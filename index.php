@@ -3,7 +3,7 @@
 require_once "src/appli/cntrlApp.php";
 
 // On initialise les controlleurs.
-$cntrlAPp = new cntrlApp();
+$cntrlApp = new cntrlApp();
 
 
 // On récupère le contexte
