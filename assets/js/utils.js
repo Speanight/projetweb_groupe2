@@ -28,3 +28,10 @@ function ajaxRequest(type, url, callback, data = null) {
   // On envoie la requête http xhr.
   xhr.send(data);
 }
+
+function displayPage(data) {
+    let page = data['header'] + data['html'] + data['footer'];
+    document.open();
+    document.write(page);
+    document.close();
+}
