@@ -1,3 +1,11 @@
+/**
+ * Fonction permettant de faire des requêtes AJAX au routeur PHP.
+ * 
+ * @param {string} type correspond au type de requête (GET, POST, PUT, DELETE, ...)
+ * @param {string} url correspond à l'URL de la requête
+ * @param {function} callback correspond à la fonction à appeler et à qui envoyer les données
+ * @param {string} data correspond aux données à envoyer au PHP, dans le tableau $_GET, $_POST, ...
+ */
 function ajaxRequest(type, url, callback, data = null) {
   let xhr;
   console.log(url + "?" + data);
@@ -29,6 +37,10 @@ function ajaxRequest(type, url, callback, data = null) {
   xhr.send(data);
 }
 
+/**
+ * Fonction permettant l'affichage de la page, supprimant l'entièreté de ce qui a été affiché avant pour ensuite rajouter la nouvelle page.
+ * @param {Array} data correspond aux données de la page. doit avoir du contenu html en position 'header', 'html' et 'footer'.
+ */
 function displayPage(data) {
     let page = data['header'] + data['html'] + data['footer'];
     document.open();

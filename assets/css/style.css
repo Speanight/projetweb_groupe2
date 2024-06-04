@@ -1,0 +1,23 @@
+/* BODY */
+body {
+    background-color: #cae5ff;
+}
+
+/* HEADER */
+.nav-item > .nav-link.active {
+    color: black;
+    background-color: #89bbfe;
+}
+
+.nav-link:hover {
+    background-color: #acedff;
+}
+
+/* FOOTER */
+footer {
+    background-color: #89bbfe;
+}
+
+footer>ul>li>a>i {
+    margin: 5px;
+}
