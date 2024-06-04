@@ -47,3 +47,15 @@ function displayPage(data) {
     document.write(page);
     document.close();
 }
+
+/**
+ * Fonction inversant chaque nombre par indice, les positifs devenant alors des négatifs et inversement.
+ * @param {Array} array Liste de nombres
+ * @returns La même liste que celle passée en argument, mais avec leurs signes inversés.
+ */
+function invertNumbersInArray(array) {
+  for (let i = 0; i < array.length; i++) {
+    array[i] = -array[i];
+  }
+  return array;
+}
