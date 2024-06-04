@@ -26,3 +26,5 @@ if ($method == "GET") {
     elseif ($uri == "/recherche")   $cntrlApp->getRecherche();
     else                            $cntrlApp->getAccueil();
 }
+
+?>
