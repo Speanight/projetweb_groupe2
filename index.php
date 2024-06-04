@@ -15,6 +15,9 @@ $ajax['footer'] = file_get_contents("src/view/footer.html");
 // On initialise les controlleurs.
 $cntrlApp = new cntrlApp();
 
+// On récupère la session si l'utilisateur est connecté.
+if (isset($_SESSION['user']))   $user = $_SESSION['user'];
+else                            $user = null;
 
 // On récupère le contexte
 $method = $_SERVER["REQUEST_METHOD"];
