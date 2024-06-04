@@ -13,7 +13,7 @@ $ajax['header'] = file_get_contents("src/view/header.html");
 $ajax['footer'] = file_get_contents("src/view/footer.html");
 
 // On initialise les controlleurs.
-$cntrlApp = new cntrlApp($ajax);
+$cntrlApp = new cntrlApp();
 
 
 // On récupère le contexte
@@ -23,7 +23,7 @@ $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
 // On redirige dans le chemin nécessaire.
 if ($method == "GET") {
     if ($uri == "/")                $cntrlApp->getInitialAccueil();
-    elseif ($uri == "/accueil")     $cntrlApp->getAccueil();
-    elseif ($uri == "/recherche")   $cntrlApp->getRecherche();
-    else                            $cntrlApp->getAccueil();
+    elseif ($uri == "/accueil")     $cntrlApp->getAccueil($ajax);
+    elseif ($uri == "/recherche")   $cntrlApp->getRecherche($ajax);
+    else                            $cntrlApp->getAccueil($ajax);
 }
