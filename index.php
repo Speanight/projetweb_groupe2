@@ -2,6 +2,7 @@
 // On récupère les fichiers nécessaires.
 require_once "src/appli/cntrlApp.php";
 
+// TODO: Cacher les erreurs sur le rendu final !
 // On affiche les erreurs php.
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -25,10 +26,11 @@ $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
 
 // On redirige dans le chemin nécessaire.
 if ($method == "GET") {
-    if ($uri == "/")                $cntrlApp->getInitialAccueil();
-    elseif ($uri == "/accueil")     $cntrlApp->getAccueil($ajax);
-    elseif ($uri == "/recherche")   $cntrlApp->getRecherche($ajax);
-    else                            $cntrlApp->getAccueil($ajax);
+    if ($uri == "/")                    $cntrlApp->getInitialAccueil();
+    elseif ($uri == "/accueil")         $cntrlApp->getAccueil($ajax);
+    elseif ($uri == "/recherche")       $cntrlApp->getRecherche($ajax);
+    elseif ($uri == "/modal/connexion") $cntrlApp->getModalConnexion();
+    else                                $cntrlApp->getAccueil($ajax);
 }
 
 ?>

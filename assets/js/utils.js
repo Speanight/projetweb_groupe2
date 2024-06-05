@@ -48,6 +48,12 @@ function displayPage(data) {
     document.close();
 }
 
+// TODO: Description fonction
+function appendToPage(data, place) {
+  let elem = document.getElementById(place);
+  elem.innerHTML = data[place];
+}
+
 /**
  * Fonction inversant chaque nombre par indice, les positifs devenant alors des négatifs et inversement.
  * @param {Array} array Liste de nombres

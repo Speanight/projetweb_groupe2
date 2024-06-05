@@ -1,0 +1,12 @@
+.Tmodal {
+    transition: all .5s;
+}
+
+.Tmodal.hidden {
+    display: none;
+}
+
+.Tmodal.shown {
+    display: block;
+    background-color: #000000cc;
+}
