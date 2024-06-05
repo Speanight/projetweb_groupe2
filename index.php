@@ -9,18 +9,21 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// On récupère le header et footer (pour éviter des répétitions dans chaque page)
-$ajax = [];
-$ajax['header'] = file_get_contents("src/view/header.html");
-$ajax['footer'] = file_get_contents("src/view/footer.html");
-
 // On initialise les controlleurs.
 $cntrlApp = new cntrlApp();
 $cntrlUser = new cntrlUser();
 
 // On récupère la session si l'utilisateur est connecté.
+session_start();
 if (isset($_SESSION['user']))   $user = $_SESSION['user'];
 else                            $user = null;
+session_write_close();
+
+// On récupère le header et footer (pour éviter des répétitions dans chaque page)
+$ajax = [];
+$ajax['header'] = file_get_contents("src/view/header.html");
+$ajax['footer'] = file_get_contents("src/view/footer.html");
+$ajax['user']   = $user;
 
 // On récupère le contexte
 $method = $_SERVER["REQUEST_METHOD"];
@@ -33,13 +36,14 @@ if ($method == "GET") {
     elseif ($uri == "/recherche")           $cntrlApp->getRecherche($ajax);
     elseif ($uri == "/modal/connexion")     $cntrlApp->getModalConnexion();
     elseif ($uri == "/modal/inscription")   $cntrlApp->getModalInscription();
+    elseif ($uri == "/modal/ajout/plongee") $cntrlApp->getModalPlongees();
+    elseif ($uri == "/profil/mesplongees")  $cntrlApp->getMesPlongees($ajax);
     else                                    $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "POST") {
     if ($uri == "/connexion")               $cntrlUser->getConnexion();
+    elseif ($uri == "/deconnexion")         $cntrlUser->getDeconnexion();
 }
 elseif ($method == "PUT") {
     if ($uri == "/inscription")             $cntrlUser->getInscription();
 }
-
-?>

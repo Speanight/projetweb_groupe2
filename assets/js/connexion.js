@@ -1,9 +1,9 @@
-const connexion = document.getElementsByClassName("connexion");
+var connexion = document.getElementsByClassName("connexion");
 for (let i = 0; i < connexion.length; i++) {
     connexion[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/connexion", afficherConnexion)});
 }
 
-const inscription = document.getElementsByClassName("inscription");
+var inscription = document.getElementsByClassName("inscription");
 for (let i = 0; i < inscription.length; i++) {
     inscription[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/inscription", afficherConnexion)});
 }
@@ -21,12 +21,12 @@ function afficherConnexion(data) {
     });
 
     // Re-attribution des boutons de connexion et d'inscription (pour les nouveaux boutons).
-    const connexion = document.getElementsByClassName("connexion");
+    var connexion = document.getElementsByClassName("connexion");
     for (let i = 0; i < connexion.length; i++) {
         connexion[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/connexion", afficherConnexion)});
     }
 
-    const inscription = document.getElementsByClassName("inscription");
+    var inscription = document.getElementsByClassName("inscription");
     for (let i = 0; i < inscription.length; i++) {
         inscription[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/inscription", afficherConnexion)});
     }
@@ -56,5 +56,9 @@ function afficherConnexion(data) {
 }
 
 function connectUser(data) {
-    console.log("connecting?");
+    if ("success" in data) {
+        let elem = document.getElementById("connexion");
+        elem.classList = "modal hidden Tmodal";
+        displayPageAdaptedForUser(data);
+    }
 }

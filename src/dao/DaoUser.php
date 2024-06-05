@@ -24,7 +24,7 @@ class DaoUser {
         $tmpUser = $statement->fetch();
 
         if ($tmpUser == false)  $user = null;
-        else                    $user = new User($tmpUser['id_user'], $tmpUser['nom_user'], $tmpUser['email_user'], $tmpUser['image_user']);
+        else                    $user = new User($tmpUser['id_user'], $tmpUser['nom_user'], $tmpUser['prenom_user'], $tmpUser['email_user'], $tmpUser['image_user']);
 
         return $user;
     }
@@ -38,7 +38,7 @@ class DaoUser {
         $tmpUser = $statement->fetch();
 
         if ($tmpUser != false) {
-            if (password_verify($password, $tmpUser['password'])) {
+            if (password_verify($password, $tmpUser['password_user'])) {
                 $user = $this->getUserById($tmpUser['id_user']);
             }
         }
@@ -61,14 +61,17 @@ class DaoUser {
 
         try {
             $statement->execute();
+            $user->set_id($this->db->lastInsertId());
         }
         catch (PDOException $error) {
-            $errorMessage = $error->getMessage();
-            print_r($errorMessage);
-
-            return false;
+            switch ($error->getCode()) {
+                case 23505:
+                    return [COMPTE_EXISTE_DEJA];
+                default:
+                    return [$error->getMessage()];
+            }
         }
 
-        return true;
+        return $user;
     }
 }

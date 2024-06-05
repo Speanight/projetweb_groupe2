@@ -34,10 +34,7 @@ canvas {
     position: fixed;
     bottom: 0;
     right: 20px;
-}
-
-.alert {
-    height: 75px;
+    z-index: 9999;
 }
 
 .alert>svg {

@@ -19,4 +19,38 @@ addEventListener("DOMContentLoaded", () => {
             // });
         });
     }
+
+    // HEADER
+    var connexion = document.getElementsByClassName("connexion");
+    for (let i = 0; i < connexion.length; i++) {
+        connexion[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/connexion", afficherConnexion)});
+    }
+
+    var inscription = document.getElementsByClassName("inscription");
+    for (let i = 0; i < inscription.length; i++) {
+        inscription[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/inscription", afficherConnexion)});
+    }
+
+    // Dropdown sur l'utilisateur.
+    let user = document.getElementById("user-menu").addEventListener("click", () => {
+        var dropdown = document.getElementById("user-dropdown");
+        if (dropdown.style.display == "block") {
+            dropdown.style.display = "none";
+        }
+        else {
+            dropdown.style.display = "block";
+        }
+    })
+
+    var deconnexion = document.getElementsByClassName("deconnexion");
+    for (let i = 0; i < deconnexion.length; i++) {
+        deconnexion[i].addEventListener("click", () => {ajaxRequest("POST", "/deconnexion", displayPageAdaptedForUser)});
+    }
+
+    var mesplongees = document.getElementsByClassName("mesplongees");
+    for (let i = 0; i < mesplongees.length; i++) {
+        mesplongees[i].addEventListener("click", () => {
+            ajaxRequest("GET", "/profil/mesplongees", displayPage);
+        })
+    }
 });
