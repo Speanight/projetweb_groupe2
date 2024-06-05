@@ -21,9 +21,9 @@ class cntrlApp {
         echo json_encode($ajax);
     }
 
-    
+    public function getModalConnexion() {
+        $ajax['connexion'] = file_get_contents("src/view/connexion-modal.html");
 
-
+        echo json_encode($ajax);
+    }
 }
-
-?>
