@@ -3,18 +3,18 @@
  * @param {Array} values Tableau de valeurs compatible avec Chart.JS
  */
 function createGraph(values) {
-    const temps = values[1];
-    const pressionAmbiante = values[2];
-    const consommationAir = values[3];
-    const pressionRestante = values[4];
-    const airRestant = values[4];
-    const labels = generateLabels(values[0]);
+    const temps = values["temps"];
+    const pressionAmbiante = values["pression ambiante"];
+    const consommationAir = values["consommation"];
+    const pressionRestante = values["bar restant"];
+    const airRestant = values["vol restant"];
+    const labels = generateLabels(values["profondeur"]);
     const data = {
     labels: labels,
     datasets: [
         {
             label: 'Profondeur',
-            data: invertNumbersInArray(values[0])
+            data: invertNumbersInArray(values["profondeur"])
         }
     ]
     };
@@ -68,16 +68,53 @@ function generateLabels(values) {
 
 
 
+addEventListener("DOMContentLoaded", () => {
+
+    //Event lorsque l'on clique sur le bouton Paramètres --> affichage du formulaire
+    let bParam = document.getElementsByClassName("bParam");
+    for (let i = 0; i < bParam.length; i++) {
+        bParam[i].addEventListener("click",() => {
+            ajaxRequest("GET","/formparam",displayPage);
+        });
+    }
+
+    document.getElementById('formParam').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+        
+        var profondeur = this.querySelector('.selectProfondeur').value;
+        var duree = this.querySelector('.selectDuree').value;
+
+
+        ajaxRequest("GET", "/graph", showGraph,"profondeur=" + profondeur + "&duree=" + duree);
+    });
+
+});
+
+
+function showGraph(values){
+
+    
+
+    console.log("Je suis dans showGraph");
+    profondeur = values['mn90'][0];
+    duree = values['mn90'][1];
+    paliers = convertArrayIfNull(values['mn90'][2]);
+
+    dictValues = generateInfos(profondeur,duree,200,3000,paliers);
+
+    console.log(dictValues);
+    
+
+    document.getElementById("canvas").style.display = "block";
+    createGraph(dictValues);
+
+
+}
 
 
 
-var values = [
-    [0, 25, 25, 3, 3, 0],
-    [0, 1.1, 34, 2, 5, 0.5],
-    [0, 2.2, 3.5, 2, 1.3, 1],
-    [0, 48.4, 2380, 80, 130, 10],
-    [200, 197.33, 38.11, 32.77, 24.11, 23.44],
-    [3000, 2951.6, 571.6, 491.6, 361.6, 351.6]
-]
 
-createGraph(values);
+
+
+
+

@@ -26,4 +26,16 @@ class cntrlApp {
 
         echo json_encode($ajax);
     }
+
+    public function getFormParam($ajax){
+        $ajax['html'] = file_get_contents("src/view/view-param.html");
+
+        echo json_encode($ajax);
+
+    }
+    
+
+
+
+
 }

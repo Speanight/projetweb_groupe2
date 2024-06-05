@@ -1,6 +1,7 @@
 <?php
 // On récupère les fichiers nécessaires.
 require_once "src/appli/cntrlApp.php";
+require_once "src/appli/cntrlPlongee.php";
 
 // TODO: Cacher les erreurs sur le rendu final !
 // On affiche les erreurs php.
@@ -15,6 +16,7 @@ $ajax['footer'] = file_get_contents("src/view/footer.html");
 
 // On initialise les controlleurs.
 $cntrlApp = new cntrlApp();
+$cntrlPlongee = new cntrlPlongee();
 
 // On récupère la session si l'utilisateur est connecté.
 if (isset($_SESSION['user']))   $user = $_SESSION['user'];
@@ -30,6 +32,8 @@ if ($method == "GET") {
     elseif ($uri == "/accueil")         $cntrlApp->getAccueil($ajax);
     elseif ($uri == "/recherche")       $cntrlApp->getRecherche($ajax);
     elseif ($uri == "/modal/connexion") $cntrlApp->getModalConnexion();
+    elseif ($uri == "/formparam")       $cntrlApp->getFormParam($ajax);
+    elseif($uri == "/graph")            $cntrlPlongee->getGraph($ajax);
     else                                $cntrlApp->getAccueil($ajax);
 }
 

@@ -1,0 +1,40 @@
+<script src="/assets/js/utils.js" defer></script>
+<script src="/assets/js/param.js" defer></script>
+<script src="/assets/js/plongeeUtils.js" defer></script>
+
+
+
+<button type="button" class="btn">Table</button>
+<button type="button" class="btn" id="bParam">Paramètres</button>
+
+
+
+<form id="formParam">
+
+    <h3 style="text-align: center;">Choisissez vos paramètres</h3>
+
+    <p>Profondeur :</p>
+
+    <select id="profondeur" class="form-select form-select-lg mb-3 selectProfondeur" aria-label="Large select example">
+        //TODO: changer les valeurs à prendre
+        <option value="3">3 mètres</option>
+        <option value="6">6 mètres</option>
+        <option value="9">9 mètres</option>
+        <option value="12">12 mètres</option>
+        <option value="15">15 mètres</option>
+    </select>
+
+    <p>Durée de votre plongée (en minutes) : </p>
+
+    <div class="input-group mb-3">
+        //TODO : voir pour gérer les erreurs
+        <input type="text" class="form-control selectDuree" placeholder="Entrez votre temps" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Analyser</button>
+</form>
+
+
+
+
+<canvas id="canvas" style="display: none;"></canvas>

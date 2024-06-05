@@ -6,7 +6,6 @@ addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < recherche.length; i++) {
         recherche[i].addEventListener("click", () => {
             ajaxRequest("GET", "/recherche", displayPage);
-            console.log("a");
             // document.getElementById("nav-recherche").classList.add("active");
         });
     }
@@ -20,4 +19,11 @@ addEventListener("DOMContentLoaded", () => {
             // });
         });
     }
+
+
+
+
+
+    //TODO : revenir ici quand j'ai fait le formulaire lorsque l'on clique sur paramètres pour afficher le graph
 });
+
