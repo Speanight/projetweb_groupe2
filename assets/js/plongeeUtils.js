@@ -1,9 +1,7 @@
 function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,paliers = [[3,5]]){
 
     //paramètres par défaut
-    vitesse_descente = 20; // en m/min
-    vitesse_remontee = 10; // en m/min
-    respiration = 20; // en l/min
+
     volume_bouteille = vol_initial/bar_initial; // volume de la bouteille
 
     var nbPalier = paliers.length; // récupère la taille de la liste paliers pour connaitre le nombre de paliers de la plongée
@@ -23,7 +21,7 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
 
     dictPlongee['profondeur'].push(0);
     dictPlongee['temps'].push(0);
-    dictPlongee['pression ambiante'].push(0);
+    dictPlongee['pression ambiante'].push(1);
     dictPlongee['consommation'].push(0);
     dictPlongee['bar restant'].push(bar_initial);
     dictPlongee['vol restant'].push(vol_initial);
@@ -111,13 +109,13 @@ function getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur_debut,profo
     newDict = dictPlongee;
 
     
-
+    //Paramètres par défaut
 
     vitesse_descente = 20; // en m/min
     vitesse_remontee = 10; // en m/min
     respiration = 20; // en l/min
 
-    if(type == "descente"){
+    if(type == "descente"){ // calcul des données si le plongeur est en descente 
         delta_t = (profondeur_fin-profondeur_debut)/vitesse_descente;
 
     
@@ -133,14 +131,14 @@ function getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur_debut,profo
     
         conso_t_bar = conso_t_l/volume_bouteille; // en bar
     
-        vol_restant_t = vol_restant_t - conso_t_l; //volume d'air restant dans la bouteille à t1
+        vol_restant_t = vol_restant_t - conso_t_l; //volume d'air restant dans la bouteille à t
     
-        bar_restant_t = bar_restant_t - conso_t_bar; // pression restante dans la bouteille à t1
+        bar_restant_t = bar_restant_t - conso_t_bar; // pression restante dans la bouteille à t
     
         pression_t = pression_moyenne_DTR;
     
     }
-    else if(type == "remontee"){
+    else if(type == "remontee"){// calcul des données si le plongeur est en remontee
         delta_t = Math.abs((profondeur_fin-profondeur_debut)/vitesse_remontee);
 
         profondeur_moyenne_DTR = Math.abs((profondeur_fin+profondeur_debut)/2); // on prend la profondeur moyenne puisque on descend, donc la profondeur n'est pas constante
@@ -157,14 +155,14 @@ function getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur_debut,profo
     
         conso_t_bar = conso_t_l/volume_bouteille; // en bar
     
-        vol_restant_t = vol_restant_t - conso_t_l; //volume d'air restant dans la bouteille à t1
+        vol_restant_t = vol_restant_t - conso_t_l; //volume d'air restant dans la bouteille à t
     
-        bar_restant_t = bar_restant_t - conso_t_bar; // pression restante dans la bouteille à t1
+        bar_restant_t = bar_restant_t - conso_t_bar; // pression restante dans la bouteille à t
     
         pression_t = pression_moyenne_DTR;
 
     }
-    else{  
+    else{  // calcul des données si le plongeur est à une profondeur constante
 
         delta_t = dureeStagne;
 
@@ -183,14 +181,14 @@ function getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur_debut,profo
 
     }
 
-//TODO: faire des arrondis quand je push les valeurs
+    //Ajout des différentes valeurs dans le dictionnaire
 
-    newDict['profondeur'].push(profondeur_t);
-    newDict['temps'].push(delta_t);
-    newDict['pression ambiante'].push(pression_t);
-    newDict['consommation'].push(conso_t_l);
-    newDict['bar restant'].push(bar_restant_t);
-    newDict['vol restant'].push(vol_restant_t);
+    newDict['profondeur'].push(Math.round((profondeur_t) * 100) / 100);
+    newDict['temps'].push(Math.round((delta_t) * 100) / 100);
+    newDict['pression ambiante'].push(Math.round((pression_t) * 100) / 100);
+    newDict['consommation'].push(Math.round((conso_t_l) * 100) / 100);
+    newDict['bar restant'].push(Math.round((bar_restant_t) * 100) / 100);
+    newDict['vol restant'].push(Math.round((vol_restant_t) * 100) / 100);
 
     return newDict;
 }
