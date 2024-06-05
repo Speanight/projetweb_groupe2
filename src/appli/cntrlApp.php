@@ -20,4 +20,10 @@ class cntrlApp {
 
         echo json_encode($ajax);
     }
+
+    
+
+
 }
+
+?>

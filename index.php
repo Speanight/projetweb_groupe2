@@ -30,3 +30,5 @@ if ($method == "GET") {
     elseif ($uri == "/recherche")   $cntrlApp->getRecherche($ajax);
     else                            $cntrlApp->getAccueil($ajax);
 }
+
+?>
