@@ -66,7 +66,12 @@ function generateLabels(values) {
     return labels;
 }
 
-let values = [
+
+
+
+
+
+var values = [
     [0, 25, 25, 3, 3, 0],
     [0, 1.1, 34, 2, 5, 0.5],
     [0, 2.2, 3.5, 2, 1.3, 1],
@@ -74,4 +79,5 @@ let values = [
     [200, 197.33, 38.11, 32.77, 24.11, 23.44],
     [3000, 2951.6, 571.6, 491.6, 361.6, 351.6]
 ]
+
 createGraph(values);
