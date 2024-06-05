@@ -1,6 +1,7 @@
 <?php
 // On récupère les fichiers nécessaires.
 require_once "src/appli/cntrlApp.php";
+require_once "src/appli/cntrlUser.php";
 
 // TODO: Cacher les erreurs sur le rendu final !
 // On affiche les erreurs php.
@@ -15,6 +16,7 @@ $ajax['footer'] = file_get_contents("src/view/footer.html");
 
 // On initialise les controlleurs.
 $cntrlApp = new cntrlApp();
+$cntrlUser = new cntrlUser();
 
 // On récupère la session si l'utilisateur est connecté.
 if (isset($_SESSION['user']))   $user = $_SESSION['user'];
@@ -26,11 +28,15 @@ $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
 
 // On redirige dans le chemin nécessaire.
 if ($method == "GET") {
-    if ($uri == "/")                    $cntrlApp->getInitialAccueil();
-    elseif ($uri == "/accueil")         $cntrlApp->getAccueil($ajax);
-    elseif ($uri == "/recherche")       $cntrlApp->getRecherche($ajax);
-    elseif ($uri == "/modal/connexion") $cntrlApp->getModalConnexion();
-    else                                $cntrlApp->getAccueil($ajax);
+    if ($uri == "/")                        $cntrlApp->getInitialAccueil();
+    elseif ($uri == "/accueil")             $cntrlApp->getAccueil($ajax);
+    elseif ($uri == "/recherche")           $cntrlApp->getRecherche($ajax);
+    elseif ($uri == "/modal/connexion")     $cntrlApp->getModalConnexion();
+    elseif ($uri == "/modal/inscription")   $cntrlApp->getModalInscription();
+    else                                    $cntrlApp->getAccueil($ajax);
+}
+elseif ($method == "POST") {
+    if ($uri == "/connexion")               $cntrlUser->getConnexion();
 }
 
 ?>

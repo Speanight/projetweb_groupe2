@@ -26,4 +26,10 @@ class cntrlApp {
 
         echo json_encode($ajax);
     }
+
+    public function getModalInscription() {
+        $ajax['connexion'] = file_get_contents("src/view/inscription-modal.html");
+
+        echo json_encode($ajax);
+    }
 }
