@@ -18,6 +18,24 @@
     </a>
 </div>
 
+<label for="profondeur" class="m-1">Profondeur :</label>
 
+<form action="" method="post" id="profondeur" class="form-inline">
+    <select id="profondeur" name="profondeur" class="btn btn-secondary m-2"> <!-- 6, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50, 52, 55, 58, 60, 62, 65 -->
+        <option value="x">Choisissez une option</option>
+        <option value="6">6m</option>
+    </select>
+    <div class="form-group row-2">
+        <button id="send-form" class="btn btn-primary m-2" type="submit" value="submit" style="background-color: #89BBFE; padding: 5px">Valider</button>
+    </div>
+</form>
 
-<canvas id="canvas"></canvas>
+<table id="table_plonge" border="1">
+    <tr>
+        <th>profondeur</th>
+        <th>Durée</th>
+        <th>Paliers</th>
+        <th>DTR</th>
+        <th>GPS</th>
+    </tr>
+</table>
