@@ -32,11 +32,27 @@ function afficherConnexion(data) {
     }
 
     // Inscription/Connexion quand on clique sur le bouton.
-    const connect = document.getElementById("connexion-compte").addEventListener("click", () => {
-        const mail = document.getElementsByName("email")[0].value;
-        const password = document.getElementsByName("password")[0].value;
-        ajaxRequest("POST", "/connexion", connectUser, "mail=" + mail + "&pass=" + password);
-    });
+    var connect = document.getElementById("connexion-compte")
+    if (connect != null) {
+            connect.addEventListener("click", () => {
+            const mail = document.getElementsByName("email")[0].value;
+            const password = document.getElementsByName("password")[0].value;
+            ajaxRequest("POST", "/connexion", connectUser, "mail=" + mail + "&pass=" + password);
+        });
+    }
+
+    var inscript = document.getElementById("inscription-compte");
+    if (inscript != null) {
+        inscript.addEventListener("click", () => {
+            const prenom = document.getElementsByName("prenom")[0].value;
+            const nom = document.getElementsByName("nom")[0].value;
+            const email = document.getElementsByName("email")[0].value;
+            const password = document.getElementsByName("pass")[0].value;
+            const passwordVerify = document.getElementsByName("passVerify")[0].value;
+
+            ajaxRequest("PUT", "/inscription", connectUser, "prenom=" + prenom + "&nom=" + nom + "&email=" + email + "&password=" + password + "&passwordVerify=" + passwordVerify);
+        });
+    }
 }
 
 function connectUser(data) {

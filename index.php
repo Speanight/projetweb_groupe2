@@ -38,5 +38,8 @@ if ($method == "GET") {
 elseif ($method == "POST") {
     if ($uri == "/connexion")               $cntrlUser->getConnexion();
 }
+elseif ($method == "PUT") {
+    if ($uri == "/inscription")             $cntrlUser->getInscription();
+}
 
 ?>

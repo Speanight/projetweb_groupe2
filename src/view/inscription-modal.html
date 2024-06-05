@@ -11,25 +11,29 @@
 
         <div class="modal-body p-5 pt-0">
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control rounded-3" id="floatingInput"
-                        placeholder="name@example.com">
+                    <input type="text" class="form-control rounded-3" id="floatingInput" name="prenom"
+                        placeholder="Jean">
                     <label for="floatingInput">Prénom</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control rounded-3" id="floatingInput"
-                        placeholder="name@example.com">
+                    <input type="text" class="form-control rounded-3" id="floatingInput" name="nom"
+                        placeholder="Jacques">
                     <label for="floatingInput">Nom</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control rounded-3" id="floatingInput"
+                    <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
                         placeholder="name@example.com">
                     <label for="floatingInput">Adresse mail</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                    <input type="password" class="form-control rounded-3" id="floatingPassword" name="pass" placeholder="Password">
                     <label for="floatingPassword">Mot de passe</label>
                 </div>
-                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary">S'inscrire</button>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-3" id="floatingPassword" name="passVerify" placeholder="Password">
+                    <label for="floatingPassword">Mot de passe (confirmation)</label>
+                </div>
+                <button id="inscription-compte" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary">S'inscrire</button>
                 <hr class="my-4">
                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary connexion">Déjà un compte ? Se connecter</button>
         </div>

@@ -2,6 +2,9 @@
 --        Script PostgreSQL 
 ------------------------------------------------------------
 
+DROP TABLE plongee;
+DROP TABLE MN90;
+DROP TABLE public.user;
 
 
 ------------------------------------------------------------
@@ -13,6 +16,7 @@ CREATE TABLE public.user(
 	nom_user        VARCHAR (50) NOT NULL ,
 	email_user      VARCHAR (64) NOT NULL ,
 	password_user   VARCHAR (64) NOT NULL  ,
+	image_user		VARCHAR(20) NOT NULL	,
 	CONSTRAINT user_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 

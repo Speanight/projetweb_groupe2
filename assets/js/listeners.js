@@ -6,7 +6,6 @@ addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < recherche.length; i++) {
         recherche[i].addEventListener("click", () => {
             ajaxRequest("GET", "/recherche", displayPage);
-            console.log("a");
             // document.getElementById("nav-recherche").classList.add("active");
         });
     }
