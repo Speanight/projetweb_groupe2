@@ -126,3 +126,19 @@ function displayPageAdaptedForUser(data) {
 function convertArrayIfNull(array) {
   return array.filter(subArray => !subArray.includes(null));
 }
+
+function additionNumberWithPreviousInArray(array){
+  let size_array = array.length;
+
+  let new_array = [];
+
+  new_array.push(array[0]);
+
+  for(let i=1; i<size_array;i++){
+    new_array.push(parseFloat((new_array[i-1] + array[i]).toFixed(1)));
+  }
+  
+  return new_array;
+  
+}
+

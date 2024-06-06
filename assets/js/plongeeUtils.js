@@ -1,4 +1,4 @@
-function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,paliers = [[3,5]]){
+function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,paliers){
 
     //paramètres par défaut
 
@@ -37,7 +37,7 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
     //on calcule les infos entre t1 et t2, soit le temps où le plongeur reste statique
 
     dureeStagne = duree - dictPlongee['temps'][1];
-
+    
     dictPlongee = getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur,profondeur,dictPlongee['vol restant'][1],dictPlongee['bar restant'][1],"stagne",dureeStagne);
   
     
@@ -48,6 +48,7 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
 
 
     if(nbPalier == 0){ // si la remontée ne possède pas de paliers
+
 
 
         dictPlongee = getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur,0,dictPlongee['vol restant'][2],dictPlongee['bar restant'][2],"remontee");
@@ -63,7 +64,10 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
         for(let i =0; i<nbPalier ;i++){
             //Montée jusqu'au palier 
             tailleListe = dictPlongee['profondeur'].length-1;
+
+
             hauteur_palier = paliers[i][0]; //récupère la profondeur du ième palier
+
 
             dictPlongee = getInfosWhileMoving(dictPlongee,volume_bouteille,dictPlongee['profondeur'][tailleListe],hauteur_palier,dictPlongee['vol restant'][tailleListe],dictPlongee['bar restant'][tailleListe],"remontee");
 

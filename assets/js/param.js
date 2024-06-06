@@ -3,12 +3,12 @@
  * @param {Array} values Tableau de valeurs compatible avec Chart.JS
  */
 function createGraph(values) {
-    const temps = values["temps"];
+    const temps = additionNumberWithPreviousInArray(values["temps"]);
     const pressionAmbiante = values["pression ambiante"];
     const consommationAir = values["consommation"];
     const pressionRestante = values["bar restant"];
     const airRestant = values["vol restant"];
-    const labels = generateLabels(values["profondeur"]);
+    const labels = generateLabels(temps);
     const data = {
     labels: labels,
     datasets: [
@@ -61,7 +61,7 @@ function createGraph(values) {
 function generateLabels(values) {
     let labels = [];
     for (let i = 0; i < values.length; i++) {
-        labels.push("t"+i);
+        labels.push(values[i]);
     }
     return labels;
 }
@@ -74,6 +74,7 @@ addEventListener("DOMContentLoaded", () => {
     let bParam = document.getElementsByClassName("bParam");
     for (let i = 0; i < bParam.length; i++) {
         bParam[i].addEventListener("click",() => {
+            console.log('i');
             ajaxRequest("GET","/formparam",displayPage);
         });
     }
@@ -84,6 +85,8 @@ addEventListener("DOMContentLoaded", () => {
         var profondeur = this.querySelector('.selectProfondeur').value;
         var duree = this.querySelector('.selectDuree').value;
 
+        let formParam = document.getElementById("formParam");
+        formParam.style.display = "none";
 
         ajaxRequest("GET", "/graph", showGraph,"profondeur=" + profondeur + "&duree=" + duree);
     });
@@ -108,10 +111,13 @@ function showGraph(values){
 
     profondeur = values['mn90'][0];
     duree = values['mn90'][1];
+
     paliers = convertArrayIfNull(values['mn90'][2]);
+
 
     dictValues = generateInfos(profondeur,duree,200,3000,paliers);
 
+    console.log(dictValues);
 
     document.getElementById("canvas").style.display = "block";
     createGraph(dictValues);

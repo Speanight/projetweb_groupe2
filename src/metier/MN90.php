@@ -25,8 +25,8 @@ class MN90{
     //GETTERS
 
     public function getPaliers(){
-        return [[3,$this->palier3m],[6,$this->palier6m],[9,$this->palier9m],[12,$this->palier12m],[15,$this->palier15m]];
-    }
+        return [[15,$this->palier15m],[12,$this->palier12m],[9,$this->palier9m],[6,$this->palier6m],[3,$this->palier3m]];
+    }   
     
     public function getProfondeur() : int {
         return $this->profondeur_palier;

@@ -2,12 +2,14 @@
 <script src="/assets/js/param.js" defer></script>
 <script src="/assets/js/plongeeUtils.js" defer></script>
 <link href="assets/css/view-param.css" rel="stylesheet"/>
+<link href="assets/css/recherche.css" rel="stylesheet"/>
 
 
 
-<button type="button" class="btn">Table</button>
-<button type="button" class="btn" id="bParam">Paramètres</button>
-
+<div id="selectChoice">
+    <button type="button" class="btn">Table</button>
+    <button type="button" class="btn" id="bParam" onclick='ajaxRequest("GET","/formparam",displayPage);'>Paramètres</button>
+</div>
 
 
 <div class="container form-container">
@@ -54,6 +56,10 @@
             </form>
         </div>
     </div>
+    
+
+    <!-- TODO: description de l'utilité du choix de ces paramètres !-->
+
 </div>
 
 
