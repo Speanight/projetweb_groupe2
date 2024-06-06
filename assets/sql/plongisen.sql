@@ -50,6 +50,7 @@ CREATE TABLE public.plongee(
 	note                INT  NOT NULL ,
 	description         VARCHAR (250) NOT NULL ,
 	id_user             INT  NOT NULL ,
+	jour				DATE NOT NULL,
 	CONSTRAINT plongee_PK PRIMARY KEY (id_plongee)
 
 	,CONSTRAINT plongee_user_FK FOREIGN KEY (id_user) REFERENCES public.user(id_user)
@@ -58,3 +59,29 @@ CREATE TABLE public.plongee(
 
 
 
+------------------------------------------------------------
+-- Table: tags
+------------------------------------------------------------
+CREATE TABLE public.tag (
+	id_tag		SERIAL NOT NULL,
+	nom_tag		VARCHAR(25) NOT NULL,
+	id_user		INT NOT NULL,
+	type_tag	VARCHAR(25) NOT NULL,
+	
+	CONSTRAINT tags_PK PRIMARY KEY (id_tag),
+	CONSTRAINT id_user_FK FOREIGN KEY (id_user) REFERENCES public.user(id_user)
+)WITHOUT OIDS;
+
+
+------------------------------------------------------------
+-- Table: tags_plongee
+------------------------------------------------------------
+CREATE TABLE public.tags_plongee (
+	id				SERIAL NOT NULL,
+	id_tag			INT NOT NULL,
+	id_plongee		INT NOT NULL,
+
+	CONSTRAINT tags_plongee_PK PRIMARY KEY (id),
+	CONSTRAINT id_tag_FK FOREIGN KEY (id_tag) REFERENCES public.tags(id_tag),
+	CONSTRAINT id_plongee_FK FOREIGN KEY (id_plongee) REFERENCES public.plongee(id_plongee)
+)WITHOUT OIDS;

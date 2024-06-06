@@ -2,6 +2,12 @@
 require_once "src/metier/User.php";
 
 class DaoUser {
+    private string $host;
+    private string $dbname;
+    private int $port;
+    private string $user;
+    private string $pass;
+    private PDO $db;
     public function __construct(string $host, string $dbname, int $port, string $user, string $pass){
         $this->host = $host;
         $this->dbname = $dbname;

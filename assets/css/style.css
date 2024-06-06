@@ -4,6 +4,10 @@ body {
 }
 
 /* HEADER */
+.nav-link {
+    cursor: pointer;
+}
+
 .nav-item > .nav-link.active {
     color: black;
     background-color: #89bbfe;

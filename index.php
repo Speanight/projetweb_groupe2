@@ -33,22 +33,27 @@ $uri = explode("?", $_SERVER["REQUEST_URI"])[0];
 
 // On redirige dans le chemin nécessaire.
 if ($method == "GET") {
-    if ($uri == "/")                        $cntrlApp->getInitialAccueil();
-    elseif ($uri == "/accueil")             $cntrlApp->getAccueil($ajax);
-    elseif ($uri == "/recherche")           $cntrlApp->getRecherche($ajax);
-    elseif ($uri == "/modal/connexion")     $cntrlApp->getModalConnexion();
-    elseif ($uri == "/formparam/duree") $cntrlPlongee->getDureeFromForm();
-    elseif ($uri == "/formparam")       $cntrlApp->getFormParam($ajax);
-    elseif($uri == "/graph")            $cntrlPlongee->getGraph($ajax);
-    elseif ($uri == "/modal/inscription")   $cntrlApp->getModalInscription();
-    elseif ($uri == "/modal/ajout/plongee") $cntrlApp->getModalPlongees();
-    elseif ($uri == "/profil/mesplongees")  $cntrlApp->getMesPlongees($ajax);
-    else                                    $cntrlApp->getAccueil($ajax);
+    if ($uri == "/")                            $cntrlApp->getInitialAccueil();
+    elseif ($uri == "/accueil")                 $cntrlApp->getAccueil($ajax);
+    elseif ($uri == "/recherche")               $cntrlApp->getRecherche($ajax);
+    elseif ($uri == "/modal/connexion")         $cntrlApp->getModalConnexion();
+    elseif ($uri == "/formparam/duree")         $cntrlPlongee->getDureeFromForm();
+    elseif ($uri == "/formparam")               $cntrlApp->getFormParam($ajax);
+    elseif($uri == "/graph")                    $cntrlPlongee->getGraph($ajax);
+    elseif ($uri == "/modal/inscription")       $cntrlApp->getModalInscription();
+    elseif ($uri == "/modal/ajout/plongee")     $cntrlApp->getModalPlongees();
+    elseif ($uri == "/profil/mesplongees")      $cntrlApp->getMesPlongees($ajax);
+    elseif ($uri == "/plongee/verify")          $cntrlApp->getIfMN90();
+    elseif ($uri == "/profil/get/plongees")     $cntrlApp->getPlongeesUser();
+    elseif ($uri == "/profil/get/tags")         $cntrlApp->getTagsUser();
+    else                                        $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "POST") {
-    if ($uri == "/connexion")               $cntrlUser->getConnexion();
-    elseif ($uri == "/deconnexion")         $cntrlUser->getDeconnexion();
+    if ($uri == "/connexion")                   $cntrlUser->getConnexion();
+    elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion();
 }
 elseif ($method == "PUT") {
-    if ($uri == "/inscription")             $cntrlUser->getInscription();
+    if ($uri == "/inscription")                 $cntrlUser->getInscription();
+    elseif ($uri == "/profil/add/plongee")      $cntrlApp->getAjoutPlongee($ajax);
+    elseif ($uri == "/profil/add/tag")          $cntrlApp->addTagUser();
 }
