@@ -8,24 +8,27 @@
                 <path fill-rule="evenodd"
                     d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
             </svg>
-            <h1 class="fw-bold mb-0 fs-2">Connectez-vous</h1>
+            <h1 class="fw-bold mb-0 fs-2">Ajouter une entrée</h1>
             <button type="button" id="closeModal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body p-5 pt-0">
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control rounded-3" id="floatingInput" name="email"
-                    placeholder="name@example.com">
-                <label for="floatingInput">Adresse mail</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="password" class="form-control rounded-3" id="floatingPassword" name="password" placeholder="Password">
-                <label for="floatingPassword">Mot de passe</label>
-            </div>
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" id="connexion-compte">Se connecter</button>
-            <hr class="my-4">
-            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary inscription">Pas de compte ?
-                S'inscrire</button>
+        <div class="modal-body p-5 pt-0 row g-3">
+            <h4 class="mb-3">Bouteilles d'oxygène</h4>
+            <div class="col-sm-6">
+                <label for="volume">Volume (L)</label>
+                <input type="number" class="form-control rounded-3" id="volume" name="volume" name="email"
+                    placeholder="300" value="300">
+              </div>
+              <div class="col-sm-6">
+                  <label for="pression">Pression (bar)</label>
+                  <input type="number" class="form-control rounded-3" id="pression" name="pression" name="email"
+                      placeholder="200" value="200">
+                </div>
+              <!-- <div class="col-sm-6">
+                <label for="pression" class="form-label">Pression (bar)</label>
+                <input type="number" class="form-control rounded-3" id="pression" name="pression" placeholder="200" value="200">
+              </div> -->
         </div>
+        
     </div>
 </div>
