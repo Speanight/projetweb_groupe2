@@ -16,61 +16,61 @@
             <h4 class="mb-3">Bouteilles d'oxygène</h4>
             <div class="col-sm-6">
                 <label for="volume">Volume (L)</label>
-                <input type="number" class="form-control rounded-3" id="volume" name="volume"
-                    placeholder="300" value="300">
+                <input type="number" class="form-control rounded-3" id="volume" name="volume" placeholder="300"
+                    value="300">
             </div>
             <div class="col-sm-6">
                 <label for="pression">Pression (bar)</label>
-                <input type="number" class="form-control rounded-3" id="pression" name="pression"
-                    placeholder="200" value="200">
+                <input type="number" class="form-control rounded-3" id="pression" name="pression" placeholder="200"
+                    value="200">
             </div>
-            
+
             <h4 class="mb-3">Détails de la plongée</h4>
             <div class="col-sm-6">
                 <label for="profondeur">Profondeur (m)</label>
-                <input type="number" class="form-control rounded-3" id="profondeur" name="profondeur"
-                    placeholder="300" value="30" min="0">
+                <input type="number" class="form-control rounded-3" id="profondeur" name="profondeur" placeholder="300"
+                    value="30" min="0">
             </div>
             <div class="col-sm-6">
                 <label for="duree">Durée (min)</label>
-                <input type="number" class="form-control rounded-3" id="duree" name="duree"
-                    placeholder="200" value="20">
+                <input type="number" class="form-control rounded-3" id="duree" name="duree" placeholder="200"
+                    value="20">
             </div>
-            
+
             <h4 class="mb-3">Personnel</h4>
             <div class="mb-3">
                 <h6>Note</h6>
                 <!-- <label for="profondeur">Note</label> -->
                 <div class="rating">
                     <label>
-                      <input type="radio" name="note" value="1" />
-                      <span class="icon">★</span>
+                        <input type="radio" name="note" value="1" />
+                        <span class="icon">★</span>
                     </label>
                     <label>
-                      <input type="radio" name="note" value="2" />
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
+                        <input type="radio" name="note" value="2" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
                     </label>
                     <label>
-                      <input type="radio" name="note" value="3" />
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>   
+                        <input type="radio" name="note" value="3" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
                     </label>
                     <label>
-                      <input type="radio" name="note" value="4" />
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
+                        <input type="radio" name="note" value="4" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
                     </label>
                     <label>
-                      <input type="radio" name="note" value="5" />
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
-                      <span class="icon">★</span>
+                        <input type="radio" name="note" value="5" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
                     </label>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <label for="description">Description</label>
                 <textarea class="form-control rounded-3" id="description" name="description"
                     placeholder="Entrez votre description ici"></textarea>
-            </div>            
+            </div>
             <div class="mb-3">
                 <label for="jour">Jour de plongée</label>
                 <input type="date" class="form-control rounded-3" id="jour" name="jour" />
@@ -86,7 +86,32 @@
 
             <div class="mb-3">
                 <h6>Tags</h6>
-                <div id="tags-placement"></div>
+                <div id="automatic-tags-placement"><span id="tag-1" class="badge bg-info-subtle text-info-emphasis rounded-pill">MN90</span></div>
+                <div id="activated-tags-placement"></div>
+                
+                <div class="btn-group" id="group-tags" role="group" aria-label="Basic checkbox toggle button group">
+                    <!-- <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label> -->
+                </div>
+                <hr>
+                <select class="form-select" name="add-tag-plongee">
+                </select>
+                <hr>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-plus-circle-fill"></i></span>
+                    <input type="text" class="form-control" name="tag-name" />
+                    <select class="form-select" name="tag-type">
+                        <option selected value="primary" class="dropdown-item bg-primary-subtle" href="#">Bleu</option>
+                        <option value="secondary" class="dropdown-item bg-secondary-subtle" href="#">Gris</option>
+                        <option value="success" class="dropdown-item bg-success-subtle" href="#">Vert</option>
+                        <option value="danger" class="dropdown-item bg-danger-subtle" href="#">Rouge</option>
+                        <option value="warning" class="dropdown-item bg-warning-subtle" href="#">Jaune</option>
+                        <option value="info" class="dropdown-item bg-info-subtle" href="#">Bleu clair</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" type="button" id="btn-add-tag">Ajouter</button>
+                </div>
+
             </div>
 
             <button class="btn btn-primary" id="btn-add-plongee">Ajouter</button>

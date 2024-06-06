@@ -1,3 +1,9 @@
+/* TABLEAU */
+.fulldesc {
+  display: none;
+}
+
+/* ETOILES POUR NOTER (FORMULAIRE) */
 .rating {
   display: inline-block;
   position: relative;

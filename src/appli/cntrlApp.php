@@ -1,7 +1,10 @@
 <?php
-require_once "src/dao/DAOMN90.php";
+require_once "src/dao/DaoMN90.php";
 require_once "src/dao/DaoPlongee.php";
+require_once "src/dao/DaoTag.php";
+require_once "src/dao/DaoTagsPlongee.php";
 require_once "src/metier/Plongee.php";
+require_once "src/metier/Tag.php";
 class cntrlApp {
     public function getInitialAccueil() {
         // TODO: Autre page pour la première page, qui dépend de si l'utilisateur est connecté ou non.
@@ -50,8 +53,19 @@ class cntrlApp {
 
     public function getModalPlongees() {
         $ajax = [];
+        $ajax['tags'] = [];
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
 
         $ajax['modal'] = file_get_contents("src/view/plongees-modal.html");
+        $daoTag = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
+        $tags = $daoTag->getTagsOfUser($user);
+
+        foreach ($tags as $tag) {
+            array_push($ajax['tags'], $tag->toArray());
+        }
+
         echo json_encode($ajax);
     }
 
@@ -61,11 +75,6 @@ class cntrlApp {
         echo json_encode($ajax);
 
     }
-    
-
-
-
-
 
     public function getAjoutPlongee($ajax = []) {
         session_start();
@@ -84,6 +93,9 @@ class cntrlApp {
             $duree          = $_PUT["duree"];
             $note           = $_PUT["note"];
             $description    = $_PUT["description"];
+            $rawTags        = $_PUT["tags"];
+
+            $tags = explode(",", $rawTags);
 
             if ($volume == "" || $pression == "" || $profondeur == "" || $jour == "" || $duree == "") {
                 $ajax['warning'] = [CHAMPS_VIDES];
@@ -96,7 +108,7 @@ class cntrlApp {
                 $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
                 $tmpPlongee = new Plongee(null, $profondeur, $duree, $pression, $volume, $note, $day, $description, $user);
     
-                $plongee = $daoPlongee->addPlongee($tmpPlongee);
+                $plongee = $daoPlongee->addPlongee($tmpPlongee, $tags);
     
                 if (gettype($plongee) == "array") {
                     $ajax['warning'] = $plongee;
@@ -104,6 +116,14 @@ class cntrlApp {
                 else {
                     $ajax["success"] = [PLONGEE_AJOUTEE];
                     $ajax["plongee"] = $plongee->toArray();
+
+                    $daoTag = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
+                    $daoTagsPlongee = new DaoTagsPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+                    for ($i=0; $i < sizeof($tags); $i++) {
+                        // print_r($tags);
+                        $daoTagsPlongee->addTagToPlongee($plongee, $tags[$i]);
+                        $plongee->add_tag($daoTag->getTagById($user, $tags[$i]));
+                    }
                 }
             }
             echo json_encode($ajax);
@@ -117,8 +137,78 @@ class cntrlApp {
         $duree      = $_GET['duree'];
 
         $daoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
-        if ($daoMN90->getIfExistsFromDureeEtProfondeur($duree, $profondeur))    $ajax['tag'] = ['<span class="badge bg-info-subtle text-info-emphasis rounded-pill">MN90</span>'];
-        else                                                                    $ajax['tag'] = [];
+        if ($daoMN90->getIfExistsFromDureeEtProfondeur($duree, $profondeur))    $ajax['tags'] = [['<span id="tag-1" class="badge bg-info-subtle text-info-emphasis rounded-pill">MN90</span>']];
+        else                                                                    $ajax['tags'] = [];
+
+        echo json_encode($ajax);
+    }
+
+    public function getPlongeesUser() {
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+
+        $ajax = [];
+        $ajax['plongees'] = [];
+
+        $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoTagPlongee = new DaoTagsPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+        $plongees = $daoPlongee->getPlongeesOfUser($user);
+
+        foreach ($plongees as $plongee) {
+            $plongee = $daoTagPlongee->getTagsOfPlongee($user, $plongee);
+            array_push($ajax['plongees'], $plongee->toArray());
+        }
+
+        echo json_encode($ajax);
+    }
+
+    public function getTagsUser() {
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+
+        $ajax = [];
+        $ajax['tags'] = [];
+
+        $daoTag = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
+        $tags = $daoTag->getTagsOfUser($user);
+
+        foreach ($tags as $tag) {
+            array_push($ajax['tags'], $tag->toArray());
+        }
+
+        echo json_encode($ajax);
+    }
+
+    public function addTagUser() {
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+        parse_str(file_get_contents("php://input"), $_PUT);
+        $nom = $_PUT['nom'];
+        $type = $_PUT['type'];
+
+
+        $ajax = [];
+        $ajax['tags'] = [];
+
+        $daoTags = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
+        $tmpTag = new Tag(null, $nom, $user, $type);
+        $tag = $daoTags->addTag($tmpTag);
+
+        if (gettype($tag) != "array") {
+            $ajax['success'] = [TAG_AJOUTE];
+        }
+        else {
+            $ajax['warning'] = $tag;
+        }
+
+        $tags = $daoTags->getTagsOfUser($user);
+
+        foreach ($tags as $tag) {
+            array_push($ajax["tags"], $tag->toArray());
+        }
 
         echo json_encode($ajax);
     }

@@ -22,7 +22,7 @@ class DaoPlongee {
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function addPlongee(Plongee $plongee) {
+    public function addPlongee(Plongee $plongee, array $tags) {
         $profondeur     = $plongee->get_profondeur();
         $duree          = $plongee->get_duree();
         $bar_initial    = $plongee->get_bar_initial();
@@ -60,5 +60,22 @@ class DaoPlongee {
         }
 
         return $plongee;
+    }
+
+    public function getPlongeesOfUser(User $user) {
+        $result     = [];
+        $id_user    = $user->get_id();
+        $statement  = $this->db->prepare("SELECT * FROM plongee WHERE id_user = :user ORDER BY jour DESC");
+        $statement->bindParam(":user", $id_user);
+        $statement->execute();
+
+        $plongees = $statement->fetchAll();
+
+        foreach ($plongees as $pl) {
+            $plongee = new Plongee($pl['id_plongee'], $pl['profondeur'], $pl['duree'], $pl['bar_initial'], $pl['volume_initial'], $pl['note'], $pl['jour'], $pl['description'], $user);
+            array_push($result, $plongee);
+        }
+
+        return $result;
     }
 }
