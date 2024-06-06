@@ -79,7 +79,7 @@ addEventListener("DOMContentLoaded", () => {
     }
 
     document.getElementById('formParam').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting
+        event.preventDefault(); // Permet au form de ne pas rafraichir la page lors de l'envoi
         
         var profondeur = this.querySelector('.selectProfondeur').value;
         var duree = this.querySelector('.selectDuree').value;
@@ -88,28 +88,61 @@ addEventListener("DOMContentLoaded", () => {
         ajaxRequest("GET", "/graph", showGraph,"profondeur=" + profondeur + "&duree=" + duree);
     });
 
+
+    let selectProfondeur = document.getElementsByClassName("selectProfondeur");
+
+    for(let i=0;i<selectProfondeur.length;i++){
+        selectProfondeur[i].addEventListener("change", function (event){
+
+            var profondeur = this.value;
+            ajaxRequest("GET", "/formparam/duree", addSelectDureeToForm,"profondeur=" + profondeur);
+        });
+    }
+
+
 });
 
 
 function showGraph(values){
 
-    
 
-    console.log("Je suis dans showGraph");
     profondeur = values['mn90'][0];
     duree = values['mn90'][1];
     paliers = convertArrayIfNull(values['mn90'][2]);
 
     dictValues = generateInfos(profondeur,duree,200,3000,paliers);
 
-    console.log(dictValues);
-    
 
     document.getElementById("canvas").style.display = "block";
     createGraph(dictValues);
+}
+
+function addSelectDureeToForm(values){
+
+    $values_duree = values['duree_dp'];
+    let divSelectDuree = document.getElementById("divDuree");
+    divSelectDuree.style.display = "block";
+    let submitButton = document.getElementById("submitButton");
+    submitButton.style.display = "block";
+
+
+    $values_duree.forEach(function(value){
+
+
+
+        let selectDuree = document.getElementsByClassName("selectDuree");
+
+        for(let i=0;i<selectDuree.length;i++){
+            var select = selectDuree[i];
+            select.options[select.options.length] = new Option ("" + value['duree_dp'] + " minutes",value['duree_dp']);
+        }
+
+    });
 
 
 }
+
+
 
 
 

@@ -47,7 +47,20 @@ class DaoMN90
         else $mn90 = new MN90($result['profondeur_palier'],$result['duree_dp'],$result['palier3m'],$result['palier6m'],$result['palier9m'],$result['palier12m'],$result['palier15m']);
 
         return $mn90;
+    }
 
+    public function getDureeWithProfondeur($profondeur){
+
+        $statement = $this->db->prepare("SELECT duree_dp FROM mn90 WHERE profondeur_palier=:profondeur_palier;");
+        $statement->bindParam(":profondeur_palier",$profondeur);
+
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if($result == false) $duree = null;
+        else $duree = $result;
+        
+        return $duree;
 
     }
 

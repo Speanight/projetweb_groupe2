@@ -32,6 +32,7 @@ if ($method == "GET") {
     elseif ($uri == "/accueil")         $cntrlApp->getAccueil($ajax);
     elseif ($uri == "/recherche")       $cntrlApp->getRecherche($ajax);
     elseif ($uri == "/modal/connexion") $cntrlApp->getModalConnexion();
+    elseif ($uri == "/formparam/duree") $cntrlPlongee->getDureeFromForm();
     elseif ($uri == "/formparam")       $cntrlApp->getFormParam($ajax);
     elseif($uri == "/graph")            $cntrlPlongee->getGraph($ajax);
     else                                $cntrlApp->getAccueil($ajax);

@@ -31,5 +31,22 @@ class cntrlPlongee{
 
     }
 
+    public function getDureeFromForm(){
+
+        $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
+
+        if(isset($_GET['profondeur'])){
+            $profondeur = $_GET['profondeur'];
+        }
+        else $profondeur = null;
+
+        $duree = $DaoMN90->getDureeWithProfondeur($profondeur);
+
+        $ajax['duree_dp'] = $duree;
+
+        print_r(json_encode($ajax));
+
+    }
+
 
 }
