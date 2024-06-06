@@ -22,6 +22,12 @@ class cntrlApp {
         echo json_encode($ajax);
     }
 
+    public function getRechercheTable($ajax) {
+        $ajax['html'] = file_get_contents("src/view/table.html");
+
+        echo json_encode($ajax);
+    }
+
     public function getModalConnexion() {
         $ajax['connexion'] = file_get_contents("src/view/connexion-modal.html");
 
