@@ -1,40 +1,49 @@
-<!--<script src="/assets/js/chart.js" defer></script>-->
-<script src="/assets/js/plongeeUtils.js"></script>
+<meta charset="UTF-8">
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous">
+<script src="/assets/js/table.js" defer></script>
+<script src="/assets/js/utils.js"></script>
 
-<h1>Table</h1>
 
-<div class="col">
-    <a class="nav-link" href="">
-        <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
-            Table
-        </button>
-    </a>
-</div>
-<div class="col">
-    <a class="nav-link" href="recherche.html">
-        <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
-            Paramètre
-        </button>
-    </a>
+
+
+<h1 class="m-1">Table</h1>
+<div class="input-group-append col-md">
+    <div class="col">
+        <a class="nav-link" href="">
+            <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
+                Table
+            </button>
+        </a>
+    </div>
+    <div class="col">
+        <a class="nav-link" href="recherche.html">
+            <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
+                Paramètre
+            </button>
+        </a>
+    </div>
 </div>
 
 <label for="profondeur" class="m-1">Profondeur :</label>
 
-<form action="" method="post" id="profondeur" class="form-inline">
-    <select id="profondeur" name="profondeur" class="btn btn-secondary m-2"> <!-- 6, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48, 50, 52, 55, 58, 60, 62, 65 -->
+<form action="" method="post" id="form_p" class="form-inline">
+    <select id="profondeur" name="profondeur" class="btn btn-secondary m-2">
         <option value="x">Choisissez une option</option>
-        <option value="6">6m</option>
     </select>
-    <div class="form-group row-2">
-        <button id="send-form" class="btn btn-primary m-2" type="submit" value="submit" style="background-color: #89BBFE; padding: 5px">Valider</button>
-    </div>
 </form>
 
-<table id="table_plonge" border="1">
+<table id="table_plonge" border="2" class="m-2" cellpadding="10">
     <tr>
-        <th>profondeur</th>
+        <th>Profondeur</th>
         <th>Durée</th>
-        <th>Paliers</th>
+        <th>Paliers 15m</th>
+        <th>Paliers 12m</th>
+        <th>Paliers 9m</th>
+        <th>Paliers 6m</th>
+        <th>Paliers 3m</th>
         <th>DTR</th>
         <th>GPS</th>
     </tr>
