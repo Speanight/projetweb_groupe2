@@ -27,6 +27,17 @@ class DaoMN90
 
     }
 
+    public function getIfExistsFromDureeEtProfondeur(int $duree, int $profondeur) {
+        $statement = $this->db->prepare("SELECT * FROM mn90 WHERE profondeur_palier = :profondeur AND duree_dp = :duree");
+        $statement->bindParam(":profondeur", $profondeur);
+        $statement->bindParam(":duree", $duree);
+        $statement->execute();
+
+        $result = $statement->fetch();
+
+        return $result != null;
+    }
+
 
 
 

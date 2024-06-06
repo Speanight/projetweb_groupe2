@@ -38,6 +38,7 @@ if ($method == "GET") {
     elseif ($uri == "/modal/inscription")   $cntrlApp->getModalInscription();
     elseif ($uri == "/modal/ajout/plongee") $cntrlApp->getModalPlongees();
     elseif ($uri == "/profil/mesplongees")  $cntrlApp->getMesPlongees($ajax);
+    elseif ($uri == "/plongee/verify")      $cntrlApp->getIfMN90();
     else                                    $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "POST") {
@@ -46,4 +47,5 @@ elseif ($method == "POST") {
 }
 elseif ($method == "PUT") {
     if ($uri == "/inscription")             $cntrlUser->getInscription();
+    elseif ($uri == "/profil/plongee/add")  $cntrlApp->getAjoutPlongee($ajax);
 }

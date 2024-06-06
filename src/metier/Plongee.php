@@ -1,23 +1,27 @@
 <?php 
-
+require_once "src/metier/User.php";
 class Plongee
 {
-
-    private int $id_plongee;
+    private ?int $id_plongee;
     private float $profondeur;
     private float $duree;
     private float $bar_initial; 
     private float $volume_initial;
     private int $note;
+    private string $day;
     private string $description;
+    private User $user;
 
-    public function __construct(int $id_plongee,float $profondeur,float $duree,float $bar_initial,float $volume_initial,int $note){
-        $this->$id_plongee = $id_plongee;
-        $this->$profondeur = $profondeur;
-        $this->$duree = $duree;
-        $this->$bar_initial = $bar_initial;
-        $this->$volume_initial = $volume_initial;
-        $this->$note = $note;
+    public function __construct(?int $id_plongee,float $profondeur,float $duree,float $bar_initial,float $volume_initial,int $note, string $day, string $description, User $user){
+        $this->id_plongee = $id_plongee;
+        $this->profondeur = $profondeur;
+        $this->duree = $duree;
+        $this->bar_initial = $bar_initial;
+        $this->volume_initial = $volume_initial;
+        $this->note = $note;
+        $this->day = $day;
+        $this->description = $description;
+        $this->user = $user;
     }
 
 
@@ -40,6 +44,33 @@ class Plongee
         return $this->note;
     }
 
+    public function get_day() : string {
+        return $this->day;
+    }
 
+    public function get_description() : string {
+        return $this->description;
+    }
 
+    public function get_user() : User {
+        return $this->user;
+    }
+
+    public function set_id(int $id) {
+        $this->id_plongee = $id;
+    }
+
+    // Methods
+    public function toArray() {
+        $plongee = [];
+        $plongee['id'] = $this->get_id_plongee();
+        $plongee['profondeur'] = $this->get_profondeur();
+        $plongee['duree'] = $this->get_duree();
+        $plongee['bar_initial'] = $this->get_bar_initial();
+        $plongee['volume_initial'] = $this->get_volume_initial();
+        $plongee['note'] = $this->get_note();
+        $plongee['description'] = $this->get_description();
+
+        return $plongee;
+    }
 }

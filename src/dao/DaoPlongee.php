@@ -1,0 +1,64 @@
+<?php
+require_once "src/metier/Plongee.php";
+class DaoPlongee {
+    private string $host;
+    private string $dbname;
+    private int $port;
+    private string $user;
+    private string $pass;
+    private PDO $db;
+    public function __construct(string $host, string $dbname, int $port, string $user, string $pass){
+        $this->host = $host;
+        $this->dbname = $dbname;
+        $this->user = $user;
+        $this->pass = $pass;
+
+        try {
+            $this->db = new PDO("pgsql:dbname=" . $dbname . ";host=" . $host . ";port=" . $port, $user, $pass);
+        } catch (PDOException $e) {
+            $erreurs = [];
+            echo $e->getMessage();
+        }
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    }
+
+    public function addPlongee(Plongee $plongee) {
+        $profondeur     = $plongee->get_profondeur();
+        $duree          = $plongee->get_duree();
+        $bar_initial    = $plongee->get_bar_initial();
+        $volume_initial = $plongee->get_volume_initial();
+        $note           = $plongee->get_note();
+        $description    = $plongee->get_description();
+        $id_user        = $plongee->get_user()->get_id();
+        $day            = $plongee->get_day();
+        
+
+        $statement = $this->db->prepare("INSERT INTO plongee (profondeur, duree, bar_initial, volume_initial, jour, note, description, id_user) VALUES (:profondeur, :duree, :bar, :volume, :jour, :note, :description, :user)");
+        $statement->bindParam(":profondeur", $profondeur);
+        $statement->bindParam(":duree", $duree);
+        $statement->bindParam(":bar", $bar_initial);
+        $statement->bindParam(":volume", $volume_initial);
+        $statement->bindParam(":jour", $day);
+        $statement->bindParam(":note", $note);
+        $statement->bindParam(":description", $description);
+        $statement->bindParam(":user", $id_user);
+
+        
+        try {
+            $statement->execute();
+            $plongee->set_id($this->db->lastInsertId());
+        }
+        catch (PDOException $error) {
+            switch ($error->getCode()) {
+                case 23505:
+                    return [COMPTE_EXISTE_DEJA];
+                case 23502:
+                    return [CHAMPS_VIDES];
+                default:
+                    return [$error->getMessage()];
+            }
+        }
+
+        return $plongee;
+    }
+}

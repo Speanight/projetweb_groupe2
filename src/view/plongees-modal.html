@@ -16,19 +16,80 @@
             <h4 class="mb-3">Bouteilles d'oxygène</h4>
             <div class="col-sm-6">
                 <label for="volume">Volume (L)</label>
-                <input type="number" class="form-control rounded-3" id="volume" name="volume" name="email"
+                <input type="number" class="form-control rounded-3" id="volume" name="volume"
                     placeholder="300" value="300">
-              </div>
-              <div class="col-sm-6">
-                  <label for="pression">Pression (bar)</label>
-                  <input type="number" class="form-control rounded-3" id="pression" name="pression" name="email"
-                      placeholder="200" value="200">
+            </div>
+            <div class="col-sm-6">
+                <label for="pression">Pression (bar)</label>
+                <input type="number" class="form-control rounded-3" id="pression" name="pression"
+                    placeholder="200" value="200">
+            </div>
+            
+            <h4 class="mb-3">Détails de la plongée</h4>
+            <div class="col-sm-6">
+                <label for="profondeur">Profondeur (m)</label>
+                <input type="number" class="form-control rounded-3" id="profondeur" name="profondeur"
+                    placeholder="300" value="30" min="0">
+            </div>
+            <div class="col-sm-6">
+                <label for="duree">Durée (min)</label>
+                <input type="number" class="form-control rounded-3" id="duree" name="duree"
+                    placeholder="200" value="20">
+            </div>
+            
+            <h4 class="mb-3">Personnel</h4>
+            <div class="mb-3">
+                <h6>Note</h6>
+                <!-- <label for="profondeur">Note</label> -->
+                <div class="rating">
+                    <label>
+                      <input type="radio" name="note" value="1" />
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="note" value="2" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="note" value="3" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>   
+                    </label>
+                    <label>
+                      <input type="radio" name="note" value="4" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="note" value="5" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
                 </div>
-              <!-- <div class="col-sm-6">
-                <label for="pression" class="form-label">Pression (bar)</label>
-                <input type="number" class="form-control rounded-3" id="pression" name="pression" placeholder="200" value="200">
-              </div> -->
+            </div>
+            <div class="mb-3">
+                <label for="description">Description</label>
+                <textarea class="form-control rounded-3" id="description" name="description"
+                    placeholder="Entrez votre description ici"></textarea>
+            </div>            
+            <div class="mb-3">
+                <label for="jour">Jour de plongée</label>
+                <input type="date" class="form-control rounded-3" id="jour" name="jour" />
+            </div>
+
+            <div class="mb-3">
+                <h6>Tags</h6>
+                <div id="tags-placement"></div>
+            </div>
+
+            <button class="btn btn-primary" id="btn-add-plongee">Ajouter</button>
         </div>
-        
     </div>
 </div>

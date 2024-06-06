@@ -50,6 +50,7 @@ CREATE TABLE public.plongee(
 	note                INT  NOT NULL ,
 	description         VARCHAR (250) NOT NULL ,
 	id_user             INT  NOT NULL ,
+	jour				DATE NOT NULL,
 	CONSTRAINT plongee_PK PRIMARY KEY (id_plongee)
 
 	,CONSTRAINT plongee_user_FK FOREIGN KEY (id_user) REFERENCES public.user(id_user)
