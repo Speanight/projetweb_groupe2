@@ -1,31 +1,11 @@
 <meta charset="UTF-8">
-<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
-      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">-->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous">
 <script src="/assets/js/table.js" defer></script>
 <script src="/assets/js/utils.js"></script>
 
-
-
-
-<h1 class="m-1">Table</h1>
-<div class="input-group-append col-md">
-    <div class="col">
-        <a class="nav-link" href="">
-            <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
-                Table
-            </button>
-        </a>
-    </div>
-    <div class="col">
-        <a class="nav-link" href="recherche.html">
-            <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
-                Paramètre
-            </button>
-        </a>
-    </div>
-</div>
+<h1 class="m-1">Profils</h1>
 
 <label for="profondeur" class="m-1">Profondeur :</label>
 
@@ -37,14 +17,14 @@
 
 <table id="table_plonge" border="2" class="m-2" cellpadding="10">
     <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
         <th>Profondeur</th>
         <th>Durée</th>
-        <th>Paliers 15m</th>
-        <th>Paliers 12m</th>
-        <th>Paliers 9m</th>
-        <th>Paliers 6m</th>
-        <th>Paliers 3m</th>
-        <th>DTR</th>
-        <th>GPS</th>
+        <th>Pression initiale</th>
+        <th>Volume initiale</th>
+        <th>Note</th>
+        <th>Description</th>
     </tr>
 </table>
+<div id="infos" class="m-2" style=" font-size: 20pt"></div>
