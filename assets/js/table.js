@@ -9,6 +9,10 @@ let profondeur = 0;
 
 ajaxRequest('GET','php/request.php/getPlongees/',remplireForm);
 
+/**
+ * Fonction permettant de remplir le formulaire de select avec la profondeur de toutes les plongées qui ont été effectué.
+ * @param {Array} donnee Tableau de dictionnaire
+ */
 function remplireForm(donnee) {
     let size = Object.keys(donnee).length;
     for (let i = 0; i < size; i++) {
@@ -22,7 +26,10 @@ form.addEventListener('change', function handleChange(event) {
     
 });
 
-
+/**
+ * Fonction permettant de remplir le tableau des valeurs que la requète ajax renverra.
+ * @param {Array} values Tableau de dictionnaire
+ */
 function remplireTableau(donnee) {
     document.getElementById('infos').innerHTML = '';
     clearTableau();
@@ -48,6 +55,11 @@ function remplireTableau(donnee) {
     }
 }
 
+
+/**
+ * Fonction permettant de remplacer une case vide de la table par un '-' pour améliorer la lisibilité du tableau pour le client
+ * @param {Array} values Valeur
+ */
 function decideNull(donnee) {if (donnee) {return donnee;}return '-';}
 
 function clearTableau() {
