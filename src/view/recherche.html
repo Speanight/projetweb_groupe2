@@ -1,62 +1,39 @@
-<script src="/assets/js/chart.js" defer></script>
-<script src="/assets/js/plongeeUtils.js"></script>
+<script src="/assets/js/listeners.js" defer></script>
+<script src="/assets/js/param.js" defer></script>
+<link href="assets/css/recherche.css" rel="stylesheet"/>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
-        integrity="sha256-x3YZWtRjM8bJqf48dFAv/qmgL68SI4jqNWeSLMZaMGA=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
-<script src ="script/jquery3.4.1.min.js"></script>
-
-
-<h1 class="ml-3">Recherche</h1>
-
-<!--Bouton à revoir-->
-<div class="input-group-append col-md">
-    <div class="col">
-        <a class="nav-link" href="">
-            <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
-                Table
-            </button>
-        </a>
+<div class="px-4 my-5 text-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-droplet-half d-block mx-auto mb-4" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+        <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z"/>
+      </svg>
+    <h1 class="display-5 fw-bold text-body-emphasis">Rechercher un profil de plongée</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead">Vous pouvez obtenir des renseignements en fonction de vos choix.
+            <code>Table</code> vous obtenez la table de toutes nos plongées.
+            <code>Paramètres</code> vous obtenez des informations sur la plongée que vous souhaitez faire.
+        </p>
     </div>
-    <div class="col">
-        <a class="nav-link" href="recherche.html">
-            <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
-                Paramètre
-            </button>
+</div>
+
+
+
+
+<div id="divChoice">
+    <div>
+        <button class="btn btn-secondary btn-block bTable" type="button" value="submit" aria-hidden="true">
+            Table
+        </button>
+
+    </div>
+    <div>
+        <button class="btn btn-primary btn-block bParam" type="button" value="submit" aria-hidden="true">
+            Paramètres
+        </button>
         </a>
     </div>
 </div>
-<br>
-<!--comptes utilisateurs non géré-->
-<div id="donnee" class="container">
-    <form method="post" id="request_donnee" class="form-inline">
-        <div class="form-group m-2">
-            <label class="sr-only" for="profondeur">Profondeur</label>
-            <input type="text" id="profondeur" placeholder="*Profondeur" class="form-control" required>
-        </div>
-        <div class="form-group m-2">
-            <label class="sr-only" for="duree">Durée</label>
-            <input type="text" id="duree" placeholder="*Durée" class="form-control" required>
-        </div>
-        <div class="form-group m-2">
-            <label class="sr-only" for="pnom">Prénom</label>
-            <input type="text" id="pnom" placeholder="Prénom" class="form-control">
-        </div>
-        <div class="form-group m-2">
-            <label class="sr-only" for="nom">Nom</label>
-            <input type="text" id="nom" placeholder="Nom" class="form-control">
-        </div>
-        <div class="checkbox m-2">
-            <label>
-                <input id="save" type="checkbox" class="mr-1"> Sauvegarder la saisie
-            </label>
-        </div>
-        <button  id="valider" type="button" class="btn btn-primary m-2" style="background-color: #89BBFE">Valider</button>
-    </form>
-</div>
-<canvas id="canvas"></canvas>
+
+
+
+
