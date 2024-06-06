@@ -51,4 +51,16 @@ class cntrlApp {
         $ajax['modal'] = file_get_contents("src/view/plongees-modal.html");
         echo json_encode($ajax);
     }
+
+    public function getFormParam($ajax){
+        $ajax['html'] = file_get_contents("src/view/view-param.html");
+
+        echo json_encode($ajax);
+
+    }
+    
+
+
+
+
 }

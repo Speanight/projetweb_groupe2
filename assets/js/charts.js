@@ -3,18 +3,18 @@
  * @param {Array} values Tableau de valeurs compatible avec Chart.JS
  */
 function createGraph(values) {
-    const temps = values[1];
-    const pressionAmbiante = values[2];
-    const consommationAir = values[3];
-    const pressionRestante = values[4];
-    const airRestant = values[4];
-    const labels = generateLabels(values[0]);
+    const temps = values["temps"];
+    const pressionAmbiante = values["pression ambiante"];
+    const consommationAir = values["consommation"];
+    const pressionRestante = values["bar restant"];
+    const airRestant = values["vol restant"];
+    const labels = generateLabels(values["profondeur"]);
     const data = {
     labels: labels,
     datasets: [
         {
             label: 'Profondeur',
-            data: invertNumbersInArray(values[0])
+            data: invertNumbersInArray(values["profondeur"])
         }
     ]
     };
@@ -65,19 +65,3 @@ function generateLabels(values) {
     }
     return labels;
 }
-
-
-
-
-
-
-var values = [
-    [0, 25, 25, 3, 3, 0],
-    [0, 1.1, 34, 2, 5, 0.5],
-    [0, 2.2, 3.5, 2, 1.3, 1],
-    [0, 48.4, 2380, 80, 130, 10],
-    [200, 197.33, 38.11, 32.77, 24.11, 23.44],
-    [3000, 2951.6, 571.6, 491.6, 361.6, 351.6]
-]
-
-createGraph(values);

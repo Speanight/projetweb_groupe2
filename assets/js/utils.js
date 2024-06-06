@@ -116,3 +116,13 @@ function displayPageAdaptedForUser(data) {
     }
   }
 }
+
+/**
+ * Fonction qui filtre les sous-tableaux contenant null
+ * @param {Array} array Tableau à filtrer
+ * @returns {Array} Nouveau tableau sans les sous-tableaux contenant null
+ */
+
+function convertArrayIfNull(array) {
+  return array.filter(subArray => !subArray.includes(null));
+}

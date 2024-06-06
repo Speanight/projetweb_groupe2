@@ -2,6 +2,7 @@
 // On récupère les fichiers nécessaires.
 require_once "src/appli/cntrlApp.php";
 require_once "src/appli/cntrlUser.php";
+require_once "src/appli/cntrlPlongee.php";
 
 // TODO: Cacher les erreurs sur le rendu final !
 // On affiche les erreurs php.
@@ -12,6 +13,7 @@ error_reporting(E_ALL);
 // On initialise les controlleurs.
 $cntrlApp = new cntrlApp();
 $cntrlUser = new cntrlUser();
+$cntrlPlongee = new cntrlPlongee();
 
 // On récupère la session si l'utilisateur est connecté.
 session_start();
@@ -35,6 +37,9 @@ if ($method == "GET") {
     elseif ($uri == "/accueil")             $cntrlApp->getAccueil($ajax);
     elseif ($uri == "/recherche")           $cntrlApp->getRecherche($ajax);
     elseif ($uri == "/modal/connexion")     $cntrlApp->getModalConnexion();
+    elseif ($uri == "/formparam/duree") $cntrlPlongee->getDureeFromForm();
+    elseif ($uri == "/formparam")       $cntrlApp->getFormParam($ajax);
+    elseif($uri == "/graph")            $cntrlPlongee->getGraph($ajax);
     elseif ($uri == "/modal/inscription")   $cntrlApp->getModalInscription();
     elseif ($uri == "/modal/ajout/plongee") $cntrlApp->getModalPlongees();
     elseif ($uri == "/profil/mesplongees")  $cntrlApp->getMesPlongees($ajax);
