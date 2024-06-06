@@ -1,6 +1,6 @@
 <?php
 class User {
-    public function __construct(int $id, string $nom, string $prenom, string $email, string $image) {
+    public function __construct(?int $id, string $nom, string $prenom, string $email, string $image) {
         $this->id       = $id;
         $this->nom      = $nom;
         $this->prenom   = $prenom;
@@ -9,7 +9,7 @@ class User {
     }
 
     // GETTERS
-    public function get_id() : int {
+    public function get_id() : ?int {
         return $this->id;
     }
 
@@ -30,7 +30,7 @@ class User {
     }
 
     // SETTERS
-    public function set_id(string $id) {
+    public function set_id(int $id) {
         $this->id = $id;
     }
 

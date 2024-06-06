@@ -27,6 +27,7 @@ function ajaxRequest(type, url, callback, data = null) {
       case 201:
         console.log(xhr.responseText);
         callback(JSON.parse(xhr.responseText));
+        displayMessages(JSON.parse(xhr.responseText));
         break;
       default:
         httpErrors(xhr.status);
@@ -46,6 +47,10 @@ function displayPage(data) {
     document.open();
     document.write(page);
     document.close();
+
+    addEventListener("DOMContentLoaded", () => {
+      displayPageAdaptedForUser(data);
+    })
 }
 
 // TODO: Description fonction
@@ -64,4 +69,50 @@ function invertNumbersInArray(array) {
     array[i] = -array[i];
   }
   return array;
+}
+
+function displayMessages(data) {
+  const messageWrapper = document.getElementById("message-wrapper");
+  const typeMessages = ["success", "warning", "danger", "info"];
+  for (let i = 0; i < typeMessages.length; i++) {
+    if (typeMessages[i] in data) {
+      let msgType = typeMessages[i];
+      for (let j = 0; j < data[msgType].length; j++) {
+        var inner = `<div class="alert alert-${msgType} d-flex align-items-center" role="alert">`
+        if (msgType == "success") inner += `<i class="bi bi-check-circle-fill"></i>`; 
+        if (msgType == "warning") inner += `<i class="bi bi-exclamation-circle-fill"></i>`; 
+        if (msgType == "danger") inner += `<i class="bi bi-x-octagon-fill"></i>`;
+        if (msgType == "info") inner += `<i class="bi bi-info-circle-fill"></i>`;
+        inner += `<div>
+        ${data[msgType][j]}
+        </div>
+        <button type="button" class="btn-close btn-close-messages" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>`
+
+    messageWrapper.innerHTML += inner;
+      }
+    }
+  }
+  const closeButtons = document.getElementsByClassName("btn-close-messages");
+  // TODO: Fix fermeture par alertes (ne fonctionne pas si nombreuses).
+  for (let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].addEventListener("click", () => {
+      closeButtons[i].parentNode.remove();
+    })
+    setTimeout(function() {closeButtons[i].parentNode.remove();}, 4000);
+  }
+}
+
+function displayPageAdaptedForUser(data) {
+  if ("user" in data) {
+    if (data["user"] != null) {
+      $(".user-not-connected").hide();
+      $(".user-connected").show();
+      $(".user-image").attr("src", "assets/img/pfp/" + data.user.image);
+    }
+    else {
+      $(".user-not-connected").show();
+      $(".user-connected").hide();
+    }
+  }
 }

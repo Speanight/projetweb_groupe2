@@ -26,3 +26,18 @@ canvas {
     background-color: white;
     height: 15px;
 }
+
+/* ALERTES */
+#message-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    z-index: 9999;
+}
+
+.alert>svg {
+    width: 16px;
+    height: 16px;
+}
