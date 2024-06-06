@@ -1,21 +1,59 @@
-<script src="/assets/js/listeners.js" defer></script>
-<script src="/assets/js/param.js" defer></script>
+<script src="/assets/js/chart.js" defer></script>
+<script src="/assets/js/plongeeUtils.js"></script>
 
-<h1>Recherche</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"
+        integrity="sha256-x3YZWtRjM8bJqf48dFAv/qmgL68SI4jqNWeSLMZaMGA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha256-WqU1JavFxSAMcLP2WIOI+GB2zWmShMI82mTpLDcqFUg=" crossorigin="anonymous"></script>
+<script src ="script/jquery3.4.1.min.js"></script>
 
-<div class="col">
-    <a class="nav-link" href="./table.html">
-        <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
-            Table
-        </button>
-    </a>
+
+<h1 class="ml-3">Recherche</h1>
+<div class="input-group-append col-md">
+    <div class="col">
+        <a class="nav-link" href="table.html">
+            <button class="btn btn-secondary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #CAE5FF; color: black">
+                Table
+            </button>
+        </a>
+    </div>
+    <div class="col">
+        <a class="nav-link" href="">
+            <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
+                Paramètre
+            </button>
+        </a>
+    </div>
 </div>
-<div class="col">
-    <a class="nav-link" href="">
-        <button class="btn btn-primary btn-block" type="button" value="submit" aria-hidden="true" style="background-color: #6F8AB7">
-            Paramètre
-        </button>
-    </a>
+<br>
+<div id="donnee" class="container">
+    <form method="post" id="request_donnee" class="form-inline">
+        <div class="form-group m-2">
+            <label class="sr-only" for="profondeur">Profondeur</label>
+            <input type="text" id="profondeur" placeholder="*Profondeur" class="form-control" required>
+        </div>
+        <div class="form-group m-2">
+            <label class="sr-only" for="duree">Durée</label>
+            <input type="text" id="duree" placeholder="*Durée" class="form-control" required>
+        </div>
+        <div class="form-group m-2">
+            <label class="sr-only" for="pnom">Prénom</label>
+            <input type="text" id="pnom" placeholder="Prénom" class="form-control">
+        </div>
+        <div class="form-group m-2">
+            <label class="sr-only" for="nom">Nom</label>
+            <input type="text" id="nom" placeholder="Nom" class="form-control">
+        </div>
+        <div class="checkbox m-2">
+            <label>
+                <input id="save" type="checkbox" class="mr-1"> Sauvegarder la saisie
+            </label>
+        </div>
+        <button  id="valider" type="submit" class="btn btn-primary m-2" style="background-color: #89BBFE">Valider</button>
+    </form>
 </div>
-
-
+<canvas id="canvas"></canvas>

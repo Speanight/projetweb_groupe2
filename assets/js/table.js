@@ -31,14 +31,14 @@ function remplireTableau(donnee) {
         let data = "";
         for (let i = 0; i < size; i++) {
             data += '<tr>'
-            data += '<td>' + decideNull(donnee[i]["prenom_user"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["nom_user"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["profondeur"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["duree"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["bar_initial"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["volume_initial"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["note"]) + '</td>';
-            data += '<td>' + decideNull(donnee[i]["description"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["prenom_user"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["nom_user"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["profondeur"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["duree"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["bar_initial"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["volume_initial"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["note"]) + '</td>';
+            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["description"]) + '</td>';
             data += '</tr>';
         }
         tableau.innerHTML += data;
@@ -51,5 +51,5 @@ function remplireTableau(donnee) {
 function decideNull(donnee) {if (donnee) {return donnee;}return '-';}
 
 function clearTableau() {
-    tableau.innerHTML = '<tr><th>Prénom</th><th>Nom</th><th>Profondeur</th><th>Durée</th><th>Pression initiale</th><th>Volume initiale</th><th>Note</th><th>Description</th></tr>'
+    tableau.innerHTML = '<tr><th class="col-xs-1 text-center">Prénom</th><th class="col-xs-1 text-center">Nom</th><th class="col-xs-1 text-center">Profondeur</th><th class="col-xs-1 text-center">Durée</th><th class="col-xs-1 text-center">Pression initiale</th><th class="col-xs-1 text-center">Volume initiale</th><th class="col-xs-1 text-center">Note</th><th class="col-xs-1 text-center">Description</th></tr>'
 }
