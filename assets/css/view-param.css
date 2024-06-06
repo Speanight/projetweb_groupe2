@@ -1,0 +1,12 @@
+body, html {
+    height: 100%;
+}
+
+.form-container {
+    margin-top: 8vw;
+    margin-bottom: 10vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300%;
+}

@@ -2,6 +2,7 @@
 require_once "src/metier/User.php";
 class Plongee
 {
+
     private ?int $id_plongee;
     private float $profondeur;
     private float $duree;
@@ -25,9 +26,8 @@ class Plongee
     }
 
 
-    public function get_id_plongee() : int{
-        return $this->id_plongee;
-    }
+    //GETTERS
+
     public function get_profondeur() : float{
         return $this->profondeur;
     }
@@ -73,4 +73,23 @@ class Plongee
 
         return $plongee;
     }
+    //SETTERS
+
+    public function set_profondeur(float $profondeur){
+        return $this->profondeur;
+    }
+    public function set_duree(float $duree){
+        return $this->duree;
+    }
+    public function set_bar_initial(float $bar_initial){
+        return $this->bar_initial;
+    }
+    public function set_volume_initial(int $volume_initial){
+        return $this->volume_initial;
+    }
+    public function set_note(string $note){
+        return $this->note;
+    }
+
+
 }

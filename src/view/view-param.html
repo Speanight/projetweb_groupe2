@@ -1,0 +1,61 @@
+<script src="/assets/js/utils.js" defer></script>
+<script src="/assets/js/param.js" defer></script>
+<script src="/assets/js/plongeeUtils.js" defer></script>
+<link href="assets/css/view-param.css" rel="stylesheet"/>
+
+
+
+<button type="button" class="btn">Table</button>
+<button type="button" class="btn" id="bParam">Paramètres</button>
+
+
+
+<div class="container form-container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-11">
+            <form id="formParam" class="card p-4 border rounded">
+                <h3 class="text-center">Choisissez vos paramètres</h3>
+                <p>Profondeur :</p>
+                <div id="divProfondeur">
+                    <select id="profondeur" class="form-select form-select-lg mb-3 selectProfondeur" aria-label="Large select example">
+                        <option value="6">6 mètres</option>
+                        <option value="8">8 mètres</option>
+                        <option value="10">10 mètres</option>
+                        <option value="12">12 mètres</option>
+                        <option value="15">15 mètres</option>
+                        <option value="18">18 mètres</option>
+                        <option value="20">20 mètres</option>
+                        <option value="22">22 mètres</option>
+                        <option value="25">25 mètres</option>
+                        <option value="28">28 mètres</option>
+                        <option value="30">30 mètres</option>
+                        <option value="32">32 mètres</option>
+                        <option value="35">35 mètres</option>
+                        <option value="38">38 mètres</option>
+                        <option value="40">40 mètres</option>
+                        <option value="42">42 mètres</option>
+                        <option value="45">45 mètres</option>
+                        <option value="48">48 mètres</option>
+                        <option value="50">50 mètres</option>
+                        <option value="52">52 mètres</option>
+                        <option value="55">55 mètres</option>
+                        <option value="58">58 mètres</option>
+                        <option value="60">60 mètres</option>
+                        <option value="62">62 mètres</option>
+                        <option value="65">65 mètres</option>
+                    </select>
+                </div>
+                <div id="divDuree" style="display: none;">
+                    <p>Durée de votre plongée (en minutes) :</p>
+                    <select class="form-select form-select-lg mb-3 selectDuree" aria-label="Large select example">
+                    </select>
+                </div>
+                <button id="submitButton" style="display: none;" type="submit" class="btn btn-primary">Analyser</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<canvas id="canvas" style="display: none;"></canvas>
