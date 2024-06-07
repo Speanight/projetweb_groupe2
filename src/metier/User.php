@@ -1,5 +1,13 @@
 <?php
 class User {
+
+    private ?int $id;
+    private string $nom;
+    private string $prenom;
+    private string $email;
+    private string $image;
+
+
     public function __construct(?int $id, string $nom, string $prenom, string $email, string $image) {
         $this->id       = $id;
         $this->nom      = $nom;

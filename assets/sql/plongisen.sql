@@ -2,9 +2,6 @@
 --        Script PostgreSQL 
 ------------------------------------------------------------
 
-DROP TABLE plongee;
-DROP TABLE MN90;
-DROP TABLE public.user;
 
 
 ------------------------------------------------------------
@@ -55,7 +52,6 @@ CREATE TABLE public.plongee(
 	CONSTRAINT plongee_PK PRIMARY KEY (id_plongee)
 
 	,CONSTRAINT plongee_user_FK FOREIGN KEY (id_user) REFERENCES public.user(id_user)
-	,CONSTRAINT plongee_MN900_FK FOREIGN KEY (profondeur_palier,duree_DP) REFERENCES public.MN90(profondeur_palier,duree_DP)
 )WITHOUT OIDS;
 
 
@@ -83,6 +79,6 @@ CREATE TABLE public.tags_plongee (
 	id_plongee		INT NOT NULL,
 
 	CONSTRAINT tags_plongee_PK PRIMARY KEY (id),
-	CONSTRAINT id_tag_FK FOREIGN KEY (id_tag) REFERENCES public.tags(id_tag),
+	CONSTRAINT id_tag_FK FOREIGN KEY (id_tag) REFERENCES public.tag(id_tag),
 	CONSTRAINT id_plongee_FK FOREIGN KEY (id_plongee) REFERENCES public.plongee(id_plongee)
 )WITHOUT OIDS;

@@ -79,7 +79,7 @@
 
 
 
-.modal-body{
+#modalInfos .modal-body{
     display: flex;
     gap : 3rem;
 }
