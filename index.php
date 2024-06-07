@@ -47,6 +47,7 @@ if ($method == "GET") {
     elseif ($uri == "/profil/get/plongees")     $cntrlApp->getPlongeesUser();
     elseif ($uri == "/profil/get/tags")         $cntrlApp->getTagsUser();
     else                                        $cntrlApp->getAccueil($ajax);
+
 }
 elseif ($method == "POST") {
     if ($uri == "/connexion")                   $cntrlUser->getConnexion();

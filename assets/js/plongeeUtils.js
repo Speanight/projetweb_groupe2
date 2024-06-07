@@ -93,9 +93,6 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
 
     }
 
-
-
-
     return dictPlongee;
 
 
@@ -195,6 +192,124 @@ function getInfosWhileMoving(dictPlongee,volume_bouteille,profondeur_debut,profo
     newDict['vol restant'].push(Math.round((vol_restant_t) * 100) / 100);
 
     return newDict;
+}
+
+
+function getTotalConso(profondeur,duree,paliers){
+
+
+
+    var nbPalier = paliers.length; // récupère la taille de la liste paliers pour connaitre le nombre de paliers de la plongée
+
+
+
+    var dictPlongee = {
+        "profondeur" : [],
+        "temps" : [],
+        "pression ambiante" : [],
+        "consommation" : [],
+        "bar restant" : [],
+        "vol restant" : []
+    };
+
+
+
+    dictPlongee['profondeur'].push(0);
+    dictPlongee['temps'].push(0);
+    dictPlongee['pression ambiante'].push(1);
+    dictPlongee['consommation'].push(0);
+    dictPlongee['bar restant'].push(0);
+    dictPlongee['vol restant'].push(0);
+
+
+
+    // on calcule les infos entre t0 et t1
+
+    dictPlongee = getInfosWhileMoving(dictPlongee,0,0,profondeur,0,0,"descente");
+
+    
+
+    //on calcule les infos entre t1 et t2, soit le temps où le plongeur reste statique
+
+    dureeStagne = duree - dictPlongee['temps'][1];
+    
+    dictPlongee = getInfosWhileMoving(dictPlongee,0,profondeur,profondeur,0,0,"stagne",dureeStagne);
+  
+    
+
+
+
+    // On calcule maintenant les infos pour la remontée
+
+
+    if(nbPalier == 0){ // si la remontée ne possède pas de paliers
+
+        dictPlongee = getInfosWhileMoving(dictPlongee,0,profondeur,0,0,0,"remontee");
+        dictPlongee['pression ambiante'][3] = 0;
+
+    }
+    
+    else{
+
+        for(let i =0; i<nbPalier ;i++){
+            //Montée jusqu'au palier 
+            tailleListe = dictPlongee['profondeur'].length-1;
+
+
+            hauteur_palier = paliers[i][0]; //récupère la profondeur du ième palier
+
+
+            dictPlongee = getInfosWhileMoving(dictPlongee,0,dictPlongee['profondeur'][tailleListe],hauteur_palier,0,0,"remontee");
+
+
+            //Stagne au palier
+            tailleListe = dictPlongee['profondeur'].length-1;
+            dureeStagne = paliers[i][1];   
+
+            dictPlongee = getInfosWhileMoving(dictPlongee,0,dictPlongee['profondeur'][tailleListe],dictPlongee['profondeur'][tailleListe],0,0,"stagne",dureeStagne);
+
+            
+        }
+
+
+        //Remonte à la fin
+
+
+        tailleListe = dictPlongee['profondeur'].length-1;
+
+        dictPlongee = getInfosWhileMoving(dictPlongee,0,dictPlongee['profondeur'][tailleListe],0,0,0,"remontee");
+
+        dictPlongee['pression ambiante'][tailleListe+1] = 1;
+
+    }
+
+    return additionNumbersInArray(dictPlongee['consommation']);
+
+}
+
+function getBestBottle(consommation, bar_initial = 200) {
+    let choices = [18,15,12,10,7,5,3,1];
+    let dict = {};
+
+    let total_volume_needed = consommation / bar_initial;
+
+
+    for (let volume of choices) {
+        let bottle_capacity = volume * bar_initial; 
+        let quantity = Math.floor(total_volume_needed / volume); 
+        if (quantity > 0) {
+            dict[volume] = quantity;
+            total_volume_needed -= quantity * volume;
+        }
+    }
+
+    if (total_volume_needed > 0) {
+        let smallest_bottle = choices[choices.length - 1];
+        let additional_quantity = Math.ceil(total_volume_needed / smallest_bottle);
+        dict[smallest_bottle] = (dict[smallest_bottle] || 0) + additional_quantity;
+    }
+
+    return dict;
 }
 
 
