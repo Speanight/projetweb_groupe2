@@ -14,13 +14,30 @@ function createGraph(values) {
     datasets: [
         {
             label: 'Profondeur',
-            data: invertNumbersInArray(values["profondeur"])
+            data: invertNumbersInArray(values["profondeur"]),
+            borderColor: function(context) {
+                const index = context.dataIndex;
+
+                if(pressionRestante[index]<= 50){
+                    return 'red';
+                }
+                else{
+                    return 'blue';
+                }
+            },
+            segment: {
+                borderColor: ctx => {
+                    return pressionRestante[ctx.p0DataIndex] <= 50 || pressionRestante[ctx.p1DataIndex] <= 50 ? 'red' : 'blue';
+                }
+            }
         }
     ]
     };
 
     const lineChart = document.getElementById("canvas");
 
+
+    //TODO: Ajouter des légendes sur les axes
     const config = {
         type: 'line',
         data: data,
@@ -68,7 +85,7 @@ function generateLabels(values) {
 
 
 
-
+//Gestion des listeners et envoie des requêtes AJAX
 addEventListener("DOMContentLoaded", () => {
 
 
@@ -101,7 +118,7 @@ addEventListener("DOMContentLoaded", () => {
     }
 
 
-
+    //Afficher la durée en fonction de la profondeur choisie par l'utilisateur lors d'un select dans le formulaire
     let selectProfondeur = document.getElementsByClassName("selectProfondeur");
 
     for(let i=0;i<selectProfondeur.length;i++){
@@ -126,13 +143,31 @@ function showGraph(values){
 
     paliers = convertArrayIfNull(values['mn90'][2]);
 
+    let bar_inital = 200;
 
-    dictValues = generateInfos(profondeur,duree,200,3000,paliers);
+    let consoTotale = getTotalConso(profondeur,duree,paliers);
+    
+    let bestBottles = getBestBottle(consoTotale);
+
+    console.log(bestBottles);
+
+    let consoOfBestBottles = 0;
+
+    for (var [key, value] of Object.entries(bestBottles)){
+        consoOfBestBottles += key*value;
+    }
+
+    
+
+
+    var dictValues = generateInfos(profondeur,duree,bar_inital,consoOfBestBottles*bar_inital,paliers);
+
 
     console.log(dictValues);
 
     document.getElementById("canvas").style.display = "block";
     document.getElementsByClassName("table-responsive")[0].style.display = "block";
+    
     createGraph(dictValues);
 
     //Affichage du tableau
@@ -140,13 +175,11 @@ function showGraph(values){
     // Affichage du tableau
     let titles = ["profondeur", "temps", "pression ambiante", "consommation", "bar restant", "vol restant"];
     let titlesLength = titles.length;
-    console.log(titlesLength);
 
     var refTable = document.getElementById("tbodyTab");
-    console.log(titles[0]);
     let valuesLength = dictValues[titles[0]].length;
-    console.log(valuesLength);
 
+    invertNumbersInArray(dictValues[titles[0]]);
 
 
     // Insérer les données du tableau
@@ -158,15 +191,57 @@ function showGraph(values){
         var nouvelleCellule = nouvelleLigne.insertCell(0);
         var nouveauTexte = document.createTextNode("t" + (k));
         nouvelleCellule.appendChild(nouveauTexte);
+        if(dictValues['bar restant'][k] <= 50){
+            nouvelleCellule.style.color = 'red';
+        }
 
         // Insère les cellules pour les valeurs des titres
         for (let i = 0; i < titlesLength; i++) {
-            var nouvelleCellule = nouvelleLigne.insertCell(i + 1);
-            var nouveauTexte = document.createTextNode(dictValues[titles[i]][k]);
-            nouvelleCellule.appendChild(nouveauTexte);
+
+            if(dictValues['bar restant'][k] <= 50){
+                var nouvelleCellule = nouvelleLigne.insertCell(i + 1);
+                nouvelleCellule.style.color = 'red';
+                var nouveauTexte = document.createTextNode(dictValues[titles[i]][k]);
+                
+                nouvelleCellule.appendChild(nouveauTexte);
+            }
+            else{
+                var nouvelleCellule = nouvelleLigne.insertCell(i + 1);
+                var nouveauTexte = document.createTextNode(dictValues[titles[i]][k]);
+                nouvelleCellule.appendChild(nouveauTexte);
+            }
+
         }
     }
 
+    //Ajout des informations à la modal "infos supplémentaires" pour que l'utilisateur ait des infos sur les bouteilles qu'il doit prendre au minimum
+
+    let modalBody = document.getElementsByClassName("modal-body")[0];
+
+    var counterCard = 0;
+    //Affichage des bouteilles dans la modal
+    for (var [key, value] of Object.entries(bestBottles)){
+
+        var card = `<div class="card" style="width: 18rem;">
+                        <img src="/assets/img/bouteille_o2/bouteilleo2.jpg" class="card-img-top" alt="Bouteille d'oxygène">
+                        <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+        `;
+        modalBody.innerHTML = modalBody.innerHTML + card;
+
+        let thisCardTitle = document.getElementsByClassName("card-title")[counterCard];
+        let thisCardText = document.getElementsByClassName("card-text")[counterCard];
+
+        thisCardTitle.innerHTML = "Bouteille " + key + "L";
+        thisCardText.innerHTML = "<p><U>Quantité :</U> " + value + "x</p>" +
+                                 "<U>Pression :</U> 200 bar\n";
+
+        counterCard++;
+
+    }
 
 
 
@@ -181,6 +256,10 @@ function addSelectDureeToForm(values){
     divSelectDuree.style.display = "block";
     let submitButton = document.getElementById("submitButton");
     submitButton.style.display = "block";
+    let selectDuree = document.getElementsByClassName("selectDuree")[0];
+    while (selectDuree.options.length > 0) {
+        selectDuree.remove(0);
+    }
 
 
     $values_duree.forEach(function(value){
@@ -189,8 +268,10 @@ function addSelectDureeToForm(values){
 
         let selectDuree = document.getElementsByClassName("selectDuree");
 
+
         for(let i=0;i<selectDuree.length;i++){
             var select = selectDuree[i];
+
             select.options[select.options.length] = new Option ("" + value['duree_dp'] + " minutes",value['duree_dp']);
         }
 
@@ -198,7 +279,6 @@ function addSelectDureeToForm(values){
 
 
 }
-
 
 
 

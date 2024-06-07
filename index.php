@@ -44,6 +44,7 @@ if ($method == "GET") {
     elseif ($uri == "/modal/ajout/plongee") $cntrlApp->getModalPlongees();
     elseif ($uri == "/profil/mesplongees")  $cntrlApp->getMesPlongees($ajax);
     else                                    $cntrlApp->getAccueil($ajax);
+
 }
 elseif ($method == "POST") {
     if ($uri == "/connexion")               $cntrlUser->getConnexion();

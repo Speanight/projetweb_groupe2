@@ -356,3 +356,9 @@ INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, p
 INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (60, 45, 1, 9, 19, 35, 69, 139, '*');
 INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (60, 50, 2, 13, 22, 37, 78, 158, '*');
 INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (60, 55, 5, 15, 24, 40, 88, 178, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (62, 5, 2, NULL, NULL, NULL, NULL, 7, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (62, 10, 7, 2, NULL, NULL, NULL, 14, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (62, 15, 21, 5, 1, NULL, NULL, 33, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (65, 5, 3, NULL, NULL, NULL, NULL, 8, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (65, 10, 8, 3, NULL, NULL, NULL, 16, '*');
+INSERT INTO MN90 (profondeur_palier, duree_DP, palier15m, palier12m, palier9m, palier6m, palier3m, duree_DTR, GPS) VALUES (65, 15, 25, 5, 2, NULL, NULL, 37, '*');

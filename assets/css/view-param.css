@@ -60,5 +60,26 @@
     width : 70%;
 }
 
+.compInfos{
+    padding: 10px 20px;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    background-color: #6F8AB7;
+    color: white;
+    margin-left: 12rem;
+    align-items: center;
+}
+
+.compInfos:hover{
+    background-color: #5a7397;
+}
 
 
+
+.modal-body{
+    display: flex;
+    gap : 3rem;
+}
