@@ -2,10 +2,11 @@
 class Tag {
     private ?int $id;
     private string $nom;
-    private User $user;
+    // TODO: fix erreur page entrées
+    private ?User $user;
     private string $type;
 
-    public function __construct(?int $id, string $nom, User $user, string $type) {
+    public function __construct(?int $id, string $nom, ?User $user, string $type) {
         $this->id = $id;
         $this->nom = $nom;
         $this->user = $user;
@@ -20,7 +21,7 @@ class Tag {
         return $this->nom;
     }
 
-    public function get_user() : User {
+    public function get_user() : ?User {
         return $this->user;
     }
 

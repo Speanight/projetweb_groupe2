@@ -218,4 +218,10 @@ class cntrlApp {
 
         echo json_encode($ajax);
     }
+
+    public function getMonCompte($ajax) {
+        $ajax['html'] = file_get_contents("src/view/moncompte.html");
+
+        echo json_encode($ajax);
+    }
 }

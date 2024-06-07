@@ -71,9 +71,8 @@ class DaoTag {
 
     public function getTagById(User $user, int $id) {
         $idUser = $user->get_id();
-        $statement = $this->db->prepare("SELECT * FROM tag WHERE id_tag = :id AND id_user = :user");
+        $statement = $this->db->prepare("SELECT * FROM tag WHERE id_tag = :id");
         $statement->bindParam(":id", $id);
-        $statement->bindParam(":user", $idUser);
         $statement->execute();
         $tagRaw = $statement->fetch();
 

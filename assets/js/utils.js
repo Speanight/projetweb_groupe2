@@ -26,6 +26,7 @@ function ajaxRequest(type, url, callback, data = null) {
       case 200:
       case 201:
         console.log(xhr.responseText);
+        console.log(JSON.parse(xhr.responseText));
         callback(JSON.parse(xhr.responseText));
         displayMessages(JSON.parse(xhr.responseText));
         break;
@@ -50,10 +51,14 @@ function displayPage(data) {
 
     addEventListener("DOMContentLoaded", () => {
       displayPageAdaptedForUser(data);
-    })
+    });
 }
 
-// TODO: Description fonction
+/** Fonction ajoutant de l'HTML dans une page dans un élément à ID donné.
+ * 
+ * @param {Array} data Contenu à ajouter dans la modal. Les données à ajouter doivent être contenus dans une key du tableau avec le nom de l'ID.
+ * @param {string} place ID de l'élément où ajouter le contenu.
+ */
 function appendToPage(data, place) {
   let elem = document.getElementById(place);
   elem.innerHTML = data[place];
@@ -71,6 +76,10 @@ function invertNumbersInArray(array) {
   return array;
 }
 
+/** Fonction affichant un message d'erreur en bas de l'écran avant de le faire disparaître après 5 secondes, pour avertir l'utilisateur du résultat d'une requête.
+ * 
+ * @param {Array} data Données renvoyées par ajaxRequest. Doit contenir 'success', 'warning', 'danger' ou 'info'.
+ */
 function displayMessages(data) {
   const messageWrapper = document.getElementById("message-wrapper");
   const typeMessages = ["success", "warning", "danger", "info"];
@@ -103,6 +112,10 @@ function displayMessages(data) {
   }
 }
 
+/** Fonction permettant de masquer les parties du site que l'utilisateur n'est pas censé obtenir, selon s'il est connecté ou non.
+ * 
+ * @param {Array} data Données renvoyées par la fonction ajaxRequest. Doit contenir 'user'.
+ */
 function displayPageAdaptedForUser(data) {
   if ("user" in data) {
     if (data["user"] != null) {

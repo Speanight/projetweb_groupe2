@@ -14,7 +14,7 @@ class cntrlPlongee{
         if(isset($_GET['duree']) && isset($_GET['profondeur'])){
             $profondeur = $_GET['profondeur'];
             $duree = $_GET['duree'];
-            $plongee = new Plongee($profondeur,$duree,200,3000);
+            $plongee = new Plongee(null, $profondeur,$duree,200,3000, null, null, null, null, null);
 
         }
         else $plongee = NULL;

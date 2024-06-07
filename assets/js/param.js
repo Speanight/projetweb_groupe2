@@ -126,6 +126,7 @@ function showGraph(values){
 
     paliers = convertArrayIfNull(values['mn90'][2]);
 
+    console.log(profondeur);
 
     dictValues = generateInfos(profondeur,duree,200,3000,paliers);
 

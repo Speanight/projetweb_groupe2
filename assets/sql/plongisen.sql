@@ -17,6 +17,7 @@ CREATE TABLE public.user(
 	email_user      VARCHAR (64) NOT NULL UNIQUE,
 	password_user   VARCHAR (64) NOT NULL  ,
 	image_user		VARCHAR(20) NOT NULL	,
+	publicity		INTEGER NOT NULL		,
 	CONSTRAINT user_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 

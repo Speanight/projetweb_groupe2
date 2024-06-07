@@ -16,7 +16,6 @@ function afficherModalPlongee(data) {
     tags.innerHTML = content;
     tags.addEventListener("change", () => {
         const tag = document.getElementsByName("add-tag-plongee")[0].value;
-        console.log(tag);
         tagId = tag.split('.')[0];
         tagName = tag.split('.')[1];
         tagType = tag.split('.')[2];
@@ -25,7 +24,7 @@ function afficherModalPlongee(data) {
         var alreadyActivated = false;
 
         for (let i = 0; i < activatedTags.childNodes.length; i++) {
-            if (activatedTags.childNodes[i].id == ("tag-" + tagId)) {
+            if (activatedTags.childNodes[i].id == (tagId)) {
                 alreadyActivated = true;
             }
         }
@@ -88,7 +87,6 @@ function afficherModalPlongee(data) {
         }
 
         for (let i = 0; i < activatedTags.childNodes.length; i++) {
-            console.log(activatedTags.childNodes[i].id.split("-"));
             tagsId.push(activatedTags.childNodes[i].id.split("-")[1]);
         }
 
@@ -129,7 +127,6 @@ function ajoutPlongeeTableau(data) {
             var tags = "";
             for (let i = 0; i < plongee.tags.length; i++) {
                 const tag = plongee.tags[i];
-                console.log(tag);
                 tags += `<span id="tag-${tag.id}" class="badge bg-${tag.type}-subtle text-${tag.type}-emphasis rounded-pill">${tag.nom}</span>`
             }
             table.innerHTML += `
