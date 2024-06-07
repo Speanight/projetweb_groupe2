@@ -1,59 +1,71 @@
-'use strict';
 
-const tableau = document.getElementById('table_plonge');
-let select = document.getElementById('profondeur');
-const form = document.getElementById('form_p');
-const value = document.getElementById('value');
+addEventListener("DOMContentLoaded", () => {
 
-let profondeur = 0;
+    ajaxRequest('GET','/getprof',remplireForm);
 
-ajaxRequest('GET','php/request.php/getPlongees/',remplireForm);
+
+    let form = document.getElementById('form_p');
+    form.addEventListener('change', function handleChange(event) {
+        profondeur = event.target.value;
+        console.log(profondeur);
+        ajaxRequest('GET','/dbgettable',remplireTableau,"profondeur="+profondeur);
+        
+    });
+
+
+    
+});
+
+
 
 /**
  * Fonction permettant de remplir le formulaire de select avec la profondeur de toutes les plongées qui ont été effectué.
  * @param {Array} donnee Tableau de dictionnaire
  */
 function remplireForm(donnee) {
-    let size = Object.keys(donnee).length;
+    console.log(donnee["plongee"][0]["profondeur_palier"]);
+    let select = document.getElementById('profondeur');
+    
+    let size = donnee["plongee"].length;
+
     for (let i = 0; i < size; i++) {
-        select.options[select.options.length] = new Option(donnee[i]["profondeur"] + 'm', donnee[i]["profondeur"]);
+        select.options[select.options.length] = new Option(donnee["plongee"][i]["profondeur_palier"] + 'm', donnee["plongee"][i]["profondeur_palier"]);
     }
 }
-
-form.addEventListener('change', function handleChange(event) {
-    profondeur = event.target.value;
-    ajaxRequest('GET','php/request.php/getPlongee/'+event.target.value,remplireTableau);
-    
-});
 
 
 /**
  * Fonction permettant de remplir le tableau des valeurs que la requète ajax renverra.
  * @param {Array} donnee Tableau de dictionnaire
  */
-function remplireTableau(donnee) {
-    document.getElementById('infos').innerHTML = '';
+function remplireTableau(donnees) {
+
+    let tableau = document.getElementById('table_plonge');
+
     clearTableau();
-    if (profondeur != 'x') {
-        let size = Object.keys(donnee).length;
+    donnees.forEach(function(donnee){ 
+
         let data = "";
-        for (let i = 0; i < size; i++) {
-            data += '<tr>'
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["prenom_user"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["nom_user"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["profondeur"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["duree"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["bar_initial"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["volume_initial"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["note"]) + '</td>';
-            data += '<td class="col-xs-1 text-center">' + decideNull(donnee[i]["description"]) + '</td>';
-            data += '</tr>';
-        }
+        data += '<tr class="col-xs-1 text-center">'
+        data += '<td class="col-xs-1 text-center">' + donnee["profondeur_palier"] + '</td>';
+        data += '<td class="col-xs-1 text-center">' + donnee["duree_dp"] + '</td>';
+        data += '<td class="col-xs-1 text-center">' + decideNull(donnee["palier15m"]) + '</td>';
+        data += '<td class="col-xs-1 text-center">' + decideNull(donnee["palier12m"]) + '</td>';
+        data += '<td class="col-xs-1 text-center">' + decideNull(donnee["palier9m"]) + '</td>';
+        data += '<td class="col-xs-1 text-center">' + decideNull(donnee["palier6m"]) + '</td>';
+        data += '<td class="col-xs-1 text-center">' + decideNull(donnee["palier3m"]) + '</td>';
+        data += '<td class="col-xs-1 text-center">' + donnee["duree_dtr"] + '</td>';
+        data += '<td class="col-xs-1 text-center">' + donnee["gps"] + '</td>';
+        data += '</tr>';
         tableau.innerHTML += data;
-    }
-    else {
-        document.getElementById('infos').innerHTML = 'Veuillez entrer une profondeur valide.'
-    }
+
+    });
+
+
+
+
+
+
 }
 
 /**
@@ -63,5 +75,6 @@ function remplireTableau(donnee) {
 function decideNull(donnee) {if (donnee) {return donnee;}return '-';}
 
 function clearTableau() {
-    tableau.innerHTML = '<tr><th class="col-xs-1 text-center">Prénom</th><th class="col-xs-1 text-center">Nom</th><th class="col-xs-1 text-center">Profondeur</th><th class="col-xs-1 text-center">Durée</th><th class="col-xs-1 text-center">Pression initiale</th><th class="col-xs-1 text-center">Volume initiale</th><th class="col-xs-1 text-center">Note</th><th class="col-xs-1 text-center">Description</th></tr>'
+    let tableau = document.getElementById('table_plonge');
+    tableau.innerHTML = '<tr><th class="col-xs-1 text-center">Profondeur</th><th class="col-xs-1 text-center">Durée</th><th class="col-xs-1 text-center">Paliers 15m</th><th class="col-xs-1 text-center">Paliers 12m</th><th class="col-xs-1 text-center">Paliers 9m</th><th class="col-xs-1 text-center">Paliers 6m</th><th class="col-xs-1 text-center">Paliers 3m</th><th class="col-xs-1 text-center">DTR</th><th class="col-xs-1 text-center">GPS</th></tr>'
 }

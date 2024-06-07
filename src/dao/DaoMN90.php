@@ -74,4 +74,41 @@ class DaoMN90
 
         return $result != null;
     }
+
+    public function getProfOfMN90(){
+        try
+        {
+          $request = 'SELECT distinct(profondeur_palier) FROM mn90 ORDER BY profondeur_palier';
+          $statement = $this->db->prepare($request);
+          $statement->execute();
+          $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception)
+        {
+          error_log('Request error: '.$exception->getMessage());
+          return 'Request error: '.$exception->getMessage();
+        }
+        return $result;
+
+    }
+
+    public function getPlongeesOfMN90($profondeur){
+
+
+        $statement = $this->db->prepare("SELECT * FROM mn90 WHERE profondeur_palier=:profondeur_palier;");
+        $statement->bindParam(":profondeur_palier",$profondeur);
+
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        if($result == false) $mn90 = null;
+        else $mn90 = $result;
+
+        return $mn90;
+
+
+
+    }
+
+
 }

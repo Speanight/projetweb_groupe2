@@ -48,5 +48,35 @@ class cntrlPlongee{
 
     }
 
+    public function getProf(){
+
+        $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
+
+
+        $result = $DaoMN90->getProfOfMN90();
+
+        $ajax['plongee'] = $result;
+
+        print_r(json_encode($ajax));
+
+    }
+
+    public function getMN90Plongees(){
+
+        $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
+
+        if(isset($_GET['profondeur'])){
+            $profondeur = $_GET['profondeur'];
+        }
+
+        $tablemn90 = $DaoMN90->getPlongeesOfMN90($profondeur);
+
+       
+
+        echo json_encode($tablemn90);
+
+
+    }
+
 
 }

@@ -48,4 +48,11 @@ addEventListener("DOMContentLoaded", () => {
             ajaxRequest("GET", "/profil/edit", displayPage);
         })
     }
+
+    var table = document.getElementsByClassName("bTable");
+    for(let i=0;i<table.length;i++){
+        table[i].addEventListener("click",() => {
+            ajaxRequest("GET","/table",displayPage);
+        });
+    }
 });
