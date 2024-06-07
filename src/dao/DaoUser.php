@@ -80,4 +80,20 @@ class DaoUser {
 
         return $user;
     }
+
+    public function updateUser(User $user, string $pass) {
+        $prenom = $user->get_prenom();
+        $nom    = $user->get_nom();
+        $email  = $user->get_email();
+        $img    = $user->get_image();
+        $id     = $user->get_id();
+
+        $statement = $this->db->prepare("UPDATE public.user SET prenom_user = :prenom AND nom_user = :nom AND email_user = :email AND password_user = :pass AND image_user = :img WHERE id_user = :id");
+        $statement->bindParam(":prenom", $prenom);
+        $statement->bindParam(":nom", $nom);
+        $statement->bindParam(":email", $email);
+        $statement->bindParam(":pass", $pass);
+        $statement->bindParam(":img", $img);
+        $statement->bindParam(":id", $id);
+    }
 }

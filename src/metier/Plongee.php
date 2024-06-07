@@ -8,13 +8,13 @@ class Plongee
     private float $duree;
     private float $bar_initial; 
     private float $volume_initial;
-    private int $note;
-    private string $day;
-    private string $description;
-    private User $user;
-    private array $tags;
+    private ?int $note;
+    private ?string $day;
+    private ?string $description;
+    private ?User $user;
+    private ?array $tags;
 
-    public function __construct(?int $id_plongee,float $profondeur,float $duree,float $bar_initial,float $volume_initial,int $note, string $day, string $description, User $user, $tags = []){
+    public function __construct(?int $id_plongee, float $profondeur, float $duree, float $bar_initial,float $volume_initial, ?int $note = 0, ?string $day = "", ?string $description = "", ?User $user, $tags = []) {
         $this->id_plongee = $id_plongee;
         $this->profondeur = $profondeur;
         $this->duree = $duree;

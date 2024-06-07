@@ -46,12 +46,15 @@ if ($method == "GET") {
     elseif ($uri == "/plongee/verify")          $cntrlApp->getIfMN90();
     elseif ($uri == "/profil/get/plongees")     $cntrlApp->getPlongeesUser();
     elseif ($uri == "/profil/get/tags")         $cntrlApp->getTagsUser();
+    elseif ($uri == "/profil/edit")             $cntrlApp->getMonCompte($ajax);
+    elseif ($uri == "/profil/get")              $cntrlUser->getUser();
     else                                        $cntrlApp->getAccueil($ajax);
 
 }
 elseif ($method == "POST") {
     if ($uri == "/connexion")                   $cntrlUser->getConnexion();
     elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion();
+    elseif ($uri == "/profil/update")           $cntrlUser->updateUser();
 }
 elseif ($method == "PUT") {
     if ($uri == "/inscription")                 $cntrlUser->getInscription();

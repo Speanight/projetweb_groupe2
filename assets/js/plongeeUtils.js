@@ -31,7 +31,6 @@ function generateInfos(profondeur,duree,bar_initial = 200,vol_initial = 3000,pal
     // on calcule les infos entre t0 et t1
 
     dictPlongee = getInfosWhileMoving(dictPlongee,volume_bouteille,0,profondeur,dictPlongee['vol restant'][0],dictPlongee['bar restant'][0],"descente");
-
     
 
     //on calcule les infos entre t1 et t2, soit le temps où le plongeur reste statique

@@ -41,4 +41,11 @@ addEventListener("DOMContentLoaded", () => {
             ajaxRequest("GET", "/profil/mesplongees", displayPage);
         })
     }
+
+    var moncompte = document.getElementsByClassName("moncompte");
+    for (let i = 0; i < moncompte.length; i++) {
+        moncompte[i].addEventListener("click", () => {
+            ajaxRequest("GET", "/profil/edit", displayPage);
+        })
+    }
 });
