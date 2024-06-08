@@ -2,7 +2,6 @@
 class Tag {
     private ?int $id;
     private string $nom;
-    // TODO: fix erreur page entrées
     private ?User $user;
     private string $type;
 
@@ -31,6 +30,14 @@ class Tag {
 
     public function set_id(int $id) {
         $this->id = $id;
+    }
+
+    public function set_type(string $type) {
+        $this->type = $type;
+    }
+
+    public function set_nom(string $nom) {
+        $this->nom = $nom;
     }
 
     public function toArray() {

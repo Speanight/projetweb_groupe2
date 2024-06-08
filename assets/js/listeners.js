@@ -1,6 +1,8 @@
 // TODO: Fixer l'élément actif dans la navbar.
 
 addEventListener("DOMContentLoaded", () => {
+    // Actualité
+    ajaxRequest("GET", "/profil/amis/actualite", getActualiesAmis);
     // HEADER
     let recherche = document.getElementsByClassName("recherche");
     for (let i = 0; i < recherche.length; i++) {
@@ -46,6 +48,13 @@ addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < moncompte.length; i++) {
         moncompte[i].addEventListener("click", () => {
             ajaxRequest("GET", "/profil/edit", displayPage);
+        })
+    }
+
+    var mesamities = document.getElementsByClassName("mesamis");
+    for (let i = 0; i < mesamities.length; i++) {
+        mesamities[i].addEventListener("click", () => {
+            ajaxRequest("GET", "/profil/amis", displayPage);
         })
     }
 });

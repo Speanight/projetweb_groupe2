@@ -30,7 +30,19 @@ class DaoUser {
         $tmpUser = $statement->fetch();
 
         if ($tmpUser == false)  $user = null;
-        else                    $user = new User($tmpUser['id_user'], $tmpUser['nom_user'], $tmpUser['prenom_user'], $tmpUser['email_user'], $tmpUser['image_user']);
+        else                    $user = new User($tmpUser['id_user'], $tmpUser['nom_user'], $tmpUser['prenom_user'], $tmpUser['email_user'], $tmpUser['image_user'], $tmpUser['state']);
+
+        return $user;
+    }
+
+    public function getUserByEMail(string $email) {
+        $statement = $this->db->prepare("SELECT * FROM public.user WHERE email_user = :email");
+        $statement->bindParam(":email", $email);
+        $statement->execute();
+        $tmpUser = $statement->fetch();
+
+        if ($tmpUser == false)  $user = null;
+        else                    $user = new User($tmpUser['id_user'], $tmpUser['nom_user'], $tmpUser['prenom_user'], $tmpUser['email_user'], $tmpUser['image_user'], $tmpUser['state']);
 
         return $user;
     }
@@ -57,13 +69,15 @@ class DaoUser {
         $nom    = $user->get_nom();
         $email  = $user->get_email();
         $image  = $user->get_image();
+        $state  = $user->get_state();
 
-        $statement = $this->db->prepare("INSERT INTO public.user (prenom_user, nom_user, email_user, password_user, image_user) VALUES (:prenom, :nom, :email, :pass, :image)");
+        $statement = $this->db->prepare("INSERT INTO public.user (prenom_user, nom_user, email_user, password_user, image_user, state) VALUES (:prenom, :nom, :email, :pass, :image, :state)");
         $statement->bindParam(":prenom", $prenom);
         $statement->bindParam(":nom", $nom);
         $statement->bindParam(":email", $email);
         $statement->bindParam(":pass", $password);
         $statement->bindParam(":image", $image);
+        $statement->bindParam(":state", $state);
 
         try {
             $statement->execute();
@@ -87,13 +101,17 @@ class DaoUser {
         $email  = $user->get_email();
         $img    = $user->get_image();
         $id     = $user->get_id();
+        $state  = $user->get_state();
 
-        $statement = $this->db->prepare("UPDATE public.user SET prenom_user = :prenom AND nom_user = :nom AND email_user = :email AND password_user = :pass AND image_user = :img WHERE id_user = :id");
+        $statement = $this->db->prepare("UPDATE public.user SET prenom_user = :prenom, nom_user = :nom, email_user = :email, password_user = :pass, image_user = :img, state = :state WHERE id_user = :id");
         $statement->bindParam(":prenom", $prenom);
         $statement->bindParam(":nom", $nom);
         $statement->bindParam(":email", $email);
         $statement->bindParam(":pass", $pass);
         $statement->bindParam(":img", $img);
+        $statement->bindParam(":state", $state);
         $statement->bindParam(":id", $id);
+
+        $statement->execute();
     }
 }

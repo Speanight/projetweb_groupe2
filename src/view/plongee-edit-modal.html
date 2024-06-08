@@ -1,0 +1,121 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="57" height="57" fill="currentColor"
+                class="bi bi-droplet-half d-block mx-auto mb-4" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M7.21.8C7.69.295 8 0 8 0q.164.544.371 1.038c.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8m.413 1.021A31 31 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10c0 0 2.5 1.5 5 .5s5-.5 5-.5c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z" />
+                <path fill-rule="evenodd"
+                    d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87z" />
+            </svg>
+            <h1 class="fw-bold mb-0 fs-2">Modifier une plongée</h1>
+            <button type="button" class="btn-close" id="closeModal" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body p-5 pt-0 row g-3">
+            <h4 class="mb-3">Bouteilles d'oxygène</h4>
+            <div class="col-sm-6">
+                <label for="volume">Volume (L)</label>
+                <input type="number" class="form-control rounded-3" id="volume" name="volume" placeholder="300"
+                    value="300">
+            </div>
+            <div class="col-sm-6">
+                <label for="pression">Pression (bar)</label>
+                <input type="number" class="form-control rounded-3" id="pression" name="pression" placeholder="200"
+                    value="200">
+            </div>
+
+            <h4 class="mb-3">Détails de la plongée</h4>
+            <div class="col-sm-6">
+                <label for="profondeur">Profondeur (m)</label>
+                <input type="number" class="form-control rounded-3" id="profondeur" name="profondeur" placeholder="300"
+                    value="30" min="0">
+            </div>
+            <div class="col-sm-6">
+                <label for="duree">Durée (min)</label>
+                <input type="number" class="form-control rounded-3" id="duree" name="duree" placeholder="200"
+                    value="20">
+            </div>
+
+            <h4 class="mb-3">Personnel</h4>
+            <div class="mb-3">
+                <h6>Note</h6>
+                <!-- <label for="profondeur">Note</label> -->
+                <div class="rating">
+                    <label>
+                        <input type="radio" name="note" value="1" />
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="note" value="2" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="note" value="3" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="note" value="4" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="note" value="5" />
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                        <span class="icon">★</span>
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description">Description</label>
+                <textarea class="form-control rounded-3" id="description" name="description"
+                    placeholder="Entrez votre description ici"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="jour">Jour de plongée</label>
+                <input type="date" class="form-control rounded-3" id="jour" name="jour" />
+            </div>
+
+            <div class="mb-3">
+                <h6>Tags</h6>
+                <div id="automatic-tags-placement"><span id="tag-1"
+                        class="badge bg-info-subtle text-info-emphasis rounded-pill">MN90</span></div>
+                <div id="activated-tags-placement"></div>
+
+                <div class="btn-group" id="group-tags" role="group" aria-label="Basic checkbox toggle button group">
+                    <!-- <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btncheck1">Checkbox 1</label> -->
+                </div>
+                <hr>
+                <select class="form-select" name="add-tag-plongee">
+                </select>
+                <hr>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text"><i class="bi bi-plus-circle-fill"></i></span>
+                    <input type="text" class="form-control" name="tag-name" />
+                    <select class="form-select" name="tag-type">
+                        <option selected value="primary" class="dropdown-item bg-primary-subtle" href="#">Bleu</option>
+                        <option value="secondary" class="dropdown-item bg-secondary-subtle" href="#">Gris</option>
+                        <option value="success" class="dropdown-item bg-success-subtle" href="#">Vert</option>
+                        <option value="danger" class="dropdown-item bg-danger-subtle" href="#">Rouge</option>
+                        <option value="warning" class="dropdown-item bg-warning-subtle" href="#">Jaune</option>
+                        <option value="info" class="dropdown-item bg-info-subtle" href="#">Bleu clair</option>
+                    </select>
+                    <button class="btn btn-outline-secondary" type="button" id="btn-add-tag">Ajouter</button>
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary" id="btn-add-plongee">Ajouter</button>
+        </div>
+    </div>
+</div>

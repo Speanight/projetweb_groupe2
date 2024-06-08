@@ -44,10 +44,14 @@ if ($method == "GET") {
     elseif ($uri == "/modal/ajout/plongee")     $cntrlApp->getModalPlongees();
     elseif ($uri == "/profil/mesplongees")      $cntrlApp->getMesPlongees($ajax);
     elseif ($uri == "/plongee/verify")          $cntrlApp->getIfMN90();
+    elseif ($uri == "/modal/edit/plongee")      $cntrlApp->getModalEditPlongee();
     elseif ($uri == "/profil/get/plongees")     $cntrlApp->getPlongeesUser();
     elseif ($uri == "/profil/get/tags")         $cntrlApp->getTagsUser();
     elseif ($uri == "/profil/edit")             $cntrlApp->getMonCompte($ajax);
     elseif ($uri == "/profil/get")              $cntrlUser->getUser();
+    elseif ($uri == "/profil/amis")             $cntrlUser->getPageAmis($ajax);
+    elseif ($uri == "/modal/profile/add/ami")   $cntrlUser->getModalAddAmi();
+    elseif ($uri == "/profil/amis/actualite")   $cntrlUser->getActualitesAmis();
     else                                        $cntrlApp->getAccueil($ajax);
 
 }
@@ -55,9 +59,18 @@ elseif ($method == "POST") {
     if ($uri == "/connexion")                   $cntrlUser->getConnexion();
     elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion();
     elseif ($uri == "/profil/update")           $cntrlUser->updateUser();
+    elseif ($uri = "/profil/edit/tag")          $cntrlUser->updateTag();
 }
 elseif ($method == "PUT") {
     if ($uri == "/inscription")                 $cntrlUser->getInscription();
     elseif ($uri == "/profil/add/plongee")      $cntrlApp->getAjoutPlongee($ajax);
     elseif ($uri == "/profil/add/tag")          $cntrlApp->addTagUser();
+    elseif ($uri == "/profil/add/ami")          $cntrlUser->getAjoutAmi();
+}
+elseif ($method == "UPDATE") {
+    if ($uri == "/profil/update/tag")           $cntrlUser->updateTag();
+}
+elseif ($method == "DELETE") {
+    if ($uri == "/profil/delete/tag")           $cntrlUser->deleteTag();
+    elseif ($uri == "/profil/delete/plongee")   $cntrlUser->deletePlongee();
 }

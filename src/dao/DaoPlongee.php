@@ -78,4 +78,25 @@ class DaoPlongee {
 
         return $result;
     }
+    
+    public function getPlongeeById(int $id, User $user) {
+        $statement = $this->db->prepare("SELECT * FROM plongee WHERE id_plongee = :plongee");
+        $statement->bindParam(":plongee", $id);
+        $statement->execute();
+        $pl = $statement->fetch();
+
+        $plongee = new Plongee($pl['id_plongee'], $pl['profondeur'], $pl['duree'], $pl['bar_initial'], $pl['volume_initial'], $pl['note'], $pl['jour'], $pl['description'], $user);
+
+        return $plongee;
+    }
+
+    public function deletePlongee(Plongee $plongee) {
+        $idPlongee = $plongee->get_id_plongee();
+        $idUser = $plongee->get_user()->get_id();
+
+        $statement = $this->db->prepare("DELETE FROM plongee WHERE id_plongee = :plongee AND id_user = :user");
+        $statement->bindParam(":plongee", $idPlongee);
+        $statement->bindParam(":user", $idUser);
+        $statement->execute();
+    }
 }

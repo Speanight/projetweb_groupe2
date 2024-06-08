@@ -80,4 +80,39 @@ class DaoTag {
 
         return $tag;
     }
+
+    public function updateNomTag(Tag $tag) {
+        $idUser = $tag->get_user()->get_id();
+        $idTag  = $tag->get_id();
+        $nom    = $tag->get_nom();
+        $statement = $this->db->prepare("UPDATE public.tag SET nom_tag = :nom_tag WHERE id_tag = :tag AND id_user = :user");
+        $statement->bindParam(":nom_tag", $nom);
+        $statement->bindParam(":tag", $idTag);
+        $statement->bindParam(":user", $idUser);
+        $statement->execute();
+    }
+
+    public function updateTypeTag(Tag $tag) {
+        $idUser = $tag->get_user()->get_id(); 
+        $idTag  = $tag->get_id();
+        $type   = $tag->get_type();
+        $statement = $this->db->prepare("UPDATE public.tag SET type_tag = :typeTag WHERE id_tag = :tag AND id_user = :user");
+        $statement->bindParam(":typeTag", $type);
+        $statement->bindParam(":tag", $idTag);
+        $statement->bindParam(":user", $idUser);
+        $statement->execute();
+    }
+
+    public function deleteTag(Tag $tag) {
+        $idTag = $tag->get_id();
+        $idUser = $tag->get_user()->get_id();
+        $statement = $this->db->prepare("DELETE FROM tags_plongee WHERE id_tag = :tag");
+        $statement->bindParam(":tag", $idTag);
+        $statement->execute();
+
+        $statement = $this->db->prepare("DELETE FROM tag WHERE id_tag = :tag AND id_user = :user");
+        $statement->bindParam(":tag", $idTag);
+        $statement->bindParam(":user", $idUser);
+        $statement->execute();
+    }
 }

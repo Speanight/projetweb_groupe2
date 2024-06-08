@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-<script src="assets/js/connexion.js" defer></script>
-<link href="assets/css/accueil.css" rel="stylesheet" />
-<link href="assets/css/modal.css" rel="stylesheet" />
+<script src="/assets/js/connexion.js" defer></script>
+<link href="/assets/css/accueil.css" rel="stylesheet" />
+<link href="/assets/css/modal.css" rel="stylesheet" />
 
 <div class="px-4 py-5 my-5 text-center">
     <svg xmlns="http://www.w3.org/2000/svg" width="72" height="57" fill="currentColor" class="bi bi-droplet-half d-block mx-auto mb-4" viewBox="0 0 16 16">
@@ -13,11 +13,18 @@
         <p class="lead mb-4">Plongée ISEN a pour objectif de vous aider à vous renseigner sur les gestions de pression, d'oxygène et de palliers,
             pour vous permettre de profiter pleinement de votre aventure sous-marine.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button type="button" class="btn btn-primary btn-lg px-4 gap-3 connexion">Se connecter</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4 inscription">Inscription</button>
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3 connexion user-not-connected">Se connecter</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg px-4 inscription user-not-connected">Inscription</button>
         </div>
     </div>
 </div>
+
+<hr class="user-connected">
+<div class="container px-4 py-5 user-connected">
+    <h2 class="pb-2 border-bottom">Fil d'actualité</h2>
+    <div id="actualites"></div>
+</div>
+<hr>
 
 <div class="container px-4 py-5" id="featured-3">
     <h2 class="pb-2 border-bottom">Connectez-vous pour...</h2>
@@ -27,13 +34,7 @@
                 <i class="bi bi-journal-text"></i>
             </div>
             <h3 class="fs-2 text-body-emphasis">Sauvegarder vos plongées</h3>
-            <p>Gardez vos plongées dans votre coeur et dans votre compte, avec une possibilité de leur donner des descriptions, des images, et bien plus encore.</p>
-            <!-- <a href="#" class="icon-link">
-                Call to action
-                <svg class="bi">
-                    <use xlink:href="#chevron-right"></use>
-                </svg>
-            </a> -->
+            <p>Gardez vos plongées dans votre coeur et dans votre compte, avec une possibilité de leur donner des descriptions et bien plus encore.</p>
         </div>
         <div class="feature col">
             <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
@@ -42,11 +43,9 @@
             <h3 class="fs-2 text-body-emphasis">Personnaliser vos aventures</h3>
             <p>Tenez compte de la quantité d'oxygène que vous amenez ainsi que la profondeur que vous souhaitez atteindre : nous nous occuperons de vous proposer la
                 plongée la plus adaptée selon vos besoins.</p>
-            <a href="#" class="icon-link">
-                Call to action
-                <svg class="bi">
-                    <use xlink:href="#chevron-right"></use>
-                </svg>
+            <a class="icon-link mesplongees user-connected">
+                <i class="bi bi-chevron-right"></i>
+                Ajouter une action
             </a>
         </div>
         <div class="feature col">
@@ -56,12 +55,6 @@
             <h3 class="fs-2 text-body-emphasis">Profitez d'un service gratuit</h3>
             <p>Plongée ISEN est un service qui se veut d'être gratuit, et restera tel quel. Profitez de sauvegarder vos données sur ce site sans aucune barrière de paiement,
                 et sans avoir peur de perdre vos souvenirs.</p>
-            <a href="#" class="icon-link">
-                Call to action
-                <svg class="bi">
-                    <use xlink:href="#chevron-right"></use>
-                </svg>
-            </a>
         </div>
     </div>
 </div>
