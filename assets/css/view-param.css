@@ -1,9 +1,9 @@
 #divChoice {
     display: flex;
+    align-items: center;
+    flex-direction: column;
     gap: 20px;
-    margin-left: 37vw;
-    margin-top : 5vw;
-    margin-bottom : 3vw;
+    margin-bottom: 3rem;
 }
 
 .bParam {
@@ -82,4 +82,22 @@
 #modalInfos .modal-body{
     display: flex;
     gap : 3rem;
+}
+
+
+#valuesContent .table-container {
+    margin: 20px auto;
+    width: 90%;
+}
+#valuesContent .table th, #valuesContent .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+#valuesContent .table thead th {
+    background-color: #6F8AB7;
+    color: white;
+}
+#tbodyTab .highlight-row {
+    background-color: #ffe6e6 !important;
+    color: red;
 }

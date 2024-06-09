@@ -77,6 +77,25 @@ class cntrlPlongee{
 
 
     }
+    
+    public function getAllPlongees(){
 
+        $DaoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+
+        $allPlongee = $DaoPlongee->getAllPlongee();
+
+        $ajax = [];
+        $ajax['plongees'] = [];
+        
+        $plongees = $DaoPlongee->getAllPlongee();
+
+        foreach($plongees as $plongee){
+            array_push($ajax['plongees'],$plongee->toArray());
+        }
+
+        echo json_encode($ajax);
+
+
+    }
 
 }

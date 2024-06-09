@@ -9,12 +9,13 @@ function createGraph(values) {
     const pressionRestante = values["bar restant"];
     const airRestant = values["vol restant"];
     const labels = generateLabels(temps);
+    const valuesTpsInvert = invertNumbersInArray(values['profondeur']);
     const data = {
     labels: labels,
     datasets: [
         {
             label: 'Profondeur',
-            data: invertNumbersInArray(values["profondeur"]),
+            data: valuesTpsInvert,
             borderColor: function(context) {
                 const index = context.dataIndex;
 
@@ -170,8 +171,6 @@ function showGraph(values){
     
     createGraph(dictValues);
 
-    //Affichage du tableau
-
     // Affichage du tableau
     let titles = ["profondeur", "temps", "pression ambiante", "consommation", "bar restant", "vol restant"];
     let titlesLength = titles.length;
@@ -179,7 +178,7 @@ function showGraph(values){
     var refTable = document.getElementById("tbodyTab");
     let valuesLength = dictValues[titles[0]].length;
 
-    invertNumbersInArray(dictValues[titles[0]]);
+
 
 
     // Insérer les données du tableau

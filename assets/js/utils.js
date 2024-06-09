@@ -70,10 +70,11 @@ function appendToPage(data, place) {
  * @returns La même liste que celle passée en argument, mais avec leurs signes inversés.
  */
 function invertNumbersInArray(array) {
+  let newArray = [];
   for (let i = 0; i < array.length; i++) {
-    array[i] = -array[i];
+    newArray.push(-array[i]);
   }
-  return array;
+  return newArray;
 }
 
 /** Fonction affichant un message d'erreur en bas de l'écran avant de le faire disparaître après 5 secondes, pour avertir l'utilisateur du résultat d'une requête.

@@ -41,6 +41,7 @@ if ($method == "GET") {
     elseif ($uri == "/formparam")               $cntrlApp->getFormParam($ajax);
     elseif ($uri == "/graph")                   $cntrlPlongee->getGraph($ajax);
     elseif ($uri == "/table")                   $cntrlApp->getTable($ajax);
+    elseif ($uri == "/profils")                 $cntrlApp->getProfils($ajax);
     elseif ($uri == "/modal/inscription")       $cntrlApp->getModalInscription();
     elseif ($uri == "/modal/ajout/plongee")     $cntrlApp->getModalPlongees();
     elseif ($uri == "/profil/mesplongees")      $cntrlApp->getMesPlongees($ajax);
@@ -51,6 +52,7 @@ if ($method == "GET") {
     elseif ($uri == "/profil/get")              $cntrlUser->getUser();
     elseif ($uri == "/getprof")                 $cntrlPlongee->getProf();
     elseif ($uri == "/dbgettable")              $cntrlPlongee->getMN90Plongees();
+    elseif ($uri == "/getplongees")             $cntrlPlongee->getAllPlongees();
     else                                        $cntrlApp->getAccueil($ajax);
 
 }

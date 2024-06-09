@@ -55,4 +55,14 @@ addEventListener("DOMContentLoaded", () => {
             ajaxRequest("GET","/table",displayPage);
         });
     }
+
+    var profils = document.getElementsByClassName("profils");
+    console.log(profils);
+    for(let i=0;i<profils.length;i++){
+        console.log("i");
+        profils[i].addEventListener("click",() => {
+            ajaxRequest("GET","/profils",displayPage);
+        });
+    }
+
 });

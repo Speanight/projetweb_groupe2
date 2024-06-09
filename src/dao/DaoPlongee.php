@@ -78,4 +78,29 @@ class DaoPlongee {
 
         return $result;
     }
+
+
+    public function getAllPlongee(){
+
+        $DaoUser = new DaoUser(DBHOST, DBNAME, PORT, USER, PASS);
+        $result     = [];
+        $statement  = $this->db->prepare("SELECT * FROM plongee");
+
+
+        $statement->execute();
+
+        $plongees = $statement->fetchAll();
+
+        foreach ($plongees as $pl) {
+            $user = $DaoUser->getUserById($pl['id_user']);
+            $plongee = new Plongee($pl['id_plongee'], $pl['profondeur'], $pl['duree'], $pl['bar_initial'], $pl['volume_initial'], $pl['note'], $pl['jour'], $pl['description'], $user);
+            array_push($result, $plongee);
+        }
+
+        return $result;
+
+
+    }
+
+
 }
