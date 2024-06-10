@@ -23,6 +23,7 @@ function afficherModalPlongee(data) {
         elem.classList = "modal hidden Tmodal";
     });
 
+    // Affiche le tag MN90 si les conditions sont respectées : vérifie à chaque modification du champ.
     document.getElementById("profondeur").addEventListener("keyup", () => {
         var profondeur = document.getElementById("profondeur").value;
         var duree = document.getElementById("duree").value;
@@ -65,8 +66,7 @@ function afficherModalPlongee(data) {
             }
         }
 
-        ajaxRequest("PUT", "/profil/add/plongee", console.log, "volume=" + volume + "&pression=" + pression + "&profondeur=" + profondeur + "&jour=" + jour + "&duree=" + duree + "&note=" + note + "&description=" + description + "&tags=" + tagsId);
-        ajaxRequest("GET", "/profil/get/plongees", ajoutPlongeeTableau);
+        ajaxRequest("PUT", "/profil/add/plongee", ajoutPlongeeTableau, "volume=" + volume + "&pression=" + pression + "&profondeur=" + profondeur + "&jour=" + jour + "&duree=" + duree + "&note=" + note + "&description=" + description + "&tags=" + tagsId);
     });
 }
 
@@ -173,7 +173,8 @@ function actualiserTags(data) {
         tags.innerHTML = content;
 
         tags.addEventListener("change", () => {
-            const tag = document.getElementsByName("add-tag-plongee")[0].value;
+            const tags = document.getElementsByName("add-tag-plongee")[0];
+            const tag = tags.value;
             if (tag != "none") {
                 tagId = tag.split('.')[0];
                 tagName = tag.split('.')[1];
@@ -197,6 +198,7 @@ function actualiserTags(data) {
                     })
                     activatedTags.appendChild(elem);
                 }
+                tags.value = "none";
             }
         })
     }
