@@ -8,8 +8,8 @@ require_once "src/view/Messages.php";
 class cntrlUser {
     public function getConnexion() {
         $ajax = [];
-        $mail = $_POST["mail"];
-        $password = $_POST["pass"];
+        $mail = trim($_POST["mail"]);
+        $password = trim($_POST["pass"]);
 
         if ($mail == '' || $password == '') {
             $ajax['info'] = [CHAMPS_VIDES];
@@ -41,12 +41,12 @@ class cntrlUser {
 
     public function getInscription() {
         parse_str(file_get_contents("php://input"), $_PUT);
-        $prenom         = $_PUT["prenom"];
-        $nom            = $_PUT["nom"];
-        $email          = $_PUT["email"];
-        $password       = $_PUT["password"];
-        $passwordVerify = $_PUT["passwordVerify"];
-        $state          = $_PUT['state'];
+        $prenom         = trim($_PUT["prenom"]);
+        $nom            = trim($_PUT["nom"]);
+        $email          = trim($_PUT["email"]);
+        $password       = trim($_PUT["password"]);
+        $passwordVerify = trim($_PUT["passwordVerify"]);
+        $state          = trim($_PUT['state']);
 
         $ajax = [];
 
@@ -81,8 +81,7 @@ class cntrlUser {
         echo json_encode($ajax);
     }
 
-    public function getDeconnexion() {
-        $ajax = [];
+    public function getDeconnexion($ajax) {
         session_start();
         $_SESSION['user'] = null;
         unset($_SESSION['user']);
@@ -92,6 +91,7 @@ class cntrlUser {
 
         $ajax['success'] = [DECONNEXION_REUSSIE];
         $ajax['user'] = null;
+        $ajax['html'] = file_get_contents("src/view/accueil.html");
 
         echo json_encode($ajax);
     }

@@ -16,9 +16,12 @@
       <hr>
       <h4>Tags</h4>
       <div class="tags-list">
+        <?php if (sizeof($tags) == 0): ?>
+          <p>Vous n'avez encore crée aucun tag. Vous pouvez en créer en cliquant sur votre photo de profil et en allant dans "Mes plongées", puis dans "Ajouter une entrée".</p>
+        <?php endif; ?>
         <?php foreach($tags as $tag): ?>
           <div class="input-group">
-            <input type="text" class="form-control" id="nomTag-<?=$tag->get_id()?>" placeholder="Nom du tag" value="<?=$tag->get_nom()?>" aria-label="Recipient's username with two button addons">
+            <input type="text" class="form-control" id="nomTag-<?=$tag->get_id()?>" placeholder="Nom du tag" value="<?=$tag->get_nom()?>">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Couleur</button>
             <ul class="dropdown-menu dropdown-menu-end">
               <?php foreach ($tagsTypes as $type): ?>
