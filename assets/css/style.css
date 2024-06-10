@@ -18,10 +18,11 @@ body {
 }
 
 /* FOOTER */
-footer {
+
+
+.footer {
     background-color: #89bbfe;
 }
-
 footer>ul>li>a>i {
     margin: 5px;
 }

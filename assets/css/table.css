@@ -66,3 +66,9 @@ label {
     color: #28a745;
     margin-top: 20px;
 }
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

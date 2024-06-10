@@ -302,7 +302,10 @@ class cntrlUser {
         $ajax['actualites'] = [];
 
         session_start();
-        $user = $_SESSION['user'];
+        if(isset($_SESSION['user'])){
+            $user = $_SESSION['user'];
+        }
+        else $user=null;
         session_write_close();
 
         $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
