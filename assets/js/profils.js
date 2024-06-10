@@ -22,9 +22,7 @@ function remplireForm(donnees) {
     let size = donnees["plongees"].length;
 
     let select = document.getElementById('profondeur');
-
-
-    select.innerHTML = '';
+    select.innerHTML = "";
     for (let i = 0; i < size; i++) {
         select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
     }

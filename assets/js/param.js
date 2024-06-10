@@ -29,6 +29,10 @@ function createGraph(values) {
             segment: {
                 borderColor: ctx => {
                     return pressionRestante[ctx.p0DataIndex] <= 50 || pressionRestante[ctx.p1DataIndex] <= 50 ? 'red' : 'blue';
+                },
+                borderDash: ctx => {
+                    const index = ctx.p0DataIndex;
+                    return (index >= 0 && index <= 1) ? [5, 5] : []; // pointillés entre t0 et t1
                 }
             },
             backgroundColor: [
@@ -108,10 +112,10 @@ addEventListener("DOMContentLoaded", () => {
     let bParam = document.getElementsByClassName("bParam");
     for (let i = 0; i < bParam.length; i++) {
         bParam[i].addEventListener("click",() => {
-            console.log('i');
             ajaxRequest("GET","/formparam",displayPage);
         });
     }
+
     if(document.getElementById('formParam') !== undefined){
         document.getElementById('formParam').addEventListener('submit', function(event) {
             event.preventDefault(); // Permet au form de ne pas rafraichir la page lors de l'envoi
@@ -122,6 +126,10 @@ addEventListener("DOMContentLoaded", () => {
             let formParam = document.getElementsByClassName("paramContainer")[0];
             formParam.style.display = "none";
     
+            let canvas = document.getElementById("divCanvas");
+            canvas.style.display = "block";
+
+
             ajaxRequest("GET", "/graph", showGraph,"profondeur=" + profondeur + "&duree=" + duree);
         });
     }
