@@ -123,5 +123,27 @@ class DaoPlongee {
 
     }
 
+    public function updatePlongee(Plongee $plongee) {
+        $id             = $plongee->get_id_plongee();
+        $profondeur     = $plongee->get_profondeur();
+        $duree          = $plongee->get_duree();
+        $bar_initial    = $plongee->get_bar_initial();
+        $volume_initial = $plongee->get_volume_initial();
+        $note           = $plongee->get_note();
+        $description    = $plongee->get_description();
+        $day            = $plongee->get_day();
+
+        $statement = $this->db->prepare("UPDATE plongee SET profondeur = :prof, duree = :duree, bar_initial = :bar, volume_initial = :volume, note = :note, description = :descr, jour = :jour WHERE id_plongee = :id");
+        $statement->bindParam(":prof", $profondeur);
+        $statement->bindParam(":duree", $duree);
+        $statement->bindParam(":bar", $bar_initial);
+        $statement->bindParam(":volume", $volume_initial);
+        $statement->bindParam(":note", $note);
+        $statement->bindParam(":descr", $description);
+        $statement->bindParam(":jour", $day);
+        $statement->bindParam(":id", $id);
+        $statement->execute();
+    }
+
 
 }

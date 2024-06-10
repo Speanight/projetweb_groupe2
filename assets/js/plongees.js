@@ -70,6 +70,79 @@ function afficherModalPlongee(data) {
     });
 }
 
+function afficherModalEditPlongee(data) {
+    // Ajout de l'élément modal à la bonne position.
+    let elem = document.getElementById("modal");
+    elem.classList = "modal shown Tmodal";
+    appendToPage(data, "modal");
+
+    actualiserTags(data);
+
+    const elemTags = document.getElementsByClassName("tags");
+
+    // Ajout du "mini-formulaire" pour ajouter un tag.
+    document.getElementById("btn-add-tag").addEventListener("click", () => {
+        console.log("add tag!");
+        const name = document.getElementsByName("tag-name")[0].value;
+        const type = document.getElementsByName("tag-type")[0].value;
+        ajaxRequest("PUT", "/profil/add/tag", actualiserTags, "nom=" + name + "&type=" + type);
+    })
+
+
+    // Ajout du bouton pour fermer le modal.
+    let buttonClose = document.getElementById("closeModal");
+    buttonClose.addEventListener("click", () => {
+        elem.classList = "modal hidden Tmodal";
+    });
+
+    // Affiche le tag MN90 si les conditions sont respectées : vérifie à chaque modification du champ.
+    document.getElementById("profondeur").addEventListener("keyup", () => {
+        var profondeur = document.getElementById("profondeur").value;
+        var duree = document.getElementById("duree").value;
+        ajaxRequest("GET", "/plongee/verify", ajoutTagAutomatique, "profondeur=" + profondeur + "&duree=" + duree);
+    });
+
+    document.getElementById("duree").addEventListener("keyup", () => {
+        var profondeur = document.getElementById("profondeur").value;
+        var duree = document.getElementById("duree").value;
+        ajaxRequest("GET", "/plongee/verify", ajoutTagAutomatique, "profondeur=" + profondeur + "&duree=" + duree);
+    });
+
+    document.getElementById("btn-update-plongee").addEventListener("click", () => {
+        const volume = document.getElementsByName("volume")[0].value;
+        const pression = document.getElementsByName("pression")[0].value;
+        const profondeur = document.getElementsByName("profondeur")[0].value;
+        const duree = document.getElementsByName("duree")[0].value;
+        const elemNote = document.getElementsByName("note");
+        const description = document.getElementsByName("description")[0].value;
+        const generalTags = document.getElementById("automatic-tags-placement");
+        const activatedTags = document.getElementById("activated-tags-placement");
+
+        var tagsId = [];
+
+        for (let i = 0; i < generalTags.childNodes.length; i++) {
+            tagsId.push(generalTags.childNodes[i].id.split("-")[1]);
+        }
+
+        for (let i = 0; i < activatedTags.childNodes.length; i++) {
+            tagsId.push(activatedTags.childNodes[i].id.split("-")[1]);
+        }
+
+        var note = 0;
+        const jour = document.getElementsByName("jour")[0].value;
+
+        for (let i = 0; i < elemNote.length; i++) {
+            if (elemNote[i].checked == true) {
+                note = elemNote[i].value;
+            }
+        }
+
+        const id = data['id'];
+
+        ajaxRequest("UPDATE", "/profil/update/plongee", ajoutPlongeeTableau, "id=" + id + "&volume=" + volume + "&pression=" + pression + "&profondeur=" + profondeur + "&jour=" + jour + "&duree=" + duree + "&note=" + note + "&description=" + description + "&tags=" + tagsId);
+    });
+}
+
 addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn-modal-plongees").addEventListener("click", () => {
         ajaxRequest("GET", "/modal/ajout/plongee", afficherModalPlongee);
@@ -107,6 +180,7 @@ function ajoutPlongeeTableau(data) {
                 <td class="shortdesc" id="shortdesc-plongee-${plongee.id}">${description}</td>
                 <td class="fulldesc" id="fulldesc-plongee-${plongee.id}">${plongee.description}</td>
                 <td>
+                    <button class="btn btn-outline-secondary btn-warning editPlongee" id="deleteTag-${plongee.id}" type="button"><i class="bi bi-pencil-fill"></i></button>
                     <button class="btn btn-outline-secondary btn-danger deletePlongee" id="deletePlongee-${plongee.id}" type="button"><i class="bi bi-trash-fill"></i></button>
                 </td>
             </tr>
@@ -124,11 +198,11 @@ function ajoutPlongeeTableau(data) {
             const deletePlongees = document.getElementsByClassName("deletePlongee");
 
             for (let i = 0; i < editPlongees.length; i++) {
-                const id = editPlongees[i].id.split('-')[1];
-                document.getElementById("editPlongee-" + id).addEventListener("click", () => {
+                editPlongees[i].addEventListener("click", () => {
+                    const id = editPlongees[i].id.split('-')[1];
                     const elem = document.getElementById("modal");
                     elem.classList = "modal shown Tmodal";
-                    ajaxRequest("GET", "/modal/edit/plongee", showModal);
+                    ajaxRequest("GET", "/modal/edit/plongee", afficherModalEditPlongee, "id=" + id);
                 })
             }
 

@@ -77,6 +77,7 @@ elseif ($method == "PUT") {
 }
 elseif ($method == "UPDATE") {
     if ($uri == "/profil/update/tag")           $cntrlUser->updateTag();
+    elseif ($uri == "/profil/update/plongee")   $cntrlApp->updatePlongee();
     else                                        $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "DELETE") {
