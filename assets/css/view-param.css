@@ -57,7 +57,11 @@
 }
 
 #divCanvas{
-    width : 70%;
+    width : 70%;    
+    background-color: #6F8AB7; /* Pale Blue */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
 }
 
 .compInfos{
@@ -100,4 +104,41 @@
 #tbodyTab .highlight-row {
     background-color: #ffe6e6 !important;
     color: red;
+}
+
+
+.shadow-sm {
+    box-shadow: 0 .25rem .5rem rgba(0, 0, 0, .075)!important;
+}
+
+.shadow {
+    box-shadow: 0 .75rem 1.5rem rgba(0, 0, 0, .15)!important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .175)!important;
+}
+
+.border {
+    border: 1px solid #dee2e6!important;
+}
+
+.rounded {
+    border-radius: .25rem!important;
+}
+
+.card {
+    border-radius: .5rem!important;
+}
+
+.table-responsive {
+    border-radius: .5rem!important;
+}
+
+.modal-content {
+    border-radius: .5rem!important;
+}
+
+#canvas {
+    background-color: #E6F7FF; /* Pale Blue */
 }
