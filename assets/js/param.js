@@ -32,7 +32,7 @@ function createGraph(values) {
                 },
                 borderDash: ctx => {
                     const index = ctx.p0DataIndex;
-                    return (index >= 0 && index < 1) ? [5, 5] : []; // pointillés entre t0 et t1
+                    return (index >= 0 && index <= 1) ? [5, 5] : []; // pointillés entre t0 et t1
                 }
             },
             backgroundColor: [
