@@ -25,7 +25,7 @@ addEventListener("DOMContentLoaded", () => {
 function remplireForm(donnee) {
     console.log(donnee["plongee"][0]["profondeur_palier"]);
     let select = document.getElementById('profondeur');
-    
+    select.innerHTML = "";
     let size = donnee["plongee"].length;
 
     for (let i = 0; i < size; i++) {

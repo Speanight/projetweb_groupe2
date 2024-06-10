@@ -14,11 +14,11 @@ addEventListener("DOMContentLoaded", () => {
 
 
 function remplireForm(donnees) {
-    console.log(donnees);
-    let size = donnees["plongees"].length;
-    console.log(size);
-    let select = document.getElementById('profondeur');
 
+    let size = donnees["plongees"].length;
+
+    let select = document.getElementById('profondeur');
+    select.innerHTML = "";
     for (let i = 0; i < size; i++) {
         select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
     }
