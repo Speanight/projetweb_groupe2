@@ -58,7 +58,7 @@ function afficherConnexion(data) {
                     state = states[i].value;
                 }
             }
-
+            
             ajaxRequest("PUT", "/inscription", connectUser, "prenom=" + prenom + "&nom=" + nom + "&email=" + email + "&password=" + password + "&passwordVerify=" + passwordVerify + "&state=" + state);
         });
     }
