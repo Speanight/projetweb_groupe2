@@ -56,6 +56,7 @@ if ($method == "GET") {
     elseif ($uri == "/profil/amis/actualite")   $cntrlUser->getActualitesAmis();
     elseif ($uri =="/profil/get/amis")          $cntrlUser->getListeAmis();
     elseif ($uri == "/getprof")                 $cntrlPlongee->getProf();
+    elseif ($uri == "/getplongeeprof")          $cntrlPlongee->getProfPlongee();
     elseif ($uri == "/dbgettable")              $cntrlPlongee->getMN90Plongees();
     elseif ($uri == "/getplongees")             $cntrlPlongee->getAllPlongees();
     else                                        $cntrlApp->getAccueil($ajax);

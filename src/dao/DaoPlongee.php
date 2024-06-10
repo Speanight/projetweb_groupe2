@@ -100,6 +100,22 @@ class DaoPlongee {
         $statement->execute();
     }
 
+    public function getProfOfPlongee(){
+        try
+        {
+          $request = 'SELECT DISTINCT profondeur FROM plongee ORDER BY profondeur';
+          $statement = $this->db->prepare($request);
+          $statement->execute();
+          $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        }
+        catch (PDOException $exception)
+        {
+          error_log('Request error: '.$exception->getMessage());
+          return 'Request error: '.$exception->getMessage();
+        }
+        return $result;
+
+    }
 
     public function getAllPlongee(){
 
