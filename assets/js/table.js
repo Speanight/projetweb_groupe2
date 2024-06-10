@@ -8,7 +8,10 @@ addEventListener("DOMContentLoaded", () => {
     form.addEventListener('change', function handleChange(event) {
         profondeur = event.target.value;
         console.log(profondeur);
-        ajaxRequest('GET','/dbgettable',remplireTableau,"profondeur="+profondeur);
+        if (profondeur != 'x')
+            ajaxRequest('GET','/dbgettable',remplireTableau,"profondeur="+profondeur); 
+        else 
+            document.getElementById('infos').innerHTML = 'Veuillez entrer une profondeur valide.'
         
     });
 
