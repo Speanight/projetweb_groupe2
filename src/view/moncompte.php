@@ -29,7 +29,7 @@
               <?php endforeach; ?>
             </ul>
             <button class="btn btn-outline-secondary btn-warning editTag" id="editTag-<?=$tag->get_id()?>" type="button"><i class="bi bi-pencil-fill"></i></button>
-            <button class="btn btn-outline-secondary btn-danger deleteTag" id="deleteTag-<?=$tag->get_id()?>" type="button"><i class="bi bi-trash-fill"></i></button>
+            <button class="btn btn-outline-secondary btn-danger deleteTag" id="deleteTag-<?=$tag->get_id()?>" type="button" onclick="deleteTag(this)"><i class="bi bi-trash-fill"></i></button>
         </div>
         <?php endforeach; ?>
       </div>

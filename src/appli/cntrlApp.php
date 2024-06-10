@@ -131,8 +131,18 @@ class cntrlApp {
                     $ajax["success"] = [PLONGEE_AJOUTEE];
                     $ajax["plongee"] = $plongee->toArray();
 
+                    $ajax['plongees'] = [];
+
+                    $plongees = $daoPlongee->getPlongeesOfUser($user);
                     $daoTag = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
                     $daoTagsPlongee = new DaoTagsPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+
+                    foreach ($plongees as $plongee) {
+                        $plongee = $daoTagsPlongee->getTagsOfPlongee($user, $plongee);
+                        array_push($ajax['plongees'], $plongee->toArray());
+                    }
+
+
                     for ($i=0; $i < sizeof($tags); $i++) {
                         // print_r($tags);
                         $daoTagsPlongee->addTagToPlongee($plongee, $tags[$i]);

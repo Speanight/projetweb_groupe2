@@ -1,13 +1,19 @@
+// Ajout de la modal de connexion si on clique sur un bouton avec la classe "connexion".
 var connexion = document.getElementsByClassName("connexion");
 for (let i = 0; i < connexion.length; i++) {
     connexion[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/connexion", afficherConnexion)});
 }
 
+// Ajout de la modal d'inscription si on clique sur un bouton avec la classe "inscription".
 var inscription = document.getElementsByClassName("inscription");
 for (let i = 0; i < inscription.length; i++) {
     inscription[i].addEventListener("click", () => {ajaxRequest("GET", "/modal/inscription", afficherConnexion)});
 }
 
+/** Fonciton affichant 
+ * 
+ * @param {Array} data 
+ */
 function afficherConnexion(data) {
     // Ajout de l'élément modal à la bonne position.
     let elem = document.getElementById("connexion");
