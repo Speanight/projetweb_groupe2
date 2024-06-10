@@ -23,9 +23,11 @@ addEventListener("DOMContentLoaded", () => {
  * @param {Array} donnee Tableau de dictionnaire
  */
 function remplireForm(donnee) {
-    console.log(donnee["plongee"][0]["profondeur_palier"]);
+
     let select = document.getElementById('profondeur');
     
+    select.innerHTML = '';
+
     let size = donnee["plongee"].length;
 
     for (let i = 0; i < size; i++) {
@@ -43,6 +45,7 @@ function remplireTableau(donnees) {
     let tableau = document.getElementById('table_plonge');
 
     clearTableau();
+
     donnees.forEach(function(donnee){ 
 
         let data = "";

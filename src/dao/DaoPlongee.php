@@ -105,7 +105,7 @@ class DaoPlongee {
 
         $DaoUser = new DaoUser(DBHOST, DBNAME, PORT, USER, PASS);
         $result     = [];
-        $statement  = $this->db->prepare("SELECT * FROM plongee");
+        $statement  = $this->db->prepare("SELECT DISTINCT * FROM plongee");
 
 
         $statement->execute();

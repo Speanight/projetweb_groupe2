@@ -78,7 +78,7 @@ class DaoMN90
     public function getProfOfMN90(){
         try
         {
-          $request = 'SELECT distinct(profondeur_palier) FROM mn90 ORDER BY profondeur_palier';
+          $request = 'SELECT DISTINCT profondeur_palier FROM mn90 ORDER BY profondeur_palier';
           $statement = $this->db->prepare($request);
           $statement->execute();
           $result = $statement->fetchAll(PDO::FETCH_ASSOC);
