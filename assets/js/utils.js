@@ -64,6 +64,17 @@ function appendToPage(data, place) {
   elem.innerHTML = data[place];
 }
 
+function showModal(data) {
+  let elem = document.getElementById("modal");
+  elem.innerHTML = data['modal'];
+  
+  let buttonClose = document.getElementById("closeModal");
+  buttonClose.addEventListener("click", () => {
+      elem.classList = "modal hidden Tmodal";
+      elem.innerHTML = "";
+  });
+}
+
 /**
  * Fonction inversant chaque nombre par indice, les positifs devenant alors des négatifs et inversement.
  * @param {Array} array Liste de nombres
@@ -84,11 +95,12 @@ function invertNumbersInArray(array) {
 function displayMessages(data) {
   const messageWrapper = document.getElementById("message-wrapper");
   const typeMessages = ["success", "warning", "danger", "info"];
+  var msgId = 0;
   for (let i = 0; i < typeMessages.length; i++) {
     if (typeMessages[i] in data) {
       let msgType = typeMessages[i];
       for (let j = 0; j < data[msgType].length; j++) {
-        var inner = `<div class="alert alert-${msgType} d-flex align-items-center" role="alert">`
+        var inner = `<div class="alert alert-${msgType} d-flex align-items-center" id="alert-${msgId}" role="alert">`
         if (msgType == "success") inner += `<i class="bi bi-check-circle-fill"></i>`; 
         if (msgType == "warning") inner += `<i class="bi bi-exclamation-circle-fill"></i>`; 
         if (msgType == "danger") inner += `<i class="bi bi-x-octagon-fill"></i>`;
@@ -106,10 +118,10 @@ function displayMessages(data) {
   const closeButtons = document.getElementsByClassName("btn-close-messages");
   // TODO: Fix fermeture par alertes (ne fonctionne pas si nombreuses).
   for (let i = 0; i < closeButtons.length; i++) {
-    closeButtons[i].addEventListener("click", () => {
-      closeButtons[i].parentNode.remove();
+    closeButtons[i].addEventListener("click", function(event) {
+      event.parentNode.remove();
     })
-    setTimeout(function() {closeButtons[i].parentNode.remove();}, 4000);
+    setTimeout(function() {if (closeButtons[i] !== undefined) {closeButtons[i].parentNode.remove();}}, 5000);
   }
 }
 
@@ -122,7 +134,7 @@ function displayPageAdaptedForUser(data) {
     if (data["user"] != null) {
       $(".user-not-connected").hide();
       $(".user-connected").show();
-      $(".user-image").attr("src", "assets/img/pfp/" + data.user.image);
+      $(".user-image").attr("src", "/assets/img/pfp/" + data.user.image);
     }
     else {
       $(".user-not-connected").show();
@@ -165,3 +177,35 @@ function additionNumbersInArray(array){
   return result;
 }
 
+function getActualiesAmis(data) {
+  const elem = document.getElementById("actualites");
+  if (elem == null) {
+    return;
+  }
+  var text = "";
+  for (let i = 0; i < data['actualites'][0].length; i++) {
+      console.log(data['actualites'][0][i]);
+      var plongee = data['actualites'][0][i];
+      var note = "";
+      for (let i = 0; i < plongee.note; i++) {
+          note += "★";
+      }
+      var description = plongee.description;
+      if (description == "") {
+          description = "Cet utilisateur n'a pas ajouté de description";
+      }
+      text += `
+      <div href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+    <img src="/assets/img/pfp/${plongee.user.image}" alt="pfp" width="32" height="32" class="rounded-circle flex-shrink-0">
+    <div class="d-flex gap-2 w-100 justify-content-between">
+      <div>
+        <h6 class="mb-0">Plongée de ${plongee.duree} minutes jusqu'à ${plongee.profondeur}m de profondeur - ${note}</h6>
+        <p class="mb-0 opacity-75">${description}.</p>
+      </div>
+      <small class="opacity-50 text-nowrap">${plongee.day}</small>
+    </div>
+  </div>
+      `
+  }
+  elem.innerHTML = text;
+}

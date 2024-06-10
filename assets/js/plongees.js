@@ -140,6 +140,10 @@ function ajoutPlongeeTableau(data) {
                 <td>${tags}</td>
                 <td class="shortdesc" id="shortdesc-plongee-${plongee.id}">${description}</td>
                 <td class="fulldesc" id="fulldesc-plongee-${plongee.id}">${plongee.description}</td>
+                <td>
+                    <button class="btn btn-outline-secondary btn-warning editPlongee" id="editPlongee-${plongee.id}" type="button"><i class="bi bi-pencil-fill"></i></button>
+                    <button class="btn btn-outline-secondary btn-danger deletePlongee" id="deletePlongee-${plongee.id}" type="button"><i class="bi bi-trash-fill"></i></button>
+                </td>
             </tr>
             `
 
@@ -148,6 +152,26 @@ function ajoutPlongeeTableau(data) {
                     document.getElementById("shortdesc-plongee-" + plongee.id).style.display = "none";
                     document.getElementById("fulldesc-plongee-" + plongee.id).style.display = "block";
                     
+                });
+            }
+
+            const editPlongees = document.getElementsByClassName("editPlongee");
+            const deletePlongees = document.getElementsByClassName("deletePlongee");
+
+            for (let i = 0; i < editPlongees.length; i++) {
+                const id = editPlongees[i].id.split('-')[1];
+                document.getElementById("editPlongee-" + id).addEventListener("click", () => {
+                    const elem = document.getElementById("modal");
+                    elem.classList = "modal shown Tmodal";
+                    ajaxRequest("GET", "/modal/edit/plongee", showModal);
+                })
+            }
+
+            for (let i = 0; i < deletePlongees.length; i++) {
+                const id = deletePlongees[i].id.split('-')[1];
+                document.getElementById("deletePlongee-" + id).addEventListener("click", () => {
+                    document.getElementById("deletePlongee-" + id).parentNode.parentNode.remove();
+                    ajaxRequest("DELETE", "/profil/delete/plongee", console.log, "plongee=" + id);
                 });
             }
 

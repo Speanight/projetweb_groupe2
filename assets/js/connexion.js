@@ -38,6 +38,7 @@ function afficherConnexion(data) {
             const mail = document.getElementsByName("email")[0].value;
             const password = document.getElementsByName("password")[0].value;
             ajaxRequest("POST", "/connexion", connectUser, "mail=" + mail + "&pass=" + password);
+            ajaxRequest("GET", "/profil/get", displayPageAdaptedForUser);
         });
     }
 
@@ -49,8 +50,15 @@ function afficherConnexion(data) {
             const email = document.getElementsByName("email")[0].value;
             const password = document.getElementsByName("pass")[0].value;
             const passwordVerify = document.getElementsByName("passVerify")[0].value;
+            const states = document.getElementsByName("publicity");
+            
+            for (let i = 0; i < states.length; i++) {
+                if (states.checked) {
+                    const state = states.value;
+                }
+            }
 
-            ajaxRequest("PUT", "/inscription", connectUser, "prenom=" + prenom + "&nom=" + nom + "&email=" + email + "&password=" + password + "&passwordVerify=" + passwordVerify);
+            ajaxRequest("PUT", "/inscription", connectUser, "prenom=" + prenom + "&nom=" + nom + "&email=" + email + "&password=" + password + "&passwordVerify=" + passwordVerify + "&state=" + state);
         });
     }
 }

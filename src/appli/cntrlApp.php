@@ -233,6 +233,13 @@ class cntrlApp {
         echo json_encode($ajax);
     }
 
+    public function getModalEditPlongee() {
+        $ajax = [];
+        $ajax['modal'] = file_get_contents("src/view/plongee-edit-modal.html");
+
+        echo json_encode($ajax);
+    }
+
     public function getProfils($ajax){
 
         $ajax['html'] = file_get_contents("src/view/profils.html");

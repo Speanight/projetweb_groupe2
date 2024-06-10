@@ -18,6 +18,15 @@ CREATE TABLE public.user(
 	CONSTRAINT user_PK PRIMARY KEY (id_user)
 )WITHOUT OIDS;
 
+------------------------------------------------------------
+-- Table: follow
+------------------------------------------------------------
+CREATE TABLE public.follow(
+	id_follow		SERIAL 	NOT NULL	,
+	id_follower		INT 	NOT NULL	,
+	id_following	INT		NOT NULL	,
+	CONSTRAINT follow_PK PRIMARY KEY (id_follow)
+)WITHOUT OIDS;
 
 ------------------------------------------------------------
 -- Table: MN90

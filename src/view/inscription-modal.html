@@ -33,6 +33,21 @@
                     <input type="password" class="form-control rounded-3" id="floatingPassword" name="passVerify" placeholder="Password">
                     <label for="floatingPassword">Mot de passe (confirmation)</label>
                 </div>
+                <div class="form-floating mb-3">
+                    <h5>Etat du profil</h5>
+                    <div class="form-check">
+                      <input id="public" name="publicity" type="radio" class="form-check-input" value="2">
+                      <label class="form-check-label" for="public">Publique</label>
+                    </div>
+                    <div class="form-check">
+                      <input id="reserved" name="publicity" type="radio" class="form-check-input" value="1">
+                      <label class="form-check-label" for="reserved">Réservé (amis uniquement)</label>
+                    </div>
+                    <div class="form-check">
+                      <input id="private" name="publicity" type="radio" class="form-check-input" value="0">
+                      <label class="form-check-label" for="private">Privé</label>
+                    </div>
+                </div>
                 <button id="inscription-compte" class="w-100 mb-2 btn btn-lg rounded-3 btn-primary">S'inscrire</button>
                 <hr class="my-4">
                 <button class="w-100 mb-2 btn btn-lg rounded-3 btn-secondary connexion">Déjà un compte ? Se connecter</button>
