@@ -31,7 +31,7 @@ class cntrlUser {
                 $utils = new Utils();
                 $utils->connectUser($user);
                 $ajax['success'] = [CONNEXION_REUSSIE];
-                $ajax['user'] = $user;
+                $ajax['user'] = $user->toArray();
             }
         }
 
@@ -99,7 +99,10 @@ class cntrlUser {
     public function getUser() {
         $ajax = [];
         session_start();
-        $ajax['user'] = $_SESSION['user']->toArray();
+        if (isset($_SESSION['user'])) {
+            $ajax['user'] = $_SESSION['user']->toArray();
+        }
+        else $ajax['user'] = null;
         session_write_close();
 
         echo json_encode($ajax);

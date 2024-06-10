@@ -4,41 +4,7 @@ function afficherModalPlongee(data) {
     elem.classList = "modal shown Tmodal";
     appendToPage(data, "modal");
 
-    var tags = document.getElementsByName("add-tag-plongee")[0];
-    var content = "";
-    for (let i = 0; i < data['tags'].length; i++) {
-        const tag = data['tags'][i];
-        console.log(tag);
-        content += `
-        <option value="tag-${tag.id}.${tag.nom}.${tag.type}" class="tags badge bg-${tag.type}-subtle text-info-emphasis rounded-pill" onclick="ajoutTagAPlongee(${tag.id})">${tag.nom}</option>
-        `
-    }
-    tags.innerHTML = content;
-    tags.addEventListener("change", () => {
-        const tag = document.getElementsByName("add-tag-plongee")[0].value;
-        tagId = tag.split('.')[0];
-        tagName = tag.split('.')[1];
-        tagType = tag.split('.')[2];
-        
-        var activatedTags = document.getElementById("activated-tags-placement");
-        var alreadyActivated = false;
-
-        for (let i = 0; i < activatedTags.childNodes.length; i++) {
-            if (activatedTags.childNodes[i].id == (tagId)) {
-                alreadyActivated = true;
-            }
-        }
-        if (!alreadyActivated) {
-            var elem = document.createElement("span");
-            elem.classList = `badge bg-${tagType}-subtle text-info-emphasis rounded-pill`;
-            elem.innerHTML = tagName;
-            elem.id = tagId;
-            elem.addEventListener("click", () => {
-                elem.remove();
-            })
-            activatedTags.appendChild(elem);
-        }
-    })
+    actualiserTags(data);
 
     const elemTags = document.getElementsByClassName("tags");
 
@@ -47,7 +13,7 @@ function afficherModalPlongee(data) {
         console.log("add tag!");
         const name = document.getElementsByName("tag-name")[0].value;
         const type = document.getElementsByName("tag-type")[0].value;
-        ajaxRequest("PUT", "/profil/add/tag", ajoutTagAutomatique, "nom=" + name + "&type=" + type);
+        ajaxRequest("PUT", "/profil/add/tag", actualiserTags, "nom=" + name + "&type=" + type);
     })
 
 
@@ -141,7 +107,6 @@ function ajoutPlongeeTableau(data) {
                 <td class="shortdesc" id="shortdesc-plongee-${plongee.id}">${description}</td>
                 <td class="fulldesc" id="fulldesc-plongee-${plongee.id}">${plongee.description}</td>
                 <td>
-                    <button class="btn btn-outline-secondary btn-warning editPlongee" id="editPlongee-${plongee.id}" type="button"><i class="bi bi-pencil-fill"></i></button>
                     <button class="btn btn-outline-secondary btn-danger deletePlongee" id="deletePlongee-${plongee.id}" type="button"><i class="bi bi-trash-fill"></i></button>
                 </td>
             </tr>
@@ -191,6 +156,56 @@ function ajoutPlongeeTableau(data) {
                 $('#fulldesc-plongee-' + plongeeId).hide();
             });
         }
+    }
+}
+
+function actualiserTags(data) {
+    if ('tags' in data) {
+        var tags = document.getElementsByName("add-tag-plongee")[0];
+        tags.innerHTML = "";
+        var content = `<option value="none" class=rounded-pill" value="none">Choisissez un tag à ajouter</option>`;
+        for (let i = 0; i < data['tags'].length; i++) {
+            const tag = data['tags'][i];
+            content += `
+            <option value="tag-${tag.id}.${tag.nom}.${tag.type}" class="tags badge bg-${tag.type}-subtle text-info-emphasis rounded-pill" onclick="ajoutTagAPlongee(${tag.id})">${tag.nom}</option>
+            `
+        }
+        tags.innerHTML = content;
+
+        tags.addEventListener("change", () => {
+            const tag = document.getElementsByName("add-tag-plongee")[0].value;
+            if (tag != "none") {
+                tagId = tag.split('.')[0];
+                tagName = tag.split('.')[1];
+                tagType = tag.split('.')[2];
+                
+                var activatedTags = document.getElementById("activated-tags-placement");
+                var alreadyActivated = false;
+    
+                for (let i = 0; i < activatedTags.childNodes.length; i++) {
+                    if (activatedTags.childNodes[i].id == (tagId)) {
+                        alreadyActivated = true;
+                    }
+                }
+                if (!alreadyActivated) {
+                    var elem = document.createElement("span");
+                    elem.classList = `badge bg-${tagType}-subtle text-info-emphasis rounded-pill`;
+                    elem.innerHTML = tagName;
+                    elem.id = tagId;
+                    elem.addEventListener("click", () => {
+                        elem.remove();
+                    })
+                    activatedTags.appendChild(elem);
+                }
+            }
+        })
+    }
+}
+
+function ajoutTag(data) {
+    if ('tags' in data) {
+        let elem = document.getElementsByName("add-tag-plongee")[0];
+        elem.innerHTML += `<option value="tag-${data['tags'][0].id}.${data['tags'][0].nom}.${data['tags'][0].type}" class="tags badge bg-${data['tags'][0].type}-subtle text-info-emphasis rounded-pill" onclick="ajoutTagAPlongee(${data['tags'][0].id})">${data['tags'][0].nom}</option>`
     }
 }
 
