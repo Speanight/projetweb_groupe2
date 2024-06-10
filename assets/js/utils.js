@@ -56,7 +56,7 @@ function displayPage(data) {
 
 /** Fonction ajoutant de l'HTML dans une page dans un élément à ID donné.
  * 
- * @param {Array} data Contenu à ajouter dans la modal. Les données à ajouter doivent être contenus dans une key du tableau avec le nom de l'ID.
+ * @param {Array} data Contenu à ajouter dans le HTML. Les données à ajouter doivent être contenus dans une key du tableau avec le nom de l'ID.
  * @param {string} place ID de l'élément où ajouter le contenu.
  */
 function appendToPage(data, place) {
@@ -64,6 +64,10 @@ function appendToPage(data, place) {
   elem.innerHTML = data[place];
 }
 
+/** Fonction permettant d'afficher un modal et d'y ajouter un contenu associé.
+ * 
+ * @param {Array} data Contenu à ajouter dans le modal, les données à ajouter doivent être contenues dans la key 'modal'.
+ */
 function showModal(data) {
   let elem = document.getElementById("modal");
   elem.innerHTML = data['modal'];
@@ -153,6 +157,11 @@ function convertArrayIfNull(array) {
   return array.filter(subArray => !subArray.includes(null));
 }
 
+/** Fonction permettant de générer un nouvel Array additionnant les valeurs précédentes pour chaque position.
+ * 
+ * @param {Array} array Contient un array de nombres à additionner.
+ * @returns Nouvelle Array possédant les valeurs ajoutées avec les précédentes.
+ */
 function additionNumberWithPreviousInArray(array){
   let size_array = array.length;
 
@@ -179,10 +188,12 @@ function additionNumbersInArray(array){
 
 function getActualiesAmis(data) {
   const elem = document.getElementById("actualites");
-  if (elem == null) {
+  if (elem == null || data['actualites'] == null || data['actualites'].length == 0) {
     return;
   }
   var text = "";
+  var actualites = data['actualites'][0];
+
   for (let i = 0; i < data['actualites'][0].length; i++) {
       console.log(data['actualites'][0][i]);
       var plongee = data['actualites'][0][i];

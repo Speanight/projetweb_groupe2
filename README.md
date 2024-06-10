@@ -50,6 +50,9 @@ L'architecture suivante est celle que nous avons utilisé pour notre projet.
 .
 ├── assets			# Fichiers supplémentaires nécessaires
 │   ├── css			# Feuilles de style du site
+│   ├── img			# Images utilisées par le site
+│   │   ├── bouteille_o2	# Images de bouteilles d'oxygène
+│   │   └── pfp			# Images correspondant aux photos de profil
 │   ├── js			# Fichiers javascript du site
 │   └── sql			# Fichiers pour initialiser la base de données (ou la visualiser)
 ├── src				# Fichiers sources (controllers, dao, pages html)
@@ -67,8 +70,8 @@ L'architecture suivante est celle que nous avons utilisé pour notre projet.
 
 Le routeur se situe à `./index.php`, à la racine du projet.
 
-## Le controlleur
-> Le controlleur comporte les opérations nécessaires pour la page web, tel que la collecte des variables `$_POST`, la récupération des `SELECT` dans la base de données etc.
+## Leq controlleurs
+> Les controlleurs comportent les opérations nécessaires pour la page web, tel que la collecte des variables `$_POST`, la récupération des `SELECT` dans la base de données etc.
 
 Les controlleurs peuvent être trouvés à `./src/appli/`.
 
@@ -82,7 +85,7 @@ Les DAO peuvent être trouvées dans `./src/dao/`. Chaque fichier est nommé `Da
 
 Les objets peuvent être trouvés dans `./src/metier/`. Chaque fichier a pour nom celui de son objet. Chaque objet est utilisé pour représenter une table dans la base de données, tel que `User.php`, `Speciality.php`, `Meeting.php`, ...
 
-## Les vuew
+## Les vues
 > Une vue correspond à ce que l'utilisateur verra sur son écran, et ne doit alors être composé seulement de code html, et éventuellement de codes php nécessaires à l'affichage tel qu'une boucle `for` avec des `print_r` ou `echo`.
 
 Les vues se situent dans `./src/view/` et commencent avec un `v` si elles sont affichées à l'utilisateur. *(par exemple : header.php n'est pas montré à l'utilisateur seul : il est toujours accompagné d'une page, cependant il est montré à l'utilisateur et correspond alors bien à une "vue")*

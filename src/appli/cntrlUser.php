@@ -72,7 +72,7 @@ class cntrlUser {
             else {
                 $ajax["success"] = [COMPTE_CREE];
                 $utils->connectUser($user);
-                $ajax['user'] = $user;
+                $ajax['user'] = $user->toArray();
             }
 
         }
@@ -302,27 +302,20 @@ class cntrlUser {
         $ajax['actualites'] = [];
 
         session_start();
-        $user = $_SESSION['user'];
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        }
+        else $user = null;
         session_write_close();
 
-        $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
-        $daoFollow = new DaoFollow(DBHOST, DBNAME, PORT, USER, PASS);
+        if ($user != null) {
+            $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+            $daoFollow = new DaoFollow(DBHOST, DBNAME, PORT, USER, PASS);
 
-        $user->set_following($daoFollow->getFollowing($user));
+            $user->set_following($daoFollow->getFollowing($user));
 
-        foreach ($user->get_following() as $follow) {
-            if ($follow->get_state() == 2) {
-                $tmpPlongees = $daoPlongee->getPlongeesOfUser($follow);
-                $plongees = [];
-                foreach ($tmpPlongees as $plongee) {
-                    $arrayPlongee = $plongee->toArray();
-                    $arrayPlongee['user'] = $follow->toArray();
-                    array_push($plongees, $arrayPlongee);
-                }
-                array_push($ajax['actualites'], $plongees);
-            }
-            elseif ($follow->get_state() == 1) {
-                if ($daoFollow->checkFollowing($follow, $user)) {
+            foreach ($user->get_following() as $follow) {
+                if ($follow->get_state() == 2) {
                     $tmpPlongees = $daoPlongee->getPlongeesOfUser($follow);
                     $plongees = [];
                     foreach ($tmpPlongees as $plongee) {
@@ -332,8 +325,22 @@ class cntrlUser {
                     }
                     array_push($ajax['actualites'], $plongees);
                 }
+                elseif ($follow->get_state() == 1) {
+                    if ($daoFollow->checkFollowing($follow, $user)) {
+                        $tmpPlongees = $daoPlongee->getPlongeesOfUser($follow);
+                        $plongees = [];
+                        foreach ($tmpPlongees as $plongee) {
+                            $arrayPlongee = $plongee->toArray();
+                            $arrayPlongee['user'] = $follow->toArray();
+                            array_push($plongees, $arrayPlongee);
+                        }
+                        array_push($ajax['actualites'], $plongees);
+                    }
+                }
             }
         }
+
+
         
         echo json_encode($ajax);
     }

@@ -51,10 +51,11 @@ function afficherConnexion(data) {
             const password = document.getElementsByName("pass")[0].value;
             const passwordVerify = document.getElementsByName("passVerify")[0].value;
             const states = document.getElementsByName("publicity");
-            
+            var state = 0;
+
             for (let i = 0; i < states.length; i++) {
-                if (states.checked) {
-                    const state = states.value;
+                if (states[i].checked) {
+                    state = states[i].value;
                 }
             }
 
