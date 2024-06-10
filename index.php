@@ -66,18 +66,22 @@ elseif ($method == "POST") {
     elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion();
     elseif ($uri == "/profil/update")           $cntrlUser->updateUser();
     elseif ($uri = "/profil/edit/tag")          $cntrlUser->updateTag();
+    else                                        $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "PUT") {
     if ($uri == "/inscription")                 $cntrlUser->getInscription();
     elseif ($uri == "/profil/add/plongee")      $cntrlApp->getAjoutPlongee($ajax);
     elseif ($uri == "/profil/add/tag")          $cntrlApp->addTagUser();
     elseif ($uri == "/profil/add/ami")          $cntrlUser->getAjoutAmi();
+    else                                        $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "UPDATE") {
     if ($uri == "/profil/update/tag")           $cntrlUser->updateTag();
+    else                                        $cntrlApp->getAccueil($ajax);
 }
 elseif ($method == "DELETE") {
     if ($uri == "/profil/delete/tag")           $cntrlUser->deleteTag();
     elseif ($uri == "/profil/delete/plongee")   $cntrlUser->deletePlongee();
     elseif ($uri == "/profil/delete/ami")       $cntrlUser->deleteAmi();
+    else                                        $cntrlApp->getAccueil($ajax);
 }
