@@ -191,8 +191,10 @@ class cntrlApp {
         }
 
         for ($i=0; $i < sizeof($tags); $i++) {
-            $tag = $daoTag->getTagById($user, $tags[$i]);
-            array_push($newTags, $tag);
+            if ($tags[$i] != "") {
+                $tag = $daoTag->getTagById($user, $tags[$i]);
+                array_push($newTags, $tag);
+            }
         }
 
         $daoPlongee->updatePlongee($tmpPlongee);

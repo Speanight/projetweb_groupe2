@@ -44,6 +44,9 @@ location / {
     try_files $uri $uri/ /index.php;
 }
 ```
+
+Vous devez également penser à modifier le chemin de contexte se situant dans le fichier `utils.php`, trouvable dans `src/appli/`. Reférez-vous à la partie ci-dessous pour connaître l'architecture du projet.
+
 # Dossiers
 L'architecture suivante est celle que nous avons utilisé pour notre projet.
 ```
