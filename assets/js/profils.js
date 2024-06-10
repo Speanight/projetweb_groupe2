@@ -1,6 +1,6 @@
 addEventListener("DOMContentLoaded", () => {
 
-    ajaxRequest('GET','/getplongees',remplireForm);
+    ajaxRequest('GET','/getplongeeprof',remplireForm);
 
     let form = document.getElementById('form_p');
     form.addEventListener('change', function handleChange(event) {
@@ -29,7 +29,7 @@ function remplireForm(donnees) {
         select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
     }
 }
-
+z
 
 
 function remplireTableau(donnees) {

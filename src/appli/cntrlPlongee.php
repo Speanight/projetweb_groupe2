@@ -61,6 +61,19 @@ class cntrlPlongee{
 
     }
 
+    public function getProfPlongee(){
+
+        $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
+
+
+        $result = $DaoPlongee->getProfOfPlongee();
+
+        $ajax['plongee'] = $result;
+
+        print_r(json_encode($ajax));
+
+    }
+
     public function getMN90Plongees(){
 
         $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
