@@ -53,6 +53,18 @@ class DaoFollow {
         return $followings;
     }
 
+    public function deleteFollow(User $follower, User $following) {
+        $idFollower = $follower->get_id();
+        $idFollowing = $following->get_id();
+
+        $statement = $this->db->prepare("DELETE FROM follow WHERE id_follower = :follower AND id_following = :following");
+        $statement->bindParam(":follower", $idFollower);
+        $statement->bindParam(":following", $idFollowing);
+        $statement->execute();
+
+        return true;
+    }
+
     public function checkFollowing(User $follower, User $following) {
         $idFollower = $follower->get_id();
         $idFollowing = $following->get_id();

@@ -278,8 +278,20 @@ class cntrlUser {
         echo json_encode($ajax);
     }
 
-    public function getSuppressionAmi() {
+    public function deleteAmi() {
+        parse_str(file_get_contents("php://input"), $_DELETE);
+        $id = $_DELETE['id'];
 
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+
+        $daoUser = new DaoUser(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoFollow = new DaoFollow(DBHOST, DBNAME, PORT, USER, PASS);
+
+        $follow = $daoUser->getUserById($id);
+
+        $daoFollow->deleteFollow($user, $follow);
     }
 
     public function getActualitesAmis() {
@@ -320,6 +332,24 @@ class cntrlUser {
             }
         }
         
+        echo json_encode($ajax);
+    }
+
+    public function getListeAmis() {
+        $ajax = [];
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+
+        $daoFollow = new DaoFollow(DBHOST, DBNAME, PORT, USER, PASS);
+        $follows = $daoFollow->getFollowing($user);
+
+        $ajax['follows'] = [];
+
+        foreach ($follows as $follow) {
+            array_push($ajax['follows'], $follow->toArray());
+        }
+
         echo json_encode($ajax);
     }
 }

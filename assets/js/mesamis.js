@@ -6,8 +6,41 @@ for (let i = 0; i < ajoutAmi.length; i++) {
         ajaxRequest("GET", "/modal/profile/add/ami", showModalAddAmi);
         const modal = document.getElementById("modal");
         modal.classList = "modal shown Tmodal";
+
+        ajaxRequest("GET", "/profil/get/amis", showListAmi);
     })
     // eventAddAmi();
+}
+
+function showListAmi(data) {
+    if ('follows' in data) {
+        var elem = document.getElementById("liste-amis");
+        var text = "";
+        for (let i = 0; i < data['follows'].length; i++) {
+            const element = data["follows"][i];
+
+            text += `
+            <div class="col-lg-4">
+                <img src="/assets/img/pfp/${element.image}" class=rounded-circle" width="140" height="140" />
+                <h4 class="fw-normal">${element.nom} ${element.prenom}</h4>
+                <p>${element.email}</p>
+                <button id="${element.id}" class="deleteFriend mb-2 btn btn-lg rounded-3 btn-danger">Supprimer l'ami</button>
+            </div>
+            `
+        }
+        elem.innerHTML = text;
+
+        var friends = document.getElementsByClassName("deleteFriend");
+        for (let i = 0; i < friends.length; i++) {
+            const id = friends[i].id;
+            const elem = document.getElementById(id);
+
+            elem.addEventListener("click", () => {
+                ajaxRequest("DELETE", "/profil/delete/ami", console.log, "id=" + id);
+                elem.parentNode.remove();
+            })
+        }
+    }
 }
 
 

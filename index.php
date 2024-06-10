@@ -52,6 +52,7 @@ if ($method == "GET") {
     elseif ($uri == "/profil/amis")             $cntrlUser->getPageAmis($ajax);
     elseif ($uri == "/modal/profile/add/ami")   $cntrlUser->getModalAddAmi();
     elseif ($uri == "/profil/amis/actualite")   $cntrlUser->getActualitesAmis();
+    elseif ($uri =="/profil/get/amis")          $cntrlUser->getListeAmis();
     else                                        $cntrlApp->getAccueil($ajax);
 
 }
@@ -73,4 +74,5 @@ elseif ($method == "UPDATE") {
 elseif ($method == "DELETE") {
     if ($uri == "/profil/delete/tag")           $cntrlUser->deleteTag();
     elseif ($uri == "/profil/delete/plongee")   $cntrlUser->deletePlongee();
+    elseif ($uri == "/profil/delete/ami")       $cntrlUser->deleteAmi();
 }
