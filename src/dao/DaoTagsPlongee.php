@@ -47,4 +47,23 @@ class DaoTagsPlongee {
         }
         return $plongee;
     }
+
+    public function removeTagOfPlongee(Plongee $plongee, int $idTag) {
+        $id = $plongee->get_id_plongee();
+        $statement = $this->db->prepare("DELETE FROM tags_plongee WHERE id_plongee = :plongee AND id_tag = :tag");
+        $statement->bindParam(":plongee", $id);
+        $statement->bindParam(":tag", $idTag);
+        $statement->execute();
+    }
+
+    public function updateTagsOfPlongee(Plongee $plongee, array $tags) {
+        $id = $plongee->get_id_plongee();
+        $statement = $this->db->prepare("DELETE FROM tags_plongee WHERE id_plongee = :plongee");
+        $statement->bindParam(":plongee", $id);
+        $statement->execute();
+
+        foreach ($tags as $tag) {
+            $this->addTagToPlongee($plongee, $tag->get_id());
+        }
+    }
 }

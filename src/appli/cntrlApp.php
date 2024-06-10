@@ -154,6 +154,64 @@ class cntrlApp {
         }
     }
 
+    public function updatePlongee() {
+        session_start();
+        $user = $_SESSION['user'];
+        session_write_close();
+
+        parse_str(file_get_contents("php://input"), $_UPDATE);
+        $id             = $_UPDATE['id'];
+        $volume         = $_UPDATE["volume"];
+        $pression       = $_UPDATE["pression"];
+        $profondeur     = $_UPDATE["profondeur"];
+        $jour           = $_UPDATE["jour"];
+        $duree          = $_UPDATE["duree"];
+        $note           = $_UPDATE["note"];
+        $description    = $_UPDATE["description"];
+        $rawTags        = $_UPDATE["tags"];
+        $newTags        = [];
+
+        $tags = explode(",", $rawTags);
+
+        $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoTagsPlongee = new DaoTagsPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+        $daoTag = new DaoTag(DBHOST, DBNAME, PORT, USER, PASS);
+        $tmpPlongee = $daoPlongee->getPlongeeById($id, $user);
+
+        if ($volume != "")      $tmpPlongee->set_volume_initial($volume);
+        if ($pression != "")    $tmpPlongee->set_bar_initial($pression);
+        if ($profondeur != "")  $tmpPlongee->set_profondeur($profondeur);
+        if ($duree != "")       $tmpPlongee->set_duree($duree);
+        if ($note != "")        $tmpPlongee->set_note($note);
+        if ($description != "") $tmpPlongee->set_description($description);
+        if ($jour != "") {
+            $jourFormatted = explode('-', $jour);
+            $day = date("Y-m-d", mktime(6, null, null, $jourFormatted[1], $jourFormatted[2], $jourFormatted[0]));
+            $tmpPlongee->set_day($day);
+        }
+
+        for ($i=0; $i < sizeof($tags); $i++) {
+            $tag = $daoTag->getTagById($user, $tags[$i]);
+            array_push($newTags, $tag);
+        }
+
+        $daoPlongee->updatePlongee($tmpPlongee);
+        $daoTagsPlongee->updateTagsOfPlongee($tmpPlongee, $newTags);
+
+        $ajax["success"] = [PLONGEE_UPDATE];
+        $ajax['plongees'] = [];
+
+        $daoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
+
+        $plongees = $daoPlongee->getPlongeesOfUser($user);
+
+        foreach ($plongees as $plongee) {
+            array_push($ajax['plongees'], $plongee->toArray());
+        }
+
+        echo json_encode($ajax);
+    }
+
     public function getIfMN90() {
         $ajax = [];
 
@@ -246,6 +304,7 @@ class cntrlApp {
     public function getModalEditPlongee() {
         $ajax = [];
         $ajax['modal'] = file_get_contents("src/view/plongee-edit-modal.html");
+        $ajax['id']    = $_GET['id'];
 
         echo json_encode($ajax);
     }

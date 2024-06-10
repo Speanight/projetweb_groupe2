@@ -100,20 +100,26 @@ class Plongee
     //SETTERS
 
     public function set_profondeur(float $profondeur){
-        return $this->profondeur;
+        $this->profondeur = $profondeur;
     }
     public function set_duree(float $duree){
-        return $this->duree;
+        $this->duree = $duree;
     }
     public function set_bar_initial(float $bar_initial){
-        return $this->bar_initial;
+        $this->bar_initial = $bar_initial;
     }
     public function set_volume_initial(int $volume_initial){
-        return $this->volume_initial;
+        $this->volume_initial = $volume_initial;
     }
-    public function set_note(string $note){
-        return $this->note;
+    public function set_note(int $note){
+        $this->note = $note;
     }
 
+    public function set_day(string $day) {
+        $this->day = $day;
+    }
 
+    public function set_description(string $description) {
+        $this->description = $description;
+    }
 }

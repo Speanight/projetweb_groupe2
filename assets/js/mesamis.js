@@ -18,6 +18,7 @@ function showListAmi(data) {
         var text = "";
         for (let i = 0; i < data['follows'].length; i++) {
             const element = data["follows"][i];
+            console.log(element);
 
             text += `
             <div class="col-lg-4">

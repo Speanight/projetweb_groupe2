@@ -20,6 +20,7 @@ const MOT_DE_PASSE_INCORRECT = "Le mot de passe rentré est incorrect";
 // Plongees
 const PLONGEE_AJOUTEE = "Votre plongée a bien été ajoutée";
 const PLONGEE_SUPPRIMEE = "Votre plongée a bien été supprimée";
+const PLONGEE_UPDATE = "Votre plongée a bien été mise à jour";
 
 // Tags
 const TAG_AJOUTE = "Votre tag a bien été ajouté";
