@@ -1,5 +1,6 @@
 function main() {
     ajaxRequest("GET", "/profil/get", fillUserForm);
+    ajaxRequest("GET", "/profil/get/tags", fillTagsForm);
     addEventListener("DOMContentLoaded", () => {
         document.getElementById("editCompte").addEventListener("click", () => {
             console.log("envoi données compte");

@@ -63,7 +63,7 @@ if ($method == "GET") {
 }
 elseif ($method == "POST") {
     if ($uri == "/connexion")                   $cntrlUser->getConnexion();
-    elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion();
+    elseif ($uri == "/deconnexion")             $cntrlUser->getDeconnexion($ajax);
     elseif ($uri == "/profil/update")           $cntrlUser->updateUser();
     elseif ($uri = "/profil/edit/tag")          $cntrlUser->updateTag();
     else                                        $cntrlApp->getAccueil($ajax);

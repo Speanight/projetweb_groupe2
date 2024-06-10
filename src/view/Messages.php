@@ -4,6 +4,7 @@ const CHAMPS_VIDES = "Merci de vérifier d'avoir bien rempli tout les champs";
 const ERREUR_GENERALE = "Désolé, une erreur est survenue sur le serveur";
 // Connexion - Inscription
 const MAIL_INCORRECT = "L'adresse mail renseignée n'est pas correcte";
+const CHAMP_INCORRECT = "Un des champs est incorrect, merci de vérifier";
 
 // Création de compte
 const COMPTE_EXISTE_DEJA = "L'adresse mail renseignée correspond déjà à un compte";

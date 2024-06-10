@@ -34,7 +34,7 @@ addEventListener("DOMContentLoaded", () => {
 
     var deconnexion = document.getElementsByClassName("deconnexion");
     for (let i = 0; i < deconnexion.length; i++) {
-        deconnexion[i].addEventListener("click", () => {ajaxRequest("POST", "/deconnexion", displayPageAdaptedForUser)});
+        deconnexion[i].addEventListener("click", () => {ajaxRequest("POST", "/deconnexion", displayPage)});
     }
 
     var mesplongees = document.getElementsByClassName("mesplongees");
