@@ -63,7 +63,7 @@ class cntrlPlongee{
 
     public function getProfPlongee(){
 
-        $DaoMN90 = new DaoMN90(DBHOST, DBNAME, PORT, USER, PASS);
+        $DaoPlongee = new DaoPlongee(DBHOST, DBNAME, PORT, USER, PASS);
 
 
         $result = $DaoPlongee->getProfOfPlongee();

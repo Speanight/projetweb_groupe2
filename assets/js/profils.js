@@ -1,33 +1,30 @@
 addEventListener("DOMContentLoaded", () => {
 
-    ajaxRequest('GET','/getplongeeprof',remplireForm);
+    ajaxRequest('GET','/getplongees',remplireForm);
 
     let form = document.getElementById('form_p');
     form.addEventListener('change', function handleChange(event) {
         profondeur = event.target.value;
-        if (profondeur != 'x')
-            ajaxRequest('GET','/getplongees',remplireTableau);
-        else  {
-            document.getElementById('infos').innerHTML = 'Veuillez entrer une profondeur valide.'
-        }
+        ajaxRequest('GET','/getplongees',remplireTableau);
         
     });
     
     
 });
 
-//TODO: Les valeurs s'ajoute dans le select en plusieurs fois
+
 function remplireForm(donnees) {
-
+    console.log(donnees);
     let size = donnees["plongees"].length;
-
+    console.log(size);
     let select = document.getElementById('profondeur');
-    select.innerHTML = "";
+
+    select.innerHTML = "<option value='x'>Choisissez une option</option>";
     for (let i = 0; i < size; i++) {
         select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
     }
 }
-z
+
 
 
 function remplireTableau(donnees) {
