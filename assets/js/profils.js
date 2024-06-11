@@ -20,8 +20,16 @@ function remplireForm(donnees) {
     let select = document.getElementById('profondeur');
 
     select.innerHTML = "<option value='x'>Choisissez une option</option>";
+
+    let tabValues = [];
+
     for (let i = 0; i < size; i++) {
-        select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
+        let profondeur = donnees["plongees"][i]["profondeur"];
+        if(!tabValues.includes(profondeur)){
+            select.options[select.options.length] = new Option(donnees["plongees"][i]["profondeur"] + 'm', donnees["plongees"][i]["profondeur"]);
+            tabValues.push(donnees["plongees"][i]["profondeur"]);
+        }
+
     }
 }
 
